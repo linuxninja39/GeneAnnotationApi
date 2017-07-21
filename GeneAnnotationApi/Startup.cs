@@ -37,6 +37,17 @@ namespace GeneAnnotationApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            /*
+            app.UseIdentityServerAuthentication(
+                new IdentityServerAuthenticationOptions
+                {
+                    Authority = "http://localhost:5000",
+                    RequireHttpsMetadata = false,
+                    ApiName = "api1"
+                }
+                );
+                */
+
             app.UseMvc();
         }
     }
