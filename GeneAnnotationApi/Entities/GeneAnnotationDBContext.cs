@@ -34,11 +34,8 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<VariantType> VariantType { get; set; }
         public virtual DbSet<ZygosityType> ZygosityType { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server=lineagen-svr02;Database=GeneAnnotationDB;Trusted_Connection=True;");
-        }
+        public GeneAnnotationDBContext(DbContextOptions<GeneAnnotationDBContext> options): base(options)
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
