@@ -35,12 +35,6 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<VariantType> VariantType { get; set; }
         public virtual DbSet<ZygosityType> ZygosityType { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Accession>(entity =>
