@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeneAnnotationApi.Entities
 {
+    [Table("annotation")]
     public partial class Annotation
     {
         public Annotation()
@@ -14,16 +17,28 @@ namespace GeneAnnotationApi.Entities
             AnnotationLiterature = new HashSet<AnnotationLiterature>();
         }
 
+        [Column("id")]
         public int Id { get; set; }
+        [Column("app_user_id")]
         public int? AppUserId { get; set; }
+        [Column("created_at", TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }
+        [Required]
+        [Column("annotation")]
         public string Annotation1 { get; set; }
 
+        [InverseProperty("Annotation")]
         public virtual ICollection<AnnotationAuthor> AnnotationAuthor { get; set; }
+        [InverseProperty("Annotation")]
         public virtual ICollection<AnnotationGene> AnnotationGene { get; set; }
+        [InverseProperty("Annotation")]
         public virtual ICollection<AnnotationGeneVariant> AnnotationGeneVariant { get; set; }
+        [InverseProperty("Annotation")]
         public virtual ICollection<AnnotationGeneVariantLiterature> AnnotationGeneVariantLiterature { get; set; }
+        [InverseProperty("Annotation")]
         public virtual ICollection<AnnotationLiterature> AnnotationLiterature { get; set; }
+        [ForeignKey("AppUserId")]
+        [InverseProperty("Annotation")]
         public virtual AppUser AppUser { get; set; }
     }
 }
