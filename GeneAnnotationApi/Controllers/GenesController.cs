@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GeneAnnotationApi.Entities;
+using GeneAnnotationApi.JsonModels;
 
 namespace GeneAnnotationApi.Controllers
 {
@@ -14,17 +17,20 @@ namespace GeneAnnotationApi.Controllers
     public class GenesController : Controller
     {
         private readonly GeneAnnotationDBContext _context;
+        private readonly IMapper _mapper;
 
-        public GenesController(GeneAnnotationDBContext context)
+        public GenesController(GeneAnnotationDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Genes
         [HttpGet]
-        public IEnumerable<Gene> GetGene()
+        public IEnumerable<GeneJsonModel> GetGene()
         {
-            return _context.Gene;
+            var genes = _context.Gene.ProjectTo<GeneJsonModel>().ToList();
+            return genes;
         }
 
         // GET: api/Genes/5
