@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,8 @@ namespace GeneAnnotationApi
             var connection = @"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015";
 
             services.AddDbContext<GeneAnnotationDBContext>(options => options.UseSqlServer(connection));
+
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,17 +45,6 @@ namespace GeneAnnotationApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            /*
-            app.UseIdentityServerAuthentication(
-                new IdentityServerAuthenticationOptions
-                {
-                    Authority = "http://localhost:5000",
-                    RequireHttpsMetadata = false,
-                    ApiName = "api1"
-                }
-                );
-                */
 
             app.UseMvc();
         }
