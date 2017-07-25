@@ -35,6 +35,8 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<VariantType> VariantType { get; set; }
         public virtual DbSet<ZygosityType> ZygosityType { get; set; }
 
+        public GeneAnnotationDBContext(DbContextOptions<GeneAnnotationDBContext> options) : base(options) { }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Accession>(entity =>
