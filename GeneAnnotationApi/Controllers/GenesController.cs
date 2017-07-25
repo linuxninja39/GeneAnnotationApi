@@ -29,8 +29,13 @@ namespace GeneAnnotationApi.Controllers
         [HttpGet]
         public IEnumerable<GeneJsonModel> GetGene()
         {
-            var genes = _context.Gene.ProjectTo<GeneJsonModel>().ToList();
-            return genes;
+            if (_context.Gene != null)
+            {
+                var dbGenes = _context.Gene;
+                var genes = dbGenes.ProjectTo<GeneJsonModel>().ToList();
+                return genes;
+            }
+            return null;
         }
 
         // GET: api/Genes/5

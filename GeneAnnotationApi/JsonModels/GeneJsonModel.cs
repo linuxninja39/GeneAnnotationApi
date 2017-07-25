@@ -5,7 +5,7 @@ namespace GeneAnnotationApi.JsonModels
     public class GeneJsonModel
     {
         public SymbolJsonModel[] Symbol { get; set; }
-        public HumanGenomeAssemblyJsonModel Hg { get; set; }
+        public HumanGenomeAssemblyJsonModel HumanGenomeAssembly { get; set; }
         public ChromosomeJsonModel Chromosome { get; set; }
         public string Name { get; set; }
         public string[] PreviousNames { get; set; }
