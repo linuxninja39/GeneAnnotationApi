@@ -43,6 +43,8 @@ namespace GeneAnnotationApi.Entities
         public string Ucsc { get; set; }
         [Column("human_genome_assembly_id")]
         public int? HumanGenomeAssemblyId { get; set; }
+        [Column("chromosome_id")]
+        public int ChromosomeId { get; set; }
 
         [InverseProperty("Gene")]
         public virtual ICollection<Accession> Accession { get; set; }
@@ -64,6 +66,9 @@ namespace GeneAnnotationApi.Entities
         public virtual ICollection<Symbol> Symbol { get; set; }
         [InverseProperty("Gene")]
         public virtual ICollection<Synonym> Synonym { get; set; }
+        [ForeignKey("ChromosomeId")]
+        [InverseProperty("Gene")]
+        public virtual Chromosome Chromosome { get; set; }
         [ForeignKey("HumanGenomeAssemblyId")]
         [InverseProperty("Gene")]
         public virtual HumanGenomeAssembly HumanGenomeAssembly { get; set; }

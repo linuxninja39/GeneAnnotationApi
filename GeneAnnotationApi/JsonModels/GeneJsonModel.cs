@@ -17,7 +17,7 @@ namespace GeneAnnotationApi.JsonModels
         public int Start { get;  set; }
         public int End { get;  set; }
         public string Origin { get;  set; }
-        public GeneVariantJsonModel[] Variants { get;  set; }
+        public GeneVariantJsonModel[] GeneVariant { get;  set; }
         public AnnotationJsonModel[] Annotations { get;  set; }
     }
 }

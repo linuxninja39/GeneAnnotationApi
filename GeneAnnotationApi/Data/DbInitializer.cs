@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using GeneAnnotationApi.Entities;
@@ -19,7 +20,8 @@ namespace GeneAnnotationApi.Data
             
             ClearTables(context);
             var humanGenomeAssembly = HumanGenomeAssemblyTable(context);
-            var genes = GeneTable(context, humanGenomeAssembly);
+            var chromosomes = ChromosomeTable(context);
+            var genes = GeneTable(context, humanGenomeAssembly, chromosomes);
             var zygosityTypes = ZygosityTypeTable(context);
             var variantTypes = VariantTypeTable(context);
             var callTypes = CallTypeTable(context);
@@ -41,7 +43,8 @@ namespace GeneAnnotationApi.Data
                 "human_genome_assembly",
                 "zygosity_type",
                 "variant_type",
-                "call_type"
+                "call_type",
+                "chromosome"
             };
             foreach (var tableName in tableNames)
             {
@@ -123,7 +126,11 @@ namespace GeneAnnotationApi.Data
             return humanGenomeAssembly;
         }
 
-        private static Gene[] GeneTable(GeneAnnotationDBContext context, HumanGenomeAssembly humanGenomeAssembly)
+        private static Gene[] GeneTable(
+            GeneAnnotationDBContext context,
+            HumanGenomeAssembly humanGenomeAssembly,
+            Chromosome[] chromosomes
+            )
         {
             var genes = new Gene[]
             {
@@ -133,7 +140,8 @@ namespace GeneAnnotationApi.Data
                     KnownGeneFunction = "cool function",
                     LastModifiedBy = "joe",
                     LastModifiedDate = DateTime.Now,
-                    HumanGenomeAssembly = humanGenomeAssembly
+                    HumanGenomeAssembly = humanGenomeAssembly,
+                    Chromosome = chromosomes[0]
                 }
             };
             
@@ -173,5 +181,28 @@ namespace GeneAnnotationApi.Data
 
             return geneVariants;
         }
+
+        private static Chromosome[] ChromosomeTable(GeneAnnotationDBContext context)
+        {
+            var chromosomeNames = new string[]
+            {
+                "1",
+                "2",
+                "3",
+                "X",
+                "Y"
+            };
+
+            var chromosomes = new List<Chromosome>();
+            foreach (var chromosomeName in chromosomeNames)
+            {
+                var chromosome = new Chromosome {Name = chromosomeName};
+                chromosomes.Add(chromosome);
+                context.Chromosome.Add(chromosome);
+            }
+            context.SaveChanges();
+            return chromosomes.ToArray();
+        }
     }
+    
 }

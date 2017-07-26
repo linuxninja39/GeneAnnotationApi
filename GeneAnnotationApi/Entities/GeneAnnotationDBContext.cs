@@ -18,6 +18,7 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<Author> Author { get; set; }
         public virtual DbSet<AuthorLiterature> AuthorLiterature { get; set; }
         public virtual DbSet<CallType> CallType { get; set; }
+        public virtual DbSet<Chromosome> Chromosome { get; set; }
         public virtual DbSet<Disorder> Disorder { get; set; }
         public virtual DbSet<Gene> Gene { get; set; }
         public virtual DbSet<GeneLocation> GeneLocation { get; set; }
@@ -36,7 +37,7 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<ZygosityType> ZygosityType { get; set; }
 
         public GeneAnnotationDBContext(DbContextOptions<GeneAnnotationDBContext> options) : base(options) { }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Accession>(entity =>
@@ -104,6 +105,13 @@ namespace GeneAnnotationApi.Entities
             {
                 entity.HasIndex(e => new { e.AuthorId, e.LiteratureId })
                     .HasName("unique_author_literature")
+                    .IsUnique();
+            });
+
+            modelBuilder.Entity<Chromosome>(entity =>
+            {
+                entity.HasIndex(e => e.Name)
+                    .HasName("UQ__chromoso__72E12F1B32E70F94")
                     .IsUnique();
             });
 
