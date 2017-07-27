@@ -13,7 +13,7 @@ namespace GeneAnnotationApiTest
         }
         
         [Fact]
-        public void ConfigurationShouldBeValid()
+        public void True()
         {
             Assert.True(true);
         }
