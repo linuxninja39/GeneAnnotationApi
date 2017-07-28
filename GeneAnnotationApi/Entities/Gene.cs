@@ -41,8 +41,6 @@ namespace GeneAnnotationApi.Entities
         public string EnsembleId { get; set; }
         [Column("ucsc", TypeName = "varchar(250)")]
         public string Ucsc { get; set; }
-        [Column("human_genome_assembly_id")]
-        public int? HumanGenomeAssemblyId { get; set; }
         [Column("chromosome_id")]
         public int ChromosomeId { get; set; }
 
@@ -69,8 +67,5 @@ namespace GeneAnnotationApi.Entities
         [ForeignKey("ChromosomeId")]
         [InverseProperty("Gene")]
         public virtual Chromosome Chromosome { get; set; }
-        [ForeignKey("HumanGenomeAssemblyId")]
-        [InverseProperty("Gene")]
-        public virtual HumanGenomeAssembly HumanGenomeAssembly { get; set; }
     }
 }

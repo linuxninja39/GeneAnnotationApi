@@ -1,12 +1,12 @@
 ﻿namespace GeneAnnotationApi.JsonModels
 {
-    public class GeneVariantJsonModel
+    public class GeneVariantJsonModel: BaseJsonModel
     {
         public GeneJsonModel Gene { get; set; }
-        public GeneVariantZygosityJsonType ZygosityJson { get; set; }
-        public GeneVariantJsonType JsonType { get; set; }
-        public GeneVariantCallJsonType CallJson { get; set; }
-        public AnnotationJsonModel Annotations { get; set; }
-        public GeneVariantLiteratureJsonModel  Literatures { get; set; }
+        public VariantTypeJsonModel VariantType { get; set; }
+        public CallTypeJsonModel CallType { get; set; }
+        public AnnotationJsonModel[] AnnotationGeneVariant { get; set; }
+        public GeneVariantLiteratureJsonModel  GeneVariantLiterature { get; set; }
+        public ZygosityTypeJsonModel ZygosityType { get; set; }
     }
 }

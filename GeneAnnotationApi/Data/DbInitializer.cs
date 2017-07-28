@@ -19,9 +19,9 @@ namespace GeneAnnotationApi.Data
             }
             
             ClearTables(context);
-            var humanGenomeAssembly = HumanGenomeAssemblyTable(context);
             var chromosomes = ChromosomeTable(context);
-            var genes = GeneTable(context, humanGenomeAssembly, chromosomes);
+            var genes = GeneTable(context, chromosomes);
+            var geneLocations = GeneLocationTable(context, genes);
             var zygosityTypes = ZygosityTypeTable(context);
             var variantTypes = VariantTypeTable(context);
             var callTypes = CallTypeTable(context);
@@ -117,18 +117,25 @@ namespace GeneAnnotationApi.Data
             return callTypes;
         }
 
-        private static HumanGenomeAssembly HumanGenomeAssemblyTable(GeneAnnotationDBContext context)
+        private static GeneLocation[] GeneLocationTable(GeneAnnotationDBContext context, Gene[] genes)
         {
-            var humanGenomeAssembly = new HumanGenomeAssembly {Hg = 19};
-            context.HumanGenomeAssembly.Add(humanGenomeAssembly);
-            context.SaveChanges();
+            var geneLocations = new GeneLocation[]
+            {
+                new GeneLocation{Gene = genes[0], Chr = "1", Start = 444, End = 555, Locus = "locus", HgVersion = 19},
+                new GeneLocation{Gene = genes[0], Chr = "1", Start = 446, End = 558, Locus = "locus", HgVersion = 38}
+            };
 
-            return humanGenomeAssembly;
+            foreach (var geneLocation in geneLocations)
+            {
+                context.GeneLocation.Add(geneLocation);
+            }
+
+            context.SaveChanges();
+            return geneLocations;
         }
 
         private static Gene[] GeneTable(
             GeneAnnotationDBContext context,
-            HumanGenomeAssembly humanGenomeAssembly,
             Chromosome[] chromosomes
             )
         {
@@ -140,7 +147,6 @@ namespace GeneAnnotationApi.Data
                     KnownGeneFunction = "cool function",
                     LastModifiedBy = "joe",
                     LastModifiedDate = DateTime.Now,
-                    HumanGenomeAssembly = humanGenomeAssembly,
                     Chromosome = chromosomes[0]
                 }
             };

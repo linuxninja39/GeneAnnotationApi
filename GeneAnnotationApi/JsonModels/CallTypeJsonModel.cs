@@ -1,7 +1,6 @@
 ﻿namespace GeneAnnotationApi.JsonModels
 {
-    public enum GeneVariantType
+    public class CallTypeJsonModel
     {
-        
     }
 }
