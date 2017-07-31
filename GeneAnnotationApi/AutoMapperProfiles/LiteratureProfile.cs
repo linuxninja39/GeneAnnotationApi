@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
-using GeneAnnotationApi.JsonModels;
 
 namespace GeneAnnotationApi.AutoMapperProfiles
 {
@@ -9,7 +9,20 @@ namespace GeneAnnotationApi.AutoMapperProfiles
     {
         public LiteratureProfile()
         {
-            CreateMap<Literature, LiteratureDto>();
+            CreateMap<Literature, LiteratureDto>()
+                .ForMember(
+                    destinationMember => destinationMember.Author,
+                    opt => opt.MapFrom(
+                        lit => lit.AuthorLiterature.Select(authLit => authLit.Author)
+                        )
+                    )
+                .ForMember(
+                    destinationMember => destinationMember.Annotation,
+                    opt => opt.MapFrom(
+                        lit => lit.AnnotationLiterature.Select(authLit => authLit .Annotation)
+                        )
+                    )
+                ;
         }
     }
 }

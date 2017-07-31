@@ -19,6 +19,7 @@ namespace GeneAnnotationApi.Data
             }
             
             ClearTables(context);
+            var appUsers = AppUserTable(context);
             var chromosomes = ChromosomeTable(context);
             var genes = GeneTable(context, chromosomes);
             var geneLocations = GeneLocationTable(context, genes);
@@ -33,11 +34,13 @@ namespace GeneAnnotationApi.Data
                 callTypes
                 );
         }
+        
 
         private static void ClearTables(GeneAnnotationDBContext context)
         {
             var tableNames = new string[]
             {
+                "app_user",
                 "gene_variant",
                 "gene",
                 "human_genome_assembly",
@@ -51,6 +54,25 @@ namespace GeneAnnotationApi.Data
                 var sqlString = "DELETE FROM " + tableName;
                 context.Database.ExecuteSqlCommand(sqlString);
             }
+        }
+
+        private static AppUser[] AppUserTable(GeneAnnotationDBContext context)
+        {
+            var appUsers = new AppUser[]
+            {
+                new AppUser{Name = "jacob"},
+                new AppUser{Name = "john"},
+                new AppUser{Name = "fred"}
+            };
+            
+            foreach (var appUser in appUsers)
+            {
+                context.AppUser.Add(appUser);
+            }
+            
+            context.SaveChanges();
+
+            return appUsers;
         }
 
         private static ZygosityType[] ZygosityTypeTable(GeneAnnotationDBContext context)

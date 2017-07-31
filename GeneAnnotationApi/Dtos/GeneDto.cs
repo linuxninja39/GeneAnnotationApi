@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeneAnnotationApi.JsonModels;
 
 namespace GeneAnnotationApi.Dtos
 {

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GeneAnnotationApi.Entities;
-using GeneAnnotationApi.JsonModels;
 
 namespace GeneAnnotationApi.Controllers
 {

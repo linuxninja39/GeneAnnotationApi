@@ -1,9 +1,7 @@
 ﻿namespace GeneAnnotationApi.Dtos
 {
-    public class GeneLocationDto
+    public class GeneLocationDto: BaseDto
     {
-        public int Id { get; set; }
-        public GeneDto Gene { get; set; }
         public string Chr { get; set; }
         public int Start { get; set; }
         public int End { get; set; }

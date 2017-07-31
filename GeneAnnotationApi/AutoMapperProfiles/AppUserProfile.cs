@@ -4,11 +4,11 @@ using GeneAnnotationApi.Entities;
 
 namespace GeneAnnotationApi.AutoMapperProfiles
 {
-    public class SynonymProfile : Profile
+    public class AppUserProfile : Profile
     {
-        public SynonymProfile()
+        public AppUserProfile()
         {
-            CreateMap<Synonym, SynonymDto>();
+            CreateMap<AppUser, AppUserDto>();
         }
     }
 }

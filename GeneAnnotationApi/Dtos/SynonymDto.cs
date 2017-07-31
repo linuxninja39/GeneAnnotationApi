@@ -1,7 +1,6 @@
 ﻿using System;
-using GeneAnnotationApi.Dtos;
 
-namespace GeneAnnotationApi.JsonModels
+namespace GeneAnnotationApi.Dtos
 {
     public class SynonymDto: BaseDto
     {
