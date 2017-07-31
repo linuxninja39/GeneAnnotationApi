@@ -1,6 +1,6 @@
 ﻿namespace GeneAnnotationApi.JsonModels
 {
-    public class OriginJsonType: BaseJsonModel
+    public class OriginTypeJsonModel: BaseJsonModel
     {
         public string Name { get; set; }
     }

@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using GeneAnnotationApi.AutoMapperProfiles.CustomResolvers;
+﻿using System.Linq;
+using AutoMapper;
 using GeneAnnotationApi.Entities;
 using GeneAnnotationApi.JsonModels;
 
@@ -9,11 +9,18 @@ namespace GeneAnnotationApi.AutoMapperProfiles
     {
         public GeneProfile()
         {
-            var originResolver = new OriginResolver();
             CreateMap<Gene, GeneJsonModel>()
                 .ForMember(
                     destinationMember => destinationMember.Origin,
-                    opt => opt.ResolveUsing(originResolver)
+                    opt => opt.MapFrom(
+                        gene => gene.GeneOriginType.Select(geneOriginType => geneOriginType.OriginType).ToArray()
+                        )
+                )
+                .ForMember(
+                    destinationMember => destinationMember.Annotation,
+                    opt => opt.MapFrom(
+                        gene => gene.AnnotationGene.Select(annotationGene => annotationGene.Annotation).ToArray()
+                    )
                 )
                 ;
         }

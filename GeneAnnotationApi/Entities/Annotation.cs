@@ -25,7 +25,7 @@ namespace GeneAnnotationApi.Entities
         public DateTime CreatedAt { get; set; }
         [Required]
         [Column("annotation")]
-        public string Annotation1 { get; set; }
+        public string Note { get; set; }
 
         [InverseProperty("Annotation")]
         public virtual ICollection<AnnotationAuthor> AnnotationAuthor { get; set; }

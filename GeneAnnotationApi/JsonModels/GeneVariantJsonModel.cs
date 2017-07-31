@@ -5,8 +5,8 @@
         public GeneJsonModel Gene { get; set; }
         public VariantTypeJsonModel VariantType { get; set; }
         public CallTypeJsonModel CallType { get; set; }
-        public AnnotationJsonModel[] AnnotationGeneVariant { get; set; }
-        public GeneVariantLiteratureJsonModel  GeneVariantLiterature { get; set; }
+        public AnnotationJsonModel[] Annotation { get; set; }
+        public LiteratureJsonModel[]  Literature { get; set; }
         public ZygosityTypeJsonModel ZygosityType { get; set; }
     }
 }

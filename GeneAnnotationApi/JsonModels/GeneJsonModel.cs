@@ -12,8 +12,8 @@ namespace GeneAnnotationApi.JsonModels
         public string GeneNameExpansion { get;  set; }
         public string KnownGeneFunction { get;  set; }
         public GeneLocationJsonModel[] GeneLocation { get; set; }
-        public OriginJsonType[] Origin { get;  set; }
+        public OriginTypeJsonModel[] Origin { get;  set; }
         public GeneVariantJsonModel[] GeneVariant { get;  set; }
-        public AnnotationJsonModel[] AnnotationGene { get;  set; }
+        public AnnotationJsonModel[] Annotation { get;  set; }
     }
 }

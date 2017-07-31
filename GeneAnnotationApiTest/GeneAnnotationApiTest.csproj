@@ -11,4 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GeneAnnotationApi\GeneAnnotationApi.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Unit" />
+  </ItemGroup>
 </Project>

@@ -4,11 +4,11 @@ using GeneAnnotationApi.JsonModels;
 
 namespace GeneAnnotationApi.AutoMapperProfiles
 {
-    public class AnnotationGeneVariantProfile: Profile
+    public class LiteratureProfile : Profile
     {
-        public AnnotationGeneVariantProfile()
+        public LiteratureProfile()
         {
-            CreateMap<AnnotationGeneVariant[], AnnotationJsonModel[]>();
+            CreateMap<Literature, LiteratureJsonModel>();
         }
     }
 }
