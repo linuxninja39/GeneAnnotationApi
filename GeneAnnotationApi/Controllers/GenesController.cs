@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using GeneAnnotationApi.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,12 +28,12 @@ namespace GeneAnnotationApi.Controllers
 
         // GET: api/Genes
         [HttpGet]
-        public IEnumerable<GeneJsonModel> GetGene()
+        public IEnumerable<GeneDto> GetGene()
         {
             if (_context.Gene != null)
             {
                 var dbGenes = _context.Gene;
-                var genes = dbGenes.ProjectTo<GeneJsonModel>().ToList();
+                var genes = dbGenes.ProjectTo<GeneDto>().ToList();
                 return genes;
             }
             return null;

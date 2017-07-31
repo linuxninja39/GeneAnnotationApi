@@ -4,11 +4,11 @@ using GeneAnnotationApi.JsonModels;
 
 namespace GeneAnnotationApi.AutoMapperProfiles
 {
-    public class HumanGenomeAssemblyProfile : Profile
+    public class SynonymProfile : Profile
     {
-        public HumanGenomeAssemblyProfile()
+        public SynonymProfile()
         {
-            CreateMap<HumanGenomeAssembly, HumanGenomeAssemblyJsonModel>();
+            CreateMap<Synonym, SynonymDto>();
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace GeneAnnotationApi.JsonModels
+namespace GeneAnnotationApi.Dtos
 {
-    public class SymbolJsonModel
+    public class GeneNameDto: BaseDto
     {
+        public GeneDto Gene { get; set; }
         public string Name { get; set; }
         public DateTime ActiveDate { get; set; }
     }

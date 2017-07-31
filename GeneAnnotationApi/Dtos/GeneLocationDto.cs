@@ -1,9 +1,9 @@
-﻿namespace GeneAnnotationApi.JsonModels
+﻿namespace GeneAnnotationApi.Dtos
 {
-    public class GeneLocationJsonModel
+    public class GeneLocationDto
     {
-        public int id { get; set; }
-        public GeneJsonModel Gene { get; set; }
+        public int Id { get; set; }
+        public GeneDto Gene { get; set; }
         public string Chr { get; set; }
         public int Start { get; set; }
         public int End { get; set; }

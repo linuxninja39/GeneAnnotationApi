@@ -13,8 +13,8 @@ namespace GeneAnnotationApi.Entities
         [Column("gene_id")]
         public int? GeneId { get; set; }
         [Required]
-        [Column("synonum", TypeName = "varchar(250)")]
-        public string Synonum { get; set; }
+        [Column("name", TypeName = "varchar(250)")]
+        public string Name { get; set; }
         [Column("active_date", TypeName = "datetime")]
         public DateTime ActiveDate { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
 using GeneAnnotationApi.JsonModels;
 
@@ -8,7 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
     {
         public CallTypeProfile()
         {
-            CreateMap<CallType, CallTypeJsonModel>();
+            CreateMap<CallType, CallTypeDto>();
         }
     }
 }

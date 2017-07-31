@@ -165,7 +165,7 @@ namespace GeneAnnotationApi.Entities
 
             modelBuilder.Entity<Synonym>(entity =>
             {
-                entity.HasIndex(e => e.Synonum)
+                entity.HasIndex(e => e.Name)
                     .HasName("UQ__synonym__8E98347A41BDD768")
                     .IsUnique();
             });
