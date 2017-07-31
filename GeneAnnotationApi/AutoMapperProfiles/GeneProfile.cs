@@ -14,13 +14,13 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                 .ForMember(
                     destinationMember => destinationMember.Origin,
                     opt => opt.MapFrom(
-                        gene => gene.GeneOriginType.Select(geneOriginType => geneOriginType.OriginType).ToArray()
+                        gene => gene.GeneOriginType.Select(geneOriginType => geneOriginType.OriginType)
                         )
                 )
                 .ForMember(
                     destinationMember => destinationMember.Annotation,
                     opt => opt.MapFrom(
-                        gene => gene.AnnotationGene.Select(annotationGene => annotationGene.Annotation).ToArray()
+                        gene => gene.AnnotationGene.Select(annotationGene => annotationGene.Annotation)
                     )
                 )
                 ;

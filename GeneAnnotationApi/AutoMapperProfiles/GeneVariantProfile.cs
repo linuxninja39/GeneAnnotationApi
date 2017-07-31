@@ -18,7 +18,6 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                                 geneVariant.AnnotationGeneVariant.Select(
                                     annotationGeneVariant => annotationGeneVariant.Annotation
                                 )
-                                .ToArray()
                         )
                 )
                 .ForMember(
@@ -26,7 +25,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                     opt => opt.MapFrom(
                         geneVariant => geneVariant.GeneVariantLiterature.Select(
                             literatureGeneVariant => literatureGeneVariant.Literature
-                            ).ToArray()
+                            )
                         )
                     )
                 ;
