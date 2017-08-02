@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using GeneAnnotationApi.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,9 +18,10 @@ namespace GeneAnnotationApi.Data
             }
             
             ClearTables(context);
-            var appUsers = AppUserTable(context);
+            AppUserTable(context);
             var chromosomes = ChromosomeTable(context);
             var genes = GeneTable(context, chromosomes);
+            var symbols = GetSymbols(context, genes);
             var geneLocations = GeneLocationTable(context, genes);
             var zygosityTypes = ZygosityTypeTable(context);
             var variantTypes = VariantTypeTable(context);
@@ -40,6 +40,7 @@ namespace GeneAnnotationApi.Data
         {
             var tableNames = new string[]
             {
+                "symbol",
                 "app_user",
                 "gene_variant",
                 "gene",
@@ -56,9 +57,27 @@ namespace GeneAnnotationApi.Data
             }
         }
 
+        private static IEnumerable<Symbol> GetSymbols(GeneAnnotationDBContext context, Gene[] genes)
+        {
+             var symbols= new[]
+            {
+                new Symbol{Name = "ABCF3", Gene = genes[0], ActiveDate = DateTime.Now},
+                new Symbol{Name = "ABCG1", Gene = genes[0], ActiveDate = DateTime.Now.AddDays(-1)},
+            };
+            
+            foreach (var symbol in symbols)
+            {
+                context.Symbol.Add(symbol);
+            }
+            
+            context.SaveChanges();
+
+            return symbols;           
+        }
+
         private static AppUser[] AppUserTable(GeneAnnotationDBContext context)
         {
-            var appUsers = new AppUser[]
+            var appUsers = new[]
             {
                 new AppUser{Name = "jacob"},
                 new AppUser{Name = "john"},
@@ -77,7 +96,7 @@ namespace GeneAnnotationApi.Data
 
         private static ZygosityType[] ZygosityTypeTable(GeneAnnotationDBContext context)
         {
-            var zygosityTypes = new ZygosityType[]
+            var zygosityTypes = new[]
             {
                 new ZygosityType{Name = "Hetorzygous"},
                 new ZygosityType{Name = "Homozygous"},
@@ -95,7 +114,7 @@ namespace GeneAnnotationApi.Data
 
         private static VariantType[] VariantTypeTable(GeneAnnotationDBContext context)
         {
-            var variantTypes = new VariantType[]
+            var variantTypes = new[]
             {
                 new VariantType{Name = "Deletion (whole gene)"},
                 new VariantType{Name = "Partial Deletion (intragenic)"},
@@ -122,7 +141,7 @@ namespace GeneAnnotationApi.Data
         private static CallType[] CallTypeTable(GeneAnnotationDBContext context)
         {
             
-            var callTypes = new CallType[]
+            var callTypes = new[]
             {
                 new CallType{Name = "VOUS"},
                 new CallType{Name = "Likely pathogenic"},
@@ -141,7 +160,7 @@ namespace GeneAnnotationApi.Data
 
         private static GeneLocation[] GeneLocationTable(GeneAnnotationDBContext context, Gene[] genes)
         {
-            var geneLocations = new GeneLocation[]
+            var geneLocations = new[]
             {
                 new GeneLocation{Gene = genes[0], Chr = "1", Start = 444, End = 555, Locus = "locus", HgVersion = 19},
                 new GeneLocation{Gene = genes[0], Chr = "1", Start = 446, End = 558, Locus = "locus", HgVersion = 38}
@@ -161,7 +180,7 @@ namespace GeneAnnotationApi.Data
             Chromosome[] chromosomes
             )
         {
-            var genes = new Gene[]
+            var genes = new[]
             {
                 new Gene
                 {
@@ -190,7 +209,7 @@ namespace GeneAnnotationApi.Data
             CallType[] callTypes
             )
         {
-            var geneVariants = new GeneVariant[]
+            var geneVariants = new[]
             {
                 new GeneVariant
                 {
@@ -212,7 +231,7 @@ namespace GeneAnnotationApi.Data
 
         private static Chromosome[] ChromosomeTable(GeneAnnotationDBContext context)
         {
-            var chromosomeNames = new string[]
+            var chromosomeNames = new[]
             {
                 "1",
                 "2",

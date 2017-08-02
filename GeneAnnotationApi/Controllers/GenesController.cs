@@ -54,7 +54,9 @@ namespace GeneAnnotationApi.Controllers
                 return NotFound();
             }
 
-            return Ok(gene);
+            var geneDto = _mapper.Map<GeneDto>(gene);
+
+            return Ok(geneDto);
         }
 
         // PUT: api/Genes/5
