@@ -14,13 +14,15 @@ namespace GeneAnnotationApi.Data
 
             if (context.Gene.Any())
             {
-                return;
+//                return;
             }
             
             ClearTables(context);
             AppUserTable(context);
             var chromosomes = ChromosomeTable(context);
-            var genes = GeneTable(context, chromosomes);
+            var originTypes = GetOriginTypes(context);
+            var genes = Genes(context, chromosomes, originTypes);
+            var geneNames = GeneNames(context, genes);
             var symbols = GetSymbols(context, genes);
             var geneLocations = GeneLocationTable(context, genes);
             var zygosityTypes = ZygosityTypeTable(context);
@@ -41,9 +43,13 @@ namespace GeneAnnotationApi.Data
             var tableNames = new string[]
             {
                 "symbol",
+                "gene_location",
+                "gene_origin_type",
+                "origin_type",
                 "app_user",
                 "gene_variant",
                 "gene",
+                "gene_name",
                 "human_genome_assembly",
                 "zygosity_type",
                 "variant_type",
@@ -55,6 +61,24 @@ namespace GeneAnnotationApi.Data
                 var sqlString = "DELETE FROM " + tableName;
                 context.Database.ExecuteSqlCommand(sqlString);
             }
+        }
+
+        private static OriginType[] GetOriginTypes(GeneAnnotationDBContext context)
+        {
+            var originTypes = new[]
+            {
+                new OriginType(){Name = "origin 1"},
+                new OriginType(){Name = "origin 2"},
+            };
+            
+            foreach (var origin in originTypes)
+            {
+                context.OriginType.Add(origin);
+            }
+            
+            context.SaveChanges();
+
+            return originTypes;           
         }
 
         private static IEnumerable<Symbol> GetSymbols(GeneAnnotationDBContext context, Gene[] genes)
@@ -175,9 +199,10 @@ namespace GeneAnnotationApi.Data
             return geneLocations;
         }
 
-        private static Gene[] GeneTable(
+        private static Gene[] Genes(
             GeneAnnotationDBContext context,
-            Chromosome[] chromosomes
+            IReadOnlyList<Chromosome> chromosomes,
+            IReadOnlyList<OriginType> originTypes
             )
         {
             var genes = new[]
@@ -194,11 +219,30 @@ namespace GeneAnnotationApi.Data
             
             foreach (var gene in genes)
             {
+                gene.GeneOriginType.Add(new GeneOriginType{Gene = gene, OriginType = originTypes[0]});
                 context.Gene.Add(gene);
             }
             context.SaveChanges();
 
             return genes;
+        }
+
+        private static GeneName[] GeneNames(GeneAnnotationDBContext context, Gene[] genes)
+        {
+            var geneNames = new[]
+            {
+                new GeneName{Gene = genes[0], ActiveDate = DateTime.Now, Name = "Name 1"},
+                new GeneName{Gene = genes[0], ActiveDate = DateTime.Now.AddDays(-1), Name = "Name 2"},
+            };
+
+            foreach (var geneName in geneNames)
+            {
+                context.GeneName.Add(geneName);
+            }
+
+            context.SaveChanges();
+
+            return geneNames;
         }
 
         private static GeneVariant[] GeneVariantTable(
