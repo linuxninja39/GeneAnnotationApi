@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public ChromosomeProfile()
         {
             CreateMap<Chromosome, ChromosomeDto>();
+            CreateMap<ChromosomeDto, Chromosome>();
         }
     }
 }

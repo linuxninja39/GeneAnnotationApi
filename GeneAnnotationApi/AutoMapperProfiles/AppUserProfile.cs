@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public AppUserProfile()
         {
             CreateMap<AppUser, AppUserDto>();
+            CreateMap<AppUserDto, AppUser>();
         }
     }
 }

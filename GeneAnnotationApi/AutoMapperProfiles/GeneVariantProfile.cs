@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
+using GeneAnnotationApi.AutoMapperProfiles.CustomResolvers;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
 
@@ -26,6 +27,13 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                             literatureGeneVariant => literatureGeneVariant.Literature
                             )
                         )
+                    )
+                ;
+
+            CreateMap<GeneVariantDto, GeneVariant>()
+                .ForMember(
+                    geneVariant => geneVariant.AnnotationGeneVariant,
+                    opt => opt.ResolveUsing<GeneVariantDtoAnnotationToGeneVariantAnnotationGeneVariantResolver>()
                     )
                 ;
         }

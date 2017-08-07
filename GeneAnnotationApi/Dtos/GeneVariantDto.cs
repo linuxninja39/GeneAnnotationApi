@@ -2,7 +2,7 @@
 {
     public class GeneVariantDto: BaseDto
     {
-        public GeneDto Gene { get; set; }
+        public int GeneId { get; set; }
         public VariantTypeDto VariantType { get; set; }
         public CallTypeDto CallType { get; set; }
         public AnnotationDto[] Annotation { get; set; }

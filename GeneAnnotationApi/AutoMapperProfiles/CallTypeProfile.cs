@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public CallTypeProfile()
         {
             CreateMap<CallType, CallTypeDto>();
+            CreateMap<CallTypeDto, CallType>();
         }
     }
 }

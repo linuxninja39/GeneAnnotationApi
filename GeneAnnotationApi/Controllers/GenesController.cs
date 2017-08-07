@@ -47,7 +47,23 @@ namespace GeneAnnotationApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var gene = await _context.Gene.SingleOrDefaultAsync(m => m.Id == id);
+            var gene = await _context
+                .Gene
+                .Include(g => g.GeneName)
+                .Include(g => g.GeneLocation)
+                .Include(g => g.GeneOriginType)
+                .Include(g => g.GeneVariant)
+                    .ThenInclude(variant => variant.ZygosityType)
+                .Include(g => g.GeneVariant)
+                    .ThenInclude(variant => variant.CallType)
+                .Include(g => g.GeneVariant)
+                    .ThenInclude(variant => variant.VariantType)
+                .Include(g => g.AnnotationGene)
+                    .ThenInclude(annotationGene => annotationGene.Annotation)
+                .Include(g => g.Symbol)
+                .Include(g => g.Synonym)
+                .Include(g => g.Chromosome)
+                .SingleOrDefaultAsync(m => m.Id == id);
 
             if (gene == null)
             {
@@ -55,7 +71,7 @@ namespace GeneAnnotationApi.Controllers
             }
 
             var geneDto = _mapper.Map<GeneDto>(gene);
-
+            
             return Ok(geneDto);
         }
 

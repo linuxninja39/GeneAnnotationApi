@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public GeneLocationProfile()
         {
             CreateMap<GeneLocation, GeneLocationDto>();
+            CreateMap<GeneLocationDto, GeneLocation>();
         }
     }
 }

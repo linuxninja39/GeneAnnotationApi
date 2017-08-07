@@ -7,7 +7,7 @@ namespace GeneAnnotationApi.Dtos
     {
         public List<SymbolDto> Symbol { get; set; }
         public ChromosomeDto Chromosome { get; set; }
-        public List<GeneNameDto> GeneName { get; set; }
+        public ICollection<GeneNameDto> GeneName { get; set; }
         public List<SynonymDto> Synonym { get; set; }
         public DateTime LastModifiedDate { get; set; }
         public string GeneNameExpansion { get;  set; }

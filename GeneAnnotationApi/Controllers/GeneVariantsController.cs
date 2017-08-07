@@ -1,13 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using GeneAnnotationApi.Dtos;
+using GeneAnnotationApi.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeneAnnotationApi.Controllers
 {
     [Route("api/[controller]")]
     public class GeneVariantsController : Controller
     {
+        private readonly GeneAnnotationDBContext _context;
+        private readonly IMapper _mapper;
+
+        public GeneVariantsController(
+            GeneAnnotationDBContext context,
+            IMapper mapper
+        )
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+        
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -17,9 +32,25 @@ namespace GeneAnnotationApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            return "value";
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var geneVariant = await _context
+                .GeneVariant
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            if (geneVariant == null)
+            {
+                return NotFound();
+            }
+
+            var geneVariantDto = _mapper.Map<GeneVariantDto>(geneVariant);
+            
+            return Ok(geneVariantDto);
         }
 
         // POST api/GeneVariants
@@ -31,10 +62,13 @@ namespace GeneAnnotationApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (geneVariantDto.Id == null)
-            {
-                return BadRequest();
-            }
+
+            var geneVariantEntity = _mapper.Map<GeneVariant>(geneVariantDto);
+            _context.GeneVariant.Add(geneVariantEntity);
+            _context.SaveChanges();
+
+            geneVariantDto.Id = geneVariantEntity.Id;
+
             return Ok(geneVariantDto);
         }
 

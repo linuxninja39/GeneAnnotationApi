@@ -35,7 +35,7 @@ namespace GeneAnnotationApi
             // Add framework services.
             services.AddMvc();
 
-            var connection = @"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015";
+            const string connection = @"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015";
 
             services.AddDbContext<GeneAnnotationDBContext>(options => options.UseSqlServer(connection));
 

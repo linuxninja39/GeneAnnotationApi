@@ -8,6 +8,7 @@ namespace GeneAnnotationApi.Data
 {
     public class DbInitializer
     {
+        private static string IDENTITY_INSERT_STRING = "SET IDENTITY_INSERT ";
         public static void Initialize(GeneAnnotationDBContext context)
         {
             context.Database.EnsureCreated();
@@ -37,11 +38,11 @@ namespace GeneAnnotationApi.Data
                 );
         }
         
-
         private static void ClearTables(GeneAnnotationDBContext context)
         {
             var tableNames = new string[]
             {
+                "annotation",
                 "symbol",
                 "gene_location",
                 "gene_origin_type",
@@ -58,7 +59,11 @@ namespace GeneAnnotationApi.Data
             };
             foreach (var tableName in tableNames)
             {
-                var sqlString = "DELETE FROM " + tableName;
+                var sqlString = "DELETE FROM "
+                                + tableName
+                                + "; "
+                                + "DBCC CHECKIDENT ('" + tableName + "',RESEED, 0)"
+                    ;
                 context.Database.ExecuteSqlCommand(sqlString);
             }
         }
@@ -114,7 +119,7 @@ namespace GeneAnnotationApi.Data
             }
             
             context.SaveChanges();
-
+            
             return appUsers;
         }
 
@@ -295,5 +300,4 @@ namespace GeneAnnotationApi.Data
             return chromosomes.ToArray();
         }
     }
-    
 }
