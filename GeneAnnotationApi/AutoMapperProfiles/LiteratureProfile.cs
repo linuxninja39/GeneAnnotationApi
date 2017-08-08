@@ -23,6 +23,8 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                         )
                     )
                 ;
+
+            CreateMap<LiteratureDto, Literature>();
         }
     }
 }

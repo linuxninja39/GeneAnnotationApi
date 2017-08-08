@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public ZygosityTypeProfile()
         {
             CreateMap<ZygosityType, ZygosityTypeDto>();
+            CreateMap<ZygosityTypeDto, ZygosityType>();
         }
     }
 }

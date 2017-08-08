@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public VariantTypeProfile()
         {
             CreateMap<VariantType, VariantTypeDto>();
+            CreateMap<VariantTypeDto, VariantType>();
         }
     }
 }

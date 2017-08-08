@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public SymbolProfile()
         {
             CreateMap<Symbol, SymbolDto>();
+            CreateMap<SymbolDto, Symbol>();
         }
     }
 }

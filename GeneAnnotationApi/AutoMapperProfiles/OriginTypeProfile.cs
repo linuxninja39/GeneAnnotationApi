@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public OriginTypeProfile()
         {
             CreateMap<OriginType, OriginTypeDto>();
+            CreateMap<OriginTypeDto, OriginType>();
         }
     }
 }

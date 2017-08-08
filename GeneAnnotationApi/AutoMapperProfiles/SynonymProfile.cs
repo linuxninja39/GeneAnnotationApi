@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public SynonymProfile()
         {
             CreateMap<Synonym, SynonymDto>();
+            CreateMap<SynonymDto, Synonym>();
         }
     }
 }

@@ -18,8 +18,12 @@ namespace GeneAnnotationApi.AutoMapperProfiles.CustomResolvers
 
         public ICollection<AnnotationGeneVariant> Resolve(GeneVariantDto source, GeneVariant destination, ICollection<AnnotationGeneVariant> destMember, ResolutionContext context)
         {
-            var a = _context.AppUser.Find(1);
-            return null;
+            return source.Annotation?.Select(annotationDto => new AnnotationGeneVariant
+                {
+                    Annotation = context.Mapper.Map<Annotation>(annotationDto),
+                    GeneVariant = destination
+                })
+                .ToList();
         }
     }
 }
