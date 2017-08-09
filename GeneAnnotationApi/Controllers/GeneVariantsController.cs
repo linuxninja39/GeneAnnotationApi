@@ -22,12 +22,12 @@ namespace GeneAnnotationApi.Controllers
             _context = context;
             _mapper = mapper;
         }
-        
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] {"value1", "value2"};
         }
 
         // GET api/values/5
@@ -49,15 +49,14 @@ namespace GeneAnnotationApi.Controllers
             }
 
             var geneVariantDto = _mapper.Map<GeneVariantDto>(geneVariant);
-            
+
             return Ok(geneVariantDto);
         }
 
         // POST api/GeneVariants
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]GeneVariantDto geneVariantDto)
+        public async Task<IActionResult> Post([FromBody] GeneVariantDto geneVariantDto)
         {
-            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -67,14 +66,23 @@ namespace GeneAnnotationApi.Controllers
             _context.GeneVariant.Add(geneVariantEntity);
             _context.SaveChanges();
 
-            geneVariantDto.Id = geneVariantEntity.Id;
+            geneVariantEntity = await _context
+                .GeneVariant
+                .Include(gv => gv.ZygosityType)
+                .Include(gv => gv.CallType)
+                .Include(gv => gv.VariantType)
+                .SingleOrDefaultAsync(m => m.Id == geneVariantEntity.Id);
 
-            return Ok(geneVariantDto);
+            var retDto = _mapper.Map<GeneVariantDto>(
+                geneVariantEntity
+            );
+
+            return Ok(retDto);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 
