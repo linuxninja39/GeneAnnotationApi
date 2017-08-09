@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeneAnnotationApi.Entities;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeneAnnotationApi.Data
@@ -20,6 +21,7 @@ namespace GeneAnnotationApi.Data
             
             ClearTables(context);
             AppUserTable(context);
+            var literatures = GetLiteratures(context);
             var chromosomes = ChromosomeTable(context);
             var originTypes = GetOriginTypes(context);
             var genes = Genes(context, chromosomes, originTypes);
@@ -42,6 +44,7 @@ namespace GeneAnnotationApi.Data
         {
             var tableNames = new string[]
             {
+                "literature",
                 "annotation",
                 "symbol",
                 "gene_location",
@@ -66,6 +69,22 @@ namespace GeneAnnotationApi.Data
                     ;
                 context.Database.ExecuteSqlCommand(sqlString);
             }
+        }
+
+        private static Literature[] GetLiteratures(GeneAnnotationDBContext context)
+        {
+            var literatures = new[]
+            {
+                new Literature { Url = "http://lit1", Title = "lit1" },
+                new Literature { Url = "http://lit2", Title = "lit2" },
+            };
+
+            foreach (var lit in literatures)
+            {
+                context.Literature.Add(lit);
+            }
+            context.SaveChanges();
+            return literatures;
         }
 
         private static OriginType[] GetOriginTypes(GeneAnnotationDBContext context)
