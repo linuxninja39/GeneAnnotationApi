@@ -10,12 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using GeneAnnotationApi.Entities;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeneAnnotationApi
 {
     public class Startup
     {
+        private readonly string CORS_POLICY_NAME = "SitePolicy";
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -32,6 +34,7 @@ namespace GeneAnnotationApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+            
             // Add framework services.
             services.AddMvc();
 
@@ -52,14 +55,15 @@ namespace GeneAnnotationApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            
             app.UseCors(
-                builder =>
-                {
+                builder => {
                     builder.WithOrigins("http://localhost:4200")
                         .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
                         ;
-                }
+                    }
                 );
 
             app.UseMvc();
