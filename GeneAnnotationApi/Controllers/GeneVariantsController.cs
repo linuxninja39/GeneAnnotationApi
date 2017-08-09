@@ -23,13 +23,6 @@ namespace GeneAnnotationApi.Controllers
             _mapper = mapper;
         }
 
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] {"value1", "value2"};
-        }
-
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
@@ -41,6 +34,9 @@ namespace GeneAnnotationApi.Controllers
 
             var geneVariant = await _context
                 .GeneVariant
+                .Include(gv => gv.ZygosityType)
+                .Include(gv => gv.VariantType)
+                .Include(gv => gv.CallType)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (geneVariant == null)
