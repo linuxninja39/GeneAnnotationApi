@@ -45,6 +45,7 @@ namespace GeneAnnotationApi.Data
             var tableNames = new string[]
             {
                 "literature",
+                "annotation_gene",
                 "annotation",
                 "symbol",
                 "gene_location",
