@@ -18,6 +18,7 @@ namespace GeneAnnotationApi.Controllers
     {
         private readonly GeneAnnotationDBContext _context;
         private readonly IMapper _mapper;
+        private ObjectResult _invalidModelStateMessage;
 
         public LiteraturesController(GeneAnnotationDBContext context, IMapper mapper)
         {
@@ -40,10 +41,25 @@ namespace GeneAnnotationApi.Controllers
             return Ok(literatureDto);
         }
 
-        [HttpPost("GeneVariant/{geneVariantId}")]
-        public async Task<IActionResult> AddGeneVariantLiterature(int geneVariantId, [FromBody] LiteratureDto literatureDto)
+        [HttpPost("GeneVariant/{geneVariantId}/literatureId")]
+        public async Task<IActionResult> AddGeneVariantLiterature(
+            int geneVariantId,
+            int literatureId
+            )
         {
-            return Ok(literatureDto);
+            var geneVariantLiterature = new GeneVariantLiterature
+            {
+                GeneVariantId = geneVariantId,
+                LiteratureId = literatureId
+                
+            };
+
+            _context.GeneVariantLiterature.Add(geneVariantLiterature);
+            var literatureEntity = _context.Literature
+                .SingleOrDefaultAsync(m => m.Id == literatureId);
+            
+            return Ok(_mapper.Map<LiteratureDto>(literatureEntity));
         }
+
     }
 }

@@ -46,6 +46,7 @@ namespace GeneAnnotationApi.Data
             {
                 "literature",
                 "annotation_gene",
+                "annotation_gene_variant",
                 "annotation",
                 "symbol",
                 "gene_location",
