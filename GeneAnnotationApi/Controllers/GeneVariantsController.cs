@@ -87,5 +87,12 @@ namespace GeneAnnotationApi.Controllers
         public void Delete(int id)
         {
         }
+
+        [Route("/bob")]
+        [HttpPost]
+        public string saveLiteratureToVariant()
+        {
+            return "bob";
+        }
     }
 }

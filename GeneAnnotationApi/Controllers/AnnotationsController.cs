@@ -14,16 +14,17 @@ namespace GeneAnnotationApi.Controllers
     {
         private readonly GeneAnnotationDBContext _context;
         private readonly IMapper _mapper;
+        private ObjectResult _invalidModelStateMessage;
 
         public AnnotationsController(
             GeneAnnotationDBContext context,
             IMapper mapper
-            )
+        )
         {
             _context = context;
             _mapper = mapper;
         }
-        
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -38,39 +39,62 @@ namespace GeneAnnotationApi.Controllers
             return "value";
         }
 
-        // POST api/values
-        [HttpPost("gene/{geneId}")]
+        [HttpPost("Gene/{geneId}")]
         public async Task<IActionResult> SaveGeneAnnotation(int geneId, [FromBody] AnnotationDto annotationDto)
         {
-            if (!ModelState.IsValid)
+            if (!isModelValid(annotationDto))
             {
-                return BadRequest(ModelState);
+                return _invalidModelStateMessage;
             }
 
             if (annotationDto.AppUserId.Equals(0))
             {
-                if (annotationDto.AppUser == null || annotationDto.AppUser.Id.Equals(0))
-                {
-                    return BadRequest("AppUserId required");
-                }
                 annotationDto.AppUserId = annotationDto.AppUser.Id;
             }
-            if (annotationDto.Id > 0)
-            {
-                return BadRequest("Only NEW annotation are valid");
-            }
-
             annotationDto.AppUser = null;
 
             var annotationEntity = _mapper.Map<Annotation>(annotationDto);
             _context.Annotation.Add(annotationEntity);
             _context.SaveChanges();
 
-            var annotationGeneEntity = new AnnotationGene { GeneId = geneId, AnnotationId = annotationEntity.Id};
+            var annotationGeneEntity = new AnnotationGene {GeneId = geneId, AnnotationId = annotationEntity.Id};
 
             _context.AnnotationGene.Add(annotationGeneEntity);
             _context.SaveChanges();
-            
+
+            return Ok(_mapper.Map<AnnotationDto>(annotationEntity));
+        }
+
+        [HttpPost("GeneVariant/{geneVariantId}")]
+        public async Task<IActionResult> SaveGeneVariantAnnotation(
+            int geneVariantId,
+            [FromBody] AnnotationDto annotationDto
+        )
+        {
+            if (!isModelValid(annotationDto))
+            {
+                return _invalidModelStateMessage;
+            }
+
+            if (annotationDto.AppUserId.Equals(0))
+            {
+                annotationDto.AppUserId = annotationDto.AppUser.Id;
+            }
+            annotationDto.AppUser = null;
+
+            var annotationEntity = _mapper.Map<Annotation>(annotationDto);
+            _context.Annotation.Add(annotationEntity);
+            _context.SaveChanges();
+
+            var annotationGeneVariantEntity = new AnnotationGeneVariant
+            {
+                GeneVariantId = geneVariantId,
+                AnnotationId = annotationEntity.Id
+            };
+
+            _context.AnnotationGeneVariant.Add(annotationGeneVariantEntity);
+            _context.SaveChanges();
+
             return Ok(_mapper.Map<AnnotationDto>(annotationEntity));
         }
 
@@ -84,6 +108,33 @@ namespace GeneAnnotationApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        private bool isModelValid(AnnotationDto annotationDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                _invalidModelStateMessage = BadRequest(ModelState);
+                return false;
+            }
+
+            if (annotationDto.AppUserId.Equals(0))
+            {
+                if (annotationDto.AppUser == null || annotationDto.AppUser.Id.Equals(0))
+                {
+                    _invalidModelStateMessage = BadRequest("AppUserId required");
+                    return false;
+                }
+                annotationDto.AppUserId = annotationDto.AppUser.Id;
+            }
+            if (annotationDto.Id > 0)
+            {
+                _invalidModelStateMessage = BadRequest("Only NEW annotation are valid");
+                return false;
+            }
+
+
+            return true;
         }
     }
 }
