@@ -6,6 +6,7 @@ using AutoMapper;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeneAnnotationApi.Controllers
 {
@@ -61,6 +62,10 @@ namespace GeneAnnotationApi.Controllers
 
             _context.AnnotationGene.Add(annotationGeneEntity);
             _context.SaveChanges();
+
+            annotationEntity = _context.Annotation
+                .Include(annotation => annotation.AppUser)
+                .Single(annotation => annotation.Id == annotationEntity.Id);
 
             return Ok(_mapper.Map<AnnotationDto>(annotationEntity));
         }

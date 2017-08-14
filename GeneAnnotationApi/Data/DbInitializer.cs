@@ -129,7 +129,7 @@ namespace GeneAnnotationApi.Data
         {
             var appUsers = new[]
             {
-                new AppUser{Name = "jacob"},
+                new AppUser{Name = "jboswell@lineagen.com"},
                 new AppUser{Name = "john"},
                 new AppUser{Name = "fred"}
             };

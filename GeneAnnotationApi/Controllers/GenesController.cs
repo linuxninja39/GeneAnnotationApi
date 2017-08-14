@@ -60,6 +60,7 @@ namespace GeneAnnotationApi.Controllers
                     .ThenInclude(variant => variant.VariantType)
                 .Include(g => g.AnnotationGene)
                     .ThenInclude(annotationGene => annotationGene.Annotation)
+                        .ThenInclude(annotation => annotation.AppUser)
                 .Include(g => g.Symbol)
                 .Include(g => g.Synonym)
                 .Include(g => g.Chromosome)
