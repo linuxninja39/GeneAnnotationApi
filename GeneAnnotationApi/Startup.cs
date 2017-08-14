@@ -36,7 +36,11 @@ namespace GeneAnnotationApi
             services.AddCors();
             
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+                ;
 
             const string connection = @"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015";
 

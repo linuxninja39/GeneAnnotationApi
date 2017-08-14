@@ -20,14 +20,6 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                                 )
                         )
                 )
-                .ForMember(
-                    destinationMember => destinationMember.Literature,
-                    opt => opt.MapFrom(
-                        geneVariant => geneVariant.GeneVariantLiterature.Select(
-                            literatureGeneVariant => literatureGeneVariant.Literature
-                            )
-                        )
-                    )
                 ;
 
             CreateMap<GeneVariantDto, GeneVariant>()
