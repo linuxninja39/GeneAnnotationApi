@@ -100,6 +100,10 @@ namespace GeneAnnotationApi.Controllers
             _context.AnnotationGeneVariant.Add(annotationGeneVariantEntity);
             _context.SaveChanges();
 
+            annotationEntity = _context.Annotation
+                .Include(annotation => annotation.AppUser)
+                .Single(annotation => annotation.Id == annotationEntity.Id);
+
             return Ok(_mapper.Map<AnnotationDto>(annotationEntity));
         }
 

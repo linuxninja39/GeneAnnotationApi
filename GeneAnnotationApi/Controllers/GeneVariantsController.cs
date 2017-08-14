@@ -37,6 +37,9 @@ namespace GeneAnnotationApi.Controllers
                 .Include(gv => gv.ZygosityType)
                 .Include(gv => gv.VariantType)
                 .Include(gv => gv.CallType)
+                .Include(gv => gv.AnnotationGeneVariant)
+                    .ThenInclude(agv => agv.Annotation)
+                        .ThenInclude(a => a.AppUser)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (geneVariant == null)
