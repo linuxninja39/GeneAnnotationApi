@@ -52,10 +52,24 @@ namespace GeneAnnotationApi.Controllers
             int geneVariantId
         )
         {
-            var geneVariantLiteratures = _context.GeneVariantLiterature
-                .Where(gvl => gvl.LiteratureId == literatureId && gvl.GeneVariantId == geneVariantId);
+            try
+            {
+                var geneVariantLiterature = _context.GeneVariantLiterature
+                    .Include(gvl => gvl.AnnotationGeneVariantLiterature)
+                    .ThenInclude(gvl => gvl.Annotation)
+                    .ThenInclude(a => a.AppUser)
+                    .Include(gvl => gvl.Literature)
+                    .ThenInclude(l => l.AuthorLiterature)
+                    .ThenInclude(al => al.Author)
+                    .Single(gvl => gvl.LiteratureId == literatureId && gvl.GeneVariantId == geneVariantId);
+                ;
 
-            return Ok(geneVariantLiteratures);
+                return Ok(_mapper.Map<GeneVariantLiteratureDto>(geneVariantLiterature));
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost("{literatureId}/GeneVariant/{geneVariantId}")]
@@ -75,16 +89,18 @@ namespace GeneAnnotationApi.Controllers
 
             geneVariantLiterature = _context.GeneVariantLiterature
                 .Include(gvl => gvl.Literature)
-                    .ThenInclude(l => l.AnnotationLiterature)
-                        .ThenInclude(al => al.Annotation)
+                .ThenInclude(l => l.AnnotationLiterature)
+                .ThenInclude(al => al.Annotation)
                 .Include(gvl => gvl.Literature)
-                    .ThenInclude(l => l.AuthorLiterature)
-                        .ThenInclude(al => al.Author)
+                .ThenInclude(l => l.AuthorLiterature)
+                .ThenInclude(al => al.Author)
                 .Include(gvl => gvl.AnnotationGeneVariantLiterature)
-                    .ThenInclude(agvl => agvl.Annotation)
+                .ThenInclude(agvl => agvl.Annotation)
                 .Single(gvl => gvl.Id == geneVariantLiterature.Id);
-            
+
             return Ok(_mapper.Map<GeneVariantLiteratureDto>(geneVariantLiterature));
         }
+
+
     }
 }

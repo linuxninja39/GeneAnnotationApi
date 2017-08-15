@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using GeneAnnotationApi.Dtos;
@@ -91,11 +93,32 @@ namespace GeneAnnotationApi.Controllers
         {
         }
 
-        [Route("/bob")]
-        [HttpPost]
-        public string saveLiteratureToVariant()
+        [HttpGet("{geneVariantId}/Literature")]
+        public async Task<IActionResult> GetGeneVariantLiterature(
+            int literatureId,
+            int geneVariantId
+        )
         {
-            return "bob";
+            try
+            {
+                var geneVariantLiteratures = _context.GeneVariantLiterature
+                    .Include(gvl => gvl.AnnotationGeneVariantLiterature)
+                        .ThenInclude(gvl => gvl.Annotation)
+                            .ThenInclude(a => a.AppUser)
+                    .Include(gvl => gvl.Literature)
+                        .ThenInclude(l => l.AuthorLiterature)
+                            .ThenInclude(al => al.Author)
+                    .Where(gvl => gvl.GeneVariantId == geneVariantId)
+                    .ToList()
+                    ;
+                ;
+
+                return Ok(_mapper.Map<GeneVariantLiteratureDto[]>(geneVariantLiteratures));
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound();
+            }
         }
     }
 }

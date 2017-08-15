@@ -113,6 +113,41 @@ namespace GeneAnnotationApi.Controllers
         {
         }
 
+        [HttpPost("Literature/{literatureId}/GeneVariant/{geneVariantId}")]
+        public async Task<IActionResult> AddAnnotationGeneVariantLiterature(
+            int literatureId,
+            int geneVariantId,
+            [FromBody] AnnotationDto annotationDto
+        )
+        {
+            try
+            {
+                var geneVariantLiterature = _context.GeneVariantLiterature
+                    .Single(gvl => gvl.GeneVariantId == geneVariantId && gvl.LiteratureId == literatureId);
+                var annotationEntity = _mapper.Map<Annotation>(annotationDto);
+                _context.Annotation.Add(annotationEntity);
+                _context.SaveChanges();
+                var annotationGeneVariantLiterature = new AnnotationGeneVariantLiterature
+                {
+                    GeneVariantLiteratureId = geneVariantLiterature.Id,
+                    AnnotationId = annotationEntity.Id
+                };
+                _context.AnnotationGeneVariantLiterature.Add(annotationGeneVariantLiterature);
+                _context.SaveChanges();
+
+
+                annotationEntity = _context.Annotation
+                    .Include(annotation => annotation.AppUser)
+                    .Single(annotation => annotation.Id == annotationEntity.Id);
+
+                return Ok(_mapper.Map<AnnotationDto>(annotationEntity));
+            }
+            catch (InvalidOperationException e)
+            {
+                return NotFound("could not find GeneVariantLiterature");
+            }
+        }
+
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
