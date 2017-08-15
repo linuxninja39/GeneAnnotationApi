@@ -1,6 +1,6 @@
 ﻿namespace GeneAnnotationApi.Dtos
 {
-    public class GeneVariantLiteratureDto
+    public class GeneVariantLiteratureDto: BaseDto
     {
         public int GeneVariantId { get; set; }
         public int LiteratureId { get; set; }

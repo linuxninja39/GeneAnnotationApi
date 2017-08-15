@@ -113,17 +113,16 @@ namespace GeneAnnotationApi.Controllers
         {
         }
 
-        [HttpPost("Literature/{literatureId}/GeneVariant/{geneVariantId}")]
+        [HttpPost("GeneVariantLiterature/{geneVariantLiteratureId}")]
         public async Task<IActionResult> AddAnnotationGeneVariantLiterature(
-            int literatureId,
-            int geneVariantId,
+            int geneVariantLiteratureId,
             [FromBody] AnnotationDto annotationDto
         )
         {
             try
             {
                 var geneVariantLiterature = _context.GeneVariantLiterature
-                    .Single(gvl => gvl.GeneVariantId == geneVariantId && gvl.LiteratureId == literatureId);
+                    .Find(geneVariantLiteratureId);
                 var annotationEntity = _mapper.Map<Annotation>(annotationDto);
                 _context.Annotation.Add(annotationEntity);
                 _context.SaveChanges();

@@ -42,6 +42,13 @@ namespace GeneAnnotationApi.Controllers
                 .Include(gv => gv.AnnotationGeneVariant)
                     .ThenInclude(agv => agv.Annotation)
                         .ThenInclude(a => a.AppUser)
+                .Include(gv => gv.GeneVariantLiterature)
+                    .ThenInclude(gvl => gvl.Literature)
+                        .ThenInclude(l => l.AuthorLiterature)
+                            .ThenInclude(al => al.Author)
+                .Include(gv => gv.GeneVariantLiterature)
+                    .ThenInclude(gvl => gvl.AnnotationGeneVariantLiterature)
+                        .ThenInclude(agvl => agvl.Annotation)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (geneVariant == null)
