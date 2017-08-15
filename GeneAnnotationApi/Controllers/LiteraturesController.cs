@@ -32,9 +32,9 @@ namespace GeneAnnotationApi.Controllers
             if (_context.Literature == null) return BadRequest();
             var literatureEntities = _context.Literature
                     .Include(literature => literature.AuthorLiterature)
-                    .ThenInclude(authorLiterature => authorLiterature.Author)
+                        .ThenInclude(authorLiterature => authorLiterature.Author)
                     .Include(literature => literature.AnnotationLiterature)
-                    .ThenInclude(annotationLiterature => annotationLiterature.Annotation)
+                        .ThenInclude(annotationLiterature => annotationLiterature.Annotation)
                 ;
             var literatureDtos = literatureEntities.ProjectTo<LiteratureDto>().ToList();
             return Ok(literatureDtos);

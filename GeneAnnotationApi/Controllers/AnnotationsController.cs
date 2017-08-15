@@ -153,6 +153,35 @@ namespace GeneAnnotationApi.Controllers
         {
         }
 
+
+        [HttpPost("Literature/{literatureId}")]
+        public async Task<IActionResult> SaveLiteratureAnnotation(int literatureId, [FromBody] AnnotationDto annotationDto)
+        {
+            if (!isModelValid(annotationDto))
+            {
+                return BadRequest(_invalidModelStateMessage);
+            }
+                
+            var annotationEntity = _mapper.Map<Annotation>(annotationDto);
+            _context.Annotation.Add(annotationEntity);
+            _context.SaveChanges();
+
+            var annotationLiterature = new AnnotationLiterature
+            {
+                AnnotationId = annotationEntity.Id,
+                LiteratureId = literatureId
+            };
+
+            _context.AnnotationLiterature.Add(annotationLiterature);
+            _context.SaveChanges();
+
+            annotationEntity = _context.Annotation
+                .Include(a => a.AppUser)
+                .Single(a => a.Id == annotationEntity.Id);
+
+            return Ok(_mapper.Map<AnnotationDto>(annotationEntity));
+        }
+
         private bool isModelValid(AnnotationDto annotationDto)
         {
             if (!ModelState.IsValid)
