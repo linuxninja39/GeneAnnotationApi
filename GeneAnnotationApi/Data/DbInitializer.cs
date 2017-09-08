@@ -9,7 +9,6 @@ namespace GeneAnnotationApi.Data
 {
     public class DbInitializer
     {
-        private static string IDENTITY_INSERT_STRING = "SET IDENTITY_INSERT ";
         public static void Initialize(GeneAnnotationDBContext context)
         {
             context.Database.EnsureCreated();
