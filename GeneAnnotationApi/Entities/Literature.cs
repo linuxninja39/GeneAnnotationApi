@@ -23,6 +23,8 @@ namespace GeneAnnotationApi.Entities
         [Required]
         [Column("url", TypeName = "varchar(2000)")]
         public string Url { get; set; }
+        [Column("pubMedId", TypeName = "varchar(200)")]
+        public string PubMedId { get; set; }
 
         [InverseProperty("Literature")]
         public virtual ICollection<AnnotationLiterature> AnnotationLiterature { get; set; }

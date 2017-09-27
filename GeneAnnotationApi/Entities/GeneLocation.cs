@@ -13,8 +13,8 @@ namespace GeneAnnotationApi.Entities
         [Column("gene_id")]
         public int GeneId { get; set; }
         [Required]
-        [Column("chr", TypeName = "varchar(5)")]
-        public string Chr { get; set; }
+        [Column("chromosome_id")]
+        public int ChromosomeId { get; set; }
         [Column("start")]
         public int Start { get; set; }
         [Column("end")]
@@ -28,5 +28,8 @@ namespace GeneAnnotationApi.Entities
         [ForeignKey("GeneId")]
         [InverseProperty("GeneLocation")]
         public virtual Gene Gene { get; set; }
+        [ForeignKey("GeneLocationId")]
+        [InverseProperty("GeneLocation")]
+        public virtual Chromosome Chromosome { get; set; }
     }
 }

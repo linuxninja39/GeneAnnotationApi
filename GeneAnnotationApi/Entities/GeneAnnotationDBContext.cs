@@ -7,7 +7,6 @@ namespace GeneAnnotationApi.Entities
     public partial class GeneAnnotationDBContext : DbContext
     {
         public virtual DbSet<Accession> Accession { get; set; }
-        public virtual DbSet<AlternateGeneName> AlternateGeneName { get; set; }
         public virtual DbSet<Annotation> Annotation { get; set; }
         public virtual DbSet<AnnotationAuthor> AnnotationAuthor { get; set; }
         public virtual DbSet<AnnotationGene> AnnotationGene { get; set; }
@@ -36,7 +35,9 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<VariantType> VariantType { get; set; }
         public virtual DbSet<ZygosityType> ZygosityType { get; set; }
 
-        public GeneAnnotationDBContext(DbContextOptions<GeneAnnotationDBContext> options) : base(options) { }
+        public GeneAnnotationDBContext(DbContextOptions<GeneAnnotationDBContext> options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,35 +55,35 @@ namespace GeneAnnotationApi.Entities
 
             modelBuilder.Entity<AnnotationAuthor>(entity =>
             {
-                entity.HasIndex(e => new { e.AnnotationId, e.AuthorId })
+                entity.HasIndex(e => new {e.AnnotationId, e.AuthorId})
                     .HasName("unique_annotation_author")
                     .IsUnique();
             });
 
             modelBuilder.Entity<AnnotationGene>(entity =>
             {
-                entity.HasIndex(e => new { e.AnnotationId, e.GeneId })
+                entity.HasIndex(e => new {e.AnnotationId, e.GeneId})
                     .HasName("unique_annotation_gene")
                     .IsUnique();
             });
 
             modelBuilder.Entity<AnnotationGeneVariant>(entity =>
             {
-                entity.HasIndex(e => new { e.AnnotationId, e.GeneVariantId })
+                entity.HasIndex(e => new {e.AnnotationId, e.GeneVariantId})
                     .HasName("unique_annotation_gene_variant")
                     .IsUnique();
             });
 
             modelBuilder.Entity<AnnotationGeneVariantLiterature>(entity =>
             {
-                entity.HasIndex(e => new { e.AnnotationId, e.GeneVariantLiteratureId })
+                entity.HasIndex(e => new {e.AnnotationId, e.GeneVariantLiteratureId})
                     .HasName("unique_annotation_gene_variant_literature")
                     .IsUnique();
             });
 
             modelBuilder.Entity<AnnotationLiterature>(entity =>
             {
-                entity.HasIndex(e => new { e.AnnotationId, e.LiteratureId })
+                entity.HasIndex(e => new {e.AnnotationId, e.LiteratureId})
                     .HasName("unique_annotation_literature")
                     .IsUnique();
             });
@@ -103,7 +104,7 @@ namespace GeneAnnotationApi.Entities
 
             modelBuilder.Entity<AuthorLiterature>(entity =>
             {
-                entity.HasIndex(e => new { e.AuthorId, e.LiteratureId })
+                entity.HasIndex(e => new {e.AuthorId, e.LiteratureId})
                     .HasName("unique_author_literature")
                     .IsUnique();
             });
@@ -115,6 +116,13 @@ namespace GeneAnnotationApi.Entities
                     .IsUnique();
             });
 
+            modelBuilder.Entity<GeneLocation>(entity =>
+            {
+                entity.HasIndex(e => new {e.HgVersion, e.GeneId})
+                    .HasName("unique_hg_version_gene")
+                    .IsUnique();
+            });
+            
             modelBuilder.Entity<GeneName>(entity =>
             {
                 entity.HasIndex(e => e.Name)
@@ -124,20 +132,28 @@ namespace GeneAnnotationApi.Entities
 
             modelBuilder.Entity<GeneOriginType>(entity =>
             {
-                entity.HasIndex(e => new { e.GeneId, e.OriginTypeId })
+                entity.HasIndex(e => new {e.GeneId, e.OriginTypeId})
                     .HasName("unique_gene_origin_type")
                     .IsUnique();
             });
 
+            modelBuilder.Entity<OriginType>(entity =>
+            {
+                entity.HasIndex(e => e.Name)
+                    .HasName("unique_origin_type_name")
+                    .IsUnique();
+            });
+
+
             modelBuilder.Entity<GeneVarLitDisorder>(entity =>
             {
-                entity.HasKey(e => new { e.GeneVarLitId, e.DisorderId })
+                entity.HasKey(e => new {e.GeneVarLitId, e.DisorderId})
                     .HasName("PK__gene_var__E586E10FA9F56FED");
             });
 
             modelBuilder.Entity<GeneVariant>(entity =>
             {
-                entity.HasIndex(e => new { e.GeneId, e.ZygosityTypeId, e.VariantTypeId })
+                entity.HasIndex(e => new {e.GeneId, e.ZygosityTypeId, e.VariantTypeId})
                     .HasName("uniq_gene_zygosity_variant")
                     .IsUnique();
             });

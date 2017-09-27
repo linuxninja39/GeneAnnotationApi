@@ -66,7 +66,7 @@ namespace GeneAnnotationApi.Controllers
                         .ThenInclude(annotation => annotation.AppUser)
                 .Include(g => g.Symbol)
                 .Include(g => g.Synonym)
-                .Include(g => g.Chromosome)
+                .Include(g => g.GeneLocation)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (gene == null)

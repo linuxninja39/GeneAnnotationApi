@@ -24,7 +24,7 @@ namespace GeneAnnotationApi.Entities
         [Column("created_at", TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }
         [Required]
-        [Column("annotation")]
+        [Column("note")]
         public string Note { get; set; }
 
         [InverseProperty("Annotation")]

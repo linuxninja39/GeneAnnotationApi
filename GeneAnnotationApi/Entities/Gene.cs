@@ -11,7 +11,6 @@ namespace GeneAnnotationApi.Entities
         public Gene()
         {
             Accession = new HashSet<Accession>();
-            AlternateGeneName = new HashSet<AlternateGeneName>();
             AnnotationGene = new HashSet<AnnotationGene>();
             GeneLocation = new HashSet<GeneLocation>();
             GeneName = new HashSet<GeneName>();
@@ -26,13 +25,8 @@ namespace GeneAnnotationApi.Entities
         public int Id { get; set; }
         [Column("gene_name_expansion", TypeName = "varchar(1000)")]
         public string GeneNameExpansion { get; set; }
-        [Column("known_gene_function", TypeName = "varchar(2000)")]
-        public string KnownGeneFunction { get; set; }
-        [Required]
-        [Column("last_modified_by", TypeName = "varchar(255)")]
-        public string LastModifiedBy { get; set; }
-        [Column("last_modified_date", TypeName = "date")]
-        public DateTime LastModifiedDate { get; set; }
+        [Column("known_function", TypeName = "varchar(2000)")]
+        public string KnownFunction { get; set; }
         [Column("omim_id")]
         public int? OmimId { get; set; }
         [Column("refseq", TypeName = "varchar(250)")]
@@ -41,13 +35,9 @@ namespace GeneAnnotationApi.Entities
         public string EnsembleId { get; set; }
         [Column("ucsc", TypeName = "varchar(250)")]
         public string Ucsc { get; set; }
-        [Column("chromosome_id")]
-        public int ChromosomeId { get; set; }
 
         [InverseProperty("Gene")]
         public virtual ICollection<Accession> Accession { get; set; }
-        [InverseProperty("Gene")]
-        public virtual ICollection<AlternateGeneName> AlternateGeneName { get; set; }
         [InverseProperty("Gene")]
         public virtual ICollection<AnnotationGene> AnnotationGene { get; set; }
         [InverseProperty("Gene")]
@@ -64,8 +54,5 @@ namespace GeneAnnotationApi.Entities
         public virtual ICollection<Symbol> Symbol { get; set; }
         [InverseProperty("Gene")]
         public virtual ICollection<Synonym> Synonym { get; set; }
-        [ForeignKey("ChromosomeId")]
-        [InverseProperty("Gene")]
-        public virtual Chromosome Chromosome { get; set; }
     }
 }

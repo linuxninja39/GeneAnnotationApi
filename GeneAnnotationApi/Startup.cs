@@ -44,7 +44,8 @@ namespace GeneAnnotationApi
                 ;
 
             //const string connection = @"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015";
-            const string connection = @"Server=localhost;Database=GeneAnnotationDB;User=SA;Password=LameP455!";
+            // local Server=localhost;Database=master;Trusted_Connection=True;
+            var connection = Environment.GetEnvironmentVariable("GA_DB_STRING");
 
             services.AddDbContext<GeneAnnotationDBContext>(options => options.UseSqlServer(connection));
 

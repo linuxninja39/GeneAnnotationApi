@@ -11,6 +11,7 @@ namespace GeneAnnotationApi.Data
     {
         public static void Initialize(GeneAnnotationDBContext context)
         {
+        /*
             context.Database.EnsureCreated();
 
             if (context.Gene.Any())
@@ -238,7 +239,7 @@ namespace GeneAnnotationApi.Data
                 new Gene
                 {
                     GeneNameExpansion = "bob",
-                    KnownGeneFunction = "cool function",
+                    KnownFunction = "cool function",
                     LastModifiedBy = "joe",
                     LastModifiedDate = DateTime.Now,
                     Chromosome = chromosomes[0]
@@ -321,6 +322,7 @@ namespace GeneAnnotationApi.Data
             }
             context.SaveChanges();
             return chromosomes.ToArray();
+    */
         }
     }
 }
