@@ -19,9 +19,14 @@ namespace GeneAnnotationApi.Entities
         [Column("gene_variant_id")]
         public int GeneVariantId { get; set; }
         [Column("literature_id")]
-        public int? LiteratureId { get; set; }
-        [Column("supports_pathogenicity")]
-        public bool? SupportsPathogenicity { get; set; }
+        public int LiteratureId { get; set; }
+        [Column("app_user_id")]
+        public int AppUserId { get; set; }
+        [Column("pathogenic_support_category")]
+        public int PathogenicSupportCategoryId { get; set; }
+        [Column("added_at")]
+        public DateTime AddedAt { get; set; }
+        
 
         [InverseProperty("GeneVariantLiterature")]
         public virtual ICollection<AnnotationGeneVariantLiterature> AnnotationGeneVariantLiterature { get; set; }
@@ -33,5 +38,11 @@ namespace GeneAnnotationApi.Entities
         [ForeignKey("LiteratureId")]
         [InverseProperty("GeneVariantLiterature")]
         public virtual Literature Literature { get; set; }
+        [ForeignKey("AppUserId")]
+        [InverseProperty("GeneVariantLiteratures")]
+        public virtual AppUser AppUser { get; set; }
+        [ForeignKey("PathogenicSupportCategoryId")]
+        [InverseProperty("GeneVariantLiteratures")]
+        public virtual PathogenicSupportCategory PathogenicSupportCategory { get; set; }
     }
 }

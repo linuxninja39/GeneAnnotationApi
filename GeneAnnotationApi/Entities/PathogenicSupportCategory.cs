@@ -5,19 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeneAnnotationApi.Entities
 {
-    [Table("synonym")]
-    public partial class Synonym: ActiveDateBase
+    [Table("pathogenic_support_category")]
+    public partial class PathogenicSupportCategory
     {
         [Column("id")]
         public int Id { get; set; }
-        [Column("gene_id")]
-        public int? GeneId { get; set; }
         [Required]
         [Column("name", TypeName = "varchar(250)")]
         public string Name { get; set; }
-        
-        [ForeignKey("GeneId")]
-        [InverseProperty("Synonym")]
-        public virtual Gene Gene { get; set; }
+
+        [InverseProperty("PathogenicSupportCategory")]
+        public virtual ICollection<GeneVariantLiterature> GeneVariantLiteratures { get; set; }
     }
 }

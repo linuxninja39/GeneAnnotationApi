@@ -21,5 +21,7 @@ namespace GeneAnnotationApi.Entities
 
         [InverseProperty("AppUser")]
         public virtual ICollection<Annotation> Annotation { get; set; }
+        [InverseProperty("AppUser")]
+        public virtual ICollection<GeneVariantLiterature> GeneVariantLiteratures { get; set; }
     }
 }

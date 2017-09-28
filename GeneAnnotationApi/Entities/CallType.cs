@@ -10,7 +10,7 @@ namespace GeneAnnotationApi.Entities
     {
         public CallType()
         {
-            GeneVariant = new HashSet<GeneVariant>();
+            CallTypeGeneVariants = new HashSet<CallTypeGeneVariant>();
         }
 
         [Column("id")]
@@ -19,6 +19,6 @@ namespace GeneAnnotationApi.Entities
         public string Name { get; set; }
 
         [InverseProperty("CallType")]
-        public virtual ICollection<GeneVariant> GeneVariant { get; set; }
+        public virtual ICollection<CallTypeGeneVariant> CallTypeGeneVariants { get; set; }
     }
 }

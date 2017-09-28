@@ -38,7 +38,8 @@ namespace GeneAnnotationApi.Controllers
                 .GeneVariant
                 .Include(gv => gv.ZygosityType)
                 .Include(gv => gv.VariantType)
-                .Include(gv => gv.CallType)
+                .Include(gv => gv.CallTypeGeneVariants)
+                    .ThenInclude(geneVariantCallType => geneVariantCallType.CallType)
                 .Include(gv => gv.AnnotationGeneVariant)
                     .ThenInclude(agv => agv.Annotation)
                         .ThenInclude(a => a.AppUser)
@@ -77,7 +78,8 @@ namespace GeneAnnotationApi.Controllers
             geneVariantEntity = await _context
                 .GeneVariant
                 .Include(gv => gv.ZygosityType)
-                .Include(gv => gv.CallType)
+                .Include(gv => gv.CallTypeGeneVariants)
+                    .ThenInclude(geneVariantCallType => geneVariantCallType.CallType)
                 .Include(gv => gv.VariantType)
                 .SingleOrDefaultAsync(m => m.Id == geneVariantEntity.Id);
 

@@ -17,6 +17,7 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<Author> Author { get; set; }
         public virtual DbSet<AuthorLiterature> AuthorLiterature { get; set; }
         public virtual DbSet<CallType> CallType { get; set; }
+        public virtual DbSet<CallTypeGeneVariant> CallTypeGeneVariant { get; set; }
         public virtual DbSet<Chromosome> Chromosome { get; set; }
         public virtual DbSet<Disorder> Disorder { get; set; }
         public virtual DbSet<Gene> Gene { get; set; }
@@ -30,6 +31,7 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<Literature> Literature { get; set; }
         public virtual DbSet<NameSynonym> NameSynonym { get; set; }
         public virtual DbSet<OriginType> OriginType { get; set; }
+        public virtual DbSet<PathogenicSupportCategory> PathogenicSupportCategory { get; set; }
         public virtual DbSet<Symbol> Symbol { get; set; }
         public virtual DbSet<Synonym> Synonym { get; set; }
         public virtual DbSet<VariantType> VariantType { get; set; }
@@ -108,6 +110,20 @@ namespace GeneAnnotationApi.Entities
                     .HasName("unique_author_literature")
                     .IsUnique();
             });
+             
+            modelBuilder.Entity<CallType>(entity =>
+            {
+                entity.HasIndex(e => e.Name)
+                    .HasName("unique_call_type_name")
+                    .IsUnique();
+            });
+           
+            modelBuilder.Entity<CallTypeGeneVariant>(entity =>
+            {
+                entity.HasIndex(e => new {e.CallTypeId, e.GeneVariantId})
+                    .HasName("unique_call_type_gene_variant")
+                    .IsUnique();
+            });
 
             modelBuilder.Entity<Chromosome>(entity =>
             {
@@ -122,7 +138,7 @@ namespace GeneAnnotationApi.Entities
                     .HasName("unique_hg_version_gene")
                     .IsUnique();
             });
-            
+
             modelBuilder.Entity<GeneName>(entity =>
             {
                 entity.HasIndex(e => e.Name)
@@ -137,13 +153,6 @@ namespace GeneAnnotationApi.Entities
                     .IsUnique();
             });
 
-            modelBuilder.Entity<OriginType>(entity =>
-            {
-                entity.HasIndex(e => e.Name)
-                    .HasName("unique_origin_type_name")
-                    .IsUnique();
-            });
-
 
             modelBuilder.Entity<GeneVarLitDisorder>(entity =>
             {
@@ -153,10 +162,20 @@ namespace GeneAnnotationApi.Entities
 
             modelBuilder.Entity<GeneVariant>(entity =>
             {
-                entity.HasIndex(e => new {e.GeneId, e.ZygosityTypeId, e.VariantTypeId})
-                    .HasName("uniq_gene_zygosity_variant")
+                entity.HasIndex(e => new {e.Start, e.End, e.CodeingChange})
+                    .HasName("uniq_start_end_codingchange")
                     .IsUnique();
             });
+           
+            /*
+            modelBuilder.Entity<GeneVariantLiterature>(entity =>
+            {
+                entity.HasIndex(e => new {e.GeneVariantId, e.LiteratureId})
+                    .HasName("uniq_gene_variant_literature")
+                    .IsUnique();
+            });
+            */
+
 
             modelBuilder.Entity<HumanGenomeAssembly>(entity =>
             {
@@ -169,6 +188,20 @@ namespace GeneAnnotationApi.Entities
             {
                 entity.HasIndex(e => e.Synonum)
                     .HasName("UQ__name_syn__8E98347ADA10C4C5")
+                    .IsUnique();
+            });
+
+            modelBuilder.Entity<OriginType>(entity =>
+            {
+                entity.HasIndex(e => e.Name)
+                    .HasName("unique_origin_type_name")
+                    .IsUnique();
+            });
+            
+            modelBuilder.Entity<PathogenicSupportCategory>(entity =>
+            {
+                entity.HasIndex(e => e.Name)
+                    .HasName("unique_category_name")
                     .IsUnique();
             });
 
@@ -185,7 +218,7 @@ namespace GeneAnnotationApi.Entities
                     .HasName("UQ__synonym__8E98347A41BDD768")
                     .IsUnique();
             });
-
+            
             modelBuilder.Entity<ZygosityType>(entity =>
             {
                 entity.HasIndex(e => e.Name)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.Query.Expressions;
 
 namespace GeneAnnotationApi.Entities
 {
@@ -19,14 +20,12 @@ namespace GeneAnnotationApi.Entities
         [Column("name", TypeName = "varchar(255)")]
         public string Name { get; set; }
         [Column("parent_id")]
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         [InverseProperty("VariantType")]
         public virtual ICollection<GeneVariant> GeneVariant { get; set; }
-        /*
         [InverseProperty("Parent")]
         public virtual ICollection<VariantType> Children { get; set; }
-        */
         
         // [InverseProperty("Children")]
         [ForeignKey("ParentId")]

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GeneAnnotationApi.Entities
 {
     [Table("gene_name")]
-    public partial class GeneName
+    public partial class GeneName: ActiveDateBase
     {
         [Column("id")]
         public int Id { get; set; }
@@ -15,8 +15,6 @@ namespace GeneAnnotationApi.Entities
         [Required]
         [Column("name", TypeName = "varchar(250)")]
         public string Name { get; set; }
-        [Column("active_date", TypeName = "datetime")]
-        public DateTime ActiveDate { get; set; }
 
         [ForeignKey("GeneId")]
         [InverseProperty("GeneName")]

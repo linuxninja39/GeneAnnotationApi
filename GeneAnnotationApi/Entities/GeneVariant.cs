@@ -16,22 +16,27 @@ namespace GeneAnnotationApi.Entities
 
         [Column("id")]
         public int Id { get; set; }
-        [Column("gene_id")]
-        public int GeneId { get; set; }
+        [Required]
         [Column("zygosity_type_id")]
         public int ZygosityTypeId { get; set; }
+        [Required]
         [Column("variant_type_id")]
         public int VariantTypeId { get; set; }
-        [Column("call_type_id")]
-        public int CallTypeId { get; set; }
+        [Required]
+        [Column("start")]
+        public int Start { get; set; }
+        [Required]
+        [Column("end")]
+        public int End { get; set; }
+        [Column("coding_change", TypeName = "varchar(100)")]
+        public string CodeingChange { get; set; }
 
         [InverseProperty("GeneVariant")]
         public virtual ICollection<AnnotationGeneVariant> AnnotationGeneVariant { get; set; }
         [InverseProperty("GeneVariant")]
         public virtual ICollection<GeneVariantLiterature> GeneVariantLiterature { get; set; }
-        [ForeignKey("CallTypeId")]
         [InverseProperty("GeneVariant")]
-        public virtual CallType CallType { get; set; }
+        public virtual ICollection<CallTypeGeneVariant> CallTypeGeneVariants { get; set; }
         [ForeignKey("GeneId")]
         [InverseProperty("GeneVariant")]
         public virtual Gene Gene { get; set; }
