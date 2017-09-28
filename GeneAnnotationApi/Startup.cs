@@ -17,7 +17,6 @@ namespace GeneAnnotationApi
 {
     public class Startup
     {
-        private readonly string CORS_POLICY_NAME = "SitePolicy";
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()

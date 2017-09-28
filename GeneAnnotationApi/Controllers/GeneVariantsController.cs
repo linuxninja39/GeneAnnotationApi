@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -75,13 +74,14 @@ namespace GeneAnnotationApi.Controllers
             _context.GeneVariant.Add(geneVariantEntity);
             _context.SaveChanges();
 
+            var entity = geneVariantEntity;
             geneVariantEntity = await _context
                 .GeneVariant
                 .Include(gv => gv.ZygosityType)
                 .Include(gv => gv.CallTypeGeneVariants)
                     .ThenInclude(geneVariantCallType => geneVariantCallType.CallType)
                 .Include(gv => gv.VariantType)
-                .SingleOrDefaultAsync(m => m.Id == geneVariantEntity.Id);
+                .SingleOrDefaultAsync(m => m.Id == entity.Id);
 
             var retDto = _mapper.Map<GeneVariantDto>(
                 geneVariantEntity
@@ -90,20 +90,8 @@ namespace GeneAnnotationApi.Controllers
             return Ok(retDto);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
         [HttpGet("{geneVariantId}/Literature")]
-        public async Task<IActionResult> GetGeneVariantLiterature(
+        public OkObjectResult GetGeneVariantLiterature(
             int literatureId,
             int geneVariantId
         )
@@ -120,13 +108,12 @@ namespace GeneAnnotationApi.Controllers
                     .Where(gvl => gvl.GeneVariantId == geneVariantId)
                     .ToList()
                     ;
-                ;
 
                 return Ok(_mapper.Map<GeneVariantLiteratureDto[]>(geneVariantLiteratures));
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
-                return NotFound();
+                return new OkObjectResult(NotFound());
             }
         }
     }

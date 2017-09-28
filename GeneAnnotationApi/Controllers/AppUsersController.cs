@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GeneAnnotationApi.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GeneAnnotationApi.Entities;
@@ -26,7 +23,7 @@ namespace GeneAnnotationApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAppUsers()
+        public ObjectResult GetAppUsers()
         {
             var appUserEntities = _context.AppUser;
             var appUserDtos = appUserEntities.ProjectTo<AppUserDto>().ToList();
@@ -63,7 +60,7 @@ namespace GeneAnnotationApi.Controllers
         }
 
         [HttpPost("GeneVariant/{geneVariantId}/literatureId")]
-        public async Task<IActionResult> AddGeneVariantLiterature(
+        public ObjectResult AddGeneVariantLiterature(
             int geneVariantId,
             int literatureId
         )

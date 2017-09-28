@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
@@ -30,7 +29,7 @@ namespace GeneAnnotationApi.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] {"value1", "value2"};
+            return new[] {"value1", "value2"};
         }
 
         // GET api/values/5
@@ -41,9 +40,9 @@ namespace GeneAnnotationApi.Controllers
         }
 
         [HttpPost("Gene/{geneId}")]
-        public async Task<IActionResult> SaveGeneAnnotation(int geneId, [FromBody] AnnotationDto annotationDto)
+        public ObjectResult SaveGeneAnnotation(int geneId, [FromBody] AnnotationDto annotationDto)
         {
-            if (!isModelValid(annotationDto))
+            if (!IsModelValid(annotationDto))
             {
                 return _invalidModelStateMessage;
             }
@@ -71,12 +70,12 @@ namespace GeneAnnotationApi.Controllers
         }
 
         [HttpPost("GeneVariant/{geneVariantId}")]
-        public async Task<IActionResult> SaveGeneVariantAnnotation(
+        public ObjectResult SaveGeneVariantAnnotation(
             int geneVariantId,
             [FromBody] AnnotationDto annotationDto
         )
         {
-            if (!isModelValid(annotationDto))
+            if (!IsModelValid(annotationDto))
             {
                 return _invalidModelStateMessage;
             }
@@ -114,7 +113,7 @@ namespace GeneAnnotationApi.Controllers
         }
 
         [HttpPost("GeneVariantLiterature/{geneVariantLiteratureId}")]
-        public async Task<IActionResult> AddAnnotationGeneVariantLiterature(
+        public ObjectResult AddAnnotationGeneVariantLiterature(
             int geneVariantLiteratureId,
             [FromBody] AnnotationDto annotationDto
         )
@@ -143,7 +142,7 @@ namespace GeneAnnotationApi.Controllers
             }
             catch (InvalidOperationException e)
             {
-                return NotFound("could not find GeneVariantLiterature");
+                return NotFound("could not find GeneVariantLiterature" + e);
             }
         }
 
@@ -155,9 +154,9 @@ namespace GeneAnnotationApi.Controllers
 
 
         [HttpPost("Literature/{literatureId}")]
-        public async Task<IActionResult> SaveLiteratureAnnotation(int literatureId, [FromBody] AnnotationDto annotationDto)
+        public ObjectResult SaveLiteratureAnnotation(int literatureId, [FromBody] AnnotationDto annotationDto)
         {
-            if (!isModelValid(annotationDto))
+            if (!IsModelValid(annotationDto))
             {
                 return BadRequest(_invalidModelStateMessage);
             }
@@ -182,7 +181,7 @@ namespace GeneAnnotationApi.Controllers
             return Ok(_mapper.Map<AnnotationDto>(annotationEntity));
         }
 
-        private bool isModelValid(AnnotationDto annotationDto)
+        private bool IsModelValid(AnnotationDto annotationDto)
         {
             if (!ModelState.IsValid)
             {

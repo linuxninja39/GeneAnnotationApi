@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -18,7 +17,6 @@ namespace GeneAnnotationApi.Controllers
     {
         private readonly GeneAnnotationDBContext _context;
         private readonly IMapper _mapper;
-        private ObjectResult _invalidModelStateMessage;
 
         public LiteraturesController(GeneAnnotationDBContext context, IMapper mapper)
         {
@@ -27,9 +25,9 @@ namespace GeneAnnotationApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetLiteratures()
+        public ObjectResult GetLiteratures()
         {
-            if (_context.Literature == null) return BadRequest();
+            if (_context.Literature == null) return new ObjectResult(BadRequest());
             var literatureEntities = _context.Literature
                     .Include(literature => literature.AuthorLiterature)
                         .ThenInclude(authorLiterature => authorLiterature.Author)
@@ -41,13 +39,13 @@ namespace GeneAnnotationApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddLiterature([FromBody] LiteratureDto literatureDto)
+        public ObjectResult AddLiterature([FromBody] LiteratureDto literatureDto)
         {
             return Ok(literatureDto);
         }
 
         [HttpGet("{literatureId}/GeneVariant/{geneVariantId}")]
-        public async Task<IActionResult> GetGeneVariantLiterature(
+        public ObjectResult GetGeneVariantLiterature(
             int literatureId,
             int geneVariantId
         )
@@ -66,14 +64,14 @@ namespace GeneAnnotationApi.Controllers
 
                 return Ok(_mapper.Map<GeneVariantLiteratureDto>(geneVariantLiterature));
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
-                return NotFound();
+                return new ObjectResult(NotFound());
             }
         }
 
         [HttpPost("{literatureId}/GeneVariant/{geneVariantId}")]
-        public async Task<IActionResult> AddGeneVariantLiterature(
+        public ObjectResult AddGeneVariantLiterature(
             int literatureId,
             int geneVariantId
         )
