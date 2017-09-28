@@ -11,9 +11,9 @@ namespace GeneAnnotationApi.Entities
         [Column("id")]
         public int Id { get; set; }
         [Column("call_type_id")]
-        public int? CallTypeId { get; set; }
+        public int CallTypeId { get; set; }
         [Column("gene_variant_id")]
-        public int? GeneVariantId { get; set; }
+        public int GeneVariantId { get; set; }
         
         
         [ForeignKey("CallTypeId")]
