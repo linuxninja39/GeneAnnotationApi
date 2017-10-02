@@ -8,8 +8,15 @@ namespace GeneAnnotationApi.AutoMapperProfiles
     {
         public AnnotationProfile()
         {
-            CreateMap<Annotation, AnnotationDto>();
-            CreateMap<AnnotationDto, Annotation>();
+            CreateMap<Annotation, AnnotationDto>()
+                ;
+            CreateMap<AnnotationDto, Annotation>()
+                .ForMember(dest => dest.AnnotationAuthor, opt => opt.Ignore())
+                .ForMember(dest => dest.AnnotationGene, opt => opt.Ignore())
+                .ForMember(dest => dest.AnnotationGeneVariant, opt => opt.Ignore())
+                .ForMember(dest => dest.AnnotationGeneVariantLiterature, opt => opt.Ignore())
+                .ForMember(dest => dest.AnnotationLiterature, opt => opt.Ignore())
+                ;
         }
     }
 }

@@ -15,7 +15,6 @@ namespace GeneAnnotationApi.Entities
             GeneLocation = new HashSet<GeneLocation>();
             GeneName = new HashSet<GeneName>();
             GeneOriginType = new HashSet<GeneOriginType>();
-            GeneVariant = new HashSet<GeneVariant>();
             NameSynonym = new HashSet<NameSynonym>();
             Symbol = new HashSet<Symbol>();
             Synonym = new HashSet<Synonym>();
@@ -46,8 +45,6 @@ namespace GeneAnnotationApi.Entities
         public virtual ICollection<GeneName> GeneName { get; set; }
         [InverseProperty("Gene")]
         public virtual ICollection<GeneOriginType> GeneOriginType { get; set; }
-        [InverseProperty("Gene")]
-        public virtual ICollection<GeneVariant> GeneVariant { get; set; }
         [InverseProperty("Gene")]
         public virtual ICollection<NameSynonym> NameSynonym { get; set; }
         [InverseProperty("Gene")]

@@ -29,7 +29,7 @@ namespace GeneAnnotationApi.Entities
         [Column("end")]
         public int End { get; set; }
         [Column("coding_change", TypeName = "varchar(100)")]
-        public string CodeingChange { get; set; }
+        public string CodingChange { get; set; }
 
         [InverseProperty("GeneVariant")]
         public virtual ICollection<AnnotationGeneVariant> AnnotationGeneVariant { get; set; }
@@ -37,9 +37,6 @@ namespace GeneAnnotationApi.Entities
         public virtual ICollection<GeneVariantLiterature> GeneVariantLiterature { get; set; }
         [InverseProperty("GeneVariant")]
         public virtual ICollection<CallTypeGeneVariant> CallTypeGeneVariants { get; set; }
-        [ForeignKey("GeneId")]
-        [InverseProperty("GeneVariant")]
-        public virtual Gene Gene { get; set; }
         [ForeignKey("VariantTypeId")]
         [InverseProperty("GeneVariant")]
         public virtual VariantType VariantType { get; set; }

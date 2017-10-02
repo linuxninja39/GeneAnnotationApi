@@ -12,7 +12,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         {
             CreateMap<GeneVariantLiterature, GeneVariantLiteratureDto>()
                 .ForMember(
-                    geneVariantLiteratureDto => geneVariantLiteratureDto.Annotation,
+                    geneVariantLiteratureDto => geneVariantLiteratureDto.Annotations,
                     opt => opt.MapFrom(
                         geneVariantLiterature => geneVariantLiterature.AnnotationGeneVariantLiterature.Select(
                             annotationGeneVariantLiterature => annotationGeneVariantLiterature.Annotation
@@ -21,7 +21,16 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                 )
                 ;
 
-            CreateMap<GeneVariantLiteratureDto, GeneVariantLiterature>();
+            CreateMap<GeneVariantLiteratureDto, GeneVariantLiterature>()
+                .ForMember(
+                    geneVariantLiteratureEntity => geneVariantLiteratureEntity.AnnotationGeneVariantLiterature,
+                    opt => opt.Ignore()
+                    )
+                .ForMember(
+                    geneVariantLiteratureEntity => geneVariantLiteratureEntity.GeneVarLitDisorder,
+                    opt => opt.Ignore()
+                    )
+                ;
         }
     }
 }

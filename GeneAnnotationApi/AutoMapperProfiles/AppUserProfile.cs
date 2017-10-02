@@ -9,7 +9,10 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public AppUserProfile()
         {
             CreateMap<AppUser, AppUserDto>();
-            CreateMap<AppUserDto, AppUser>();
+            CreateMap<AppUserDto, AppUser>()
+                .ForMember(dest => dest.Annotation, opt => opt.Ignore())
+                .ForMember(dest => dest.GeneVariantLiteratures, opt => opt.Ignore())
+                ;
         }
     }
 }

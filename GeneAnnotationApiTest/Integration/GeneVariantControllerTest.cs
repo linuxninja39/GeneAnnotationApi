@@ -45,7 +45,6 @@ namespace GeneAnnotationApiTest.Integration
 
             Assert.IsType<VariantTypeDto>(geneVariant.VariantType);
             Assert.IsType<ZygosityTypeDto>(geneVariant.ZygosityType);
-            Assert.IsType<CallTypeDto>(geneVariant.CallType);
         }
     }
 }

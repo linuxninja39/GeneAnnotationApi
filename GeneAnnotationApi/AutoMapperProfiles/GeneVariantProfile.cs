@@ -20,6 +20,15 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                                 )
                         )
                 )
+                .ForMember(
+                    geneVariantDto => geneVariantDto.CallTypes,
+                    opt => opt.MapFrom(
+                            geneVariantEntity =>
+                                geneVariantEntity.CallTypeGeneVariants.Select(
+                                    callTypeGeneVariant => callTypeGeneVariant.CallType
+                                )
+                        )
+                )
                 ;
 
             CreateMap<GeneVariantDto, GeneVariant>()
@@ -27,6 +36,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                     geneVariant => geneVariant.AnnotationGeneVariant,
                     opt => opt.ResolveUsing<GeneVariantDtoAnnotationToGeneVariantAnnotationGeneVariantResolver>()
                     )
+                .ForMember(geneVariantEntity => geneVariantEntity.CallTypeGeneVariants, opt => opt.Ignore())
                 ;
         }
     }
