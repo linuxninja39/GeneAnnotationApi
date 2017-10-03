@@ -9,7 +9,9 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public PathogenicSupportCategoryProfile()
         {
             CreateMap<PathogenicSupportCategory, PathogenicSupportCategoryDto>();
-            CreateMap<PathogenicSupportCategoryDto, PathogenicSupportCategory>();
+            CreateMap<PathogenicSupportCategoryDto, PathogenicSupportCategory>()
+                .ForMember(entity => entity.GeneVariantLiteratures, opt => opt.Ignore())
+                ;
         }
     }
 }

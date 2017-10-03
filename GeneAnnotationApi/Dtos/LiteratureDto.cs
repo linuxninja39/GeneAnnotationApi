@@ -6,9 +6,9 @@ namespace GeneAnnotationApi.Dtos
     {
         public string Title;
         public string Url;
-        public List<AuthorDto> Author;
-        public List<AnnotationDto> Annotation;
+        public AuthorDto[] Authors;
+        public AnnotationDto[] Annotations;
         public string PubMedId { get; set; }
-        public GeneVariantDto[] GeneVariants { get; set; }
+        public GeneVariantLiteratureDto[] GeneVariantLiteratures { get; set; }
     }
 }

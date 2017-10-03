@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Runtime.InteropServices.ComTypes;
+using AutoMapper;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
 
@@ -9,7 +10,12 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public OriginTypeProfile()
         {
             CreateMap<OriginType, OriginTypeDto>();
-            CreateMap<OriginTypeDto, OriginType>();
+            CreateMap<OriginTypeDto, OriginType>()
+                .ForMember(
+                    originTypeEntity => originTypeEntity.GeneOriginType,
+                    opt => opt.Ignore()
+                    )
+                ;
         }
     }
 }

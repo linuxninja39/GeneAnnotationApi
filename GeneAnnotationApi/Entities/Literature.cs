@@ -12,7 +12,7 @@ namespace GeneAnnotationApi.Entities
         {
             AnnotationLiterature = new HashSet<AnnotationLiterature>();
             AuthorLiterature = new HashSet<AuthorLiterature>();
-            GeneVariantLiterature = new HashSet<GeneVariantLiterature>();
+            GeneVariantLiteratures = new HashSet<GeneVariantLiterature>();
         }
 
         [Column("id")]
@@ -31,6 +31,6 @@ namespace GeneAnnotationApi.Entities
         [InverseProperty("Literature")]
         public virtual ICollection<AuthorLiterature> AuthorLiterature { get; set; }
         [InverseProperty("Literature")]
-        public virtual ICollection<GeneVariantLiterature> GeneVariantLiterature { get; set; }
+        public virtual ICollection<GeneVariantLiterature> GeneVariantLiteratures { get; set; }
     }
 }

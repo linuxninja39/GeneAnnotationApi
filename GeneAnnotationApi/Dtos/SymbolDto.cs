@@ -2,7 +2,7 @@
 
 namespace GeneAnnotationApi.Dtos
 {
-    public class SymbolDto
+    public class SymbolDto: BaseDto
     {
         public string Name { get; set; }
         public DateTime ActiveDate { get; set; }

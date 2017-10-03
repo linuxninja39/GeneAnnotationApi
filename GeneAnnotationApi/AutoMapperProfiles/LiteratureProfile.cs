@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
+using GeneAnnotationApi.AutoMapperProfiles.CustomResolvers;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
 
@@ -11,20 +12,29 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         {
             CreateMap<Literature, LiteratureDto>()
                 .ForMember(
-                    destinationMember => destinationMember.Author,
+                    destinationMember => destinationMember.Authors,
                     opt => opt.MapFrom(
                         lit => lit.AuthorLiterature.Select(authLit => authLit.Author)
                         )
                     )
                 .ForMember(
-                    destinationMember => destinationMember.Annotation,
+                    destinationMember => destinationMember.Annotations,
                     opt => opt.MapFrom(
                         lit => lit.AnnotationLiterature.Select(authLit => authLit .Annotation)
                         )
                     )
                 ;
 
-            CreateMap<LiteratureDto, Literature>();
+            CreateMap<LiteratureDto, Literature>()
+                .ForMember(
+                    literatureEntity => literatureEntity.AnnotationLiterature,
+                    opt => opt.ResolveUsing<LiteratureDtoAnnotationToLiteratureAnnotationLiteratureResolver>()
+                    )
+                .ForMember(
+                    literatureEntity => literatureEntity.AuthorLiterature,
+                    opt => opt.ResolveUsing<LiteratureDtoAuthorToLiteratureAuthorLiteratureResolver>()
+                    )
+                ;
         }
     }
 }

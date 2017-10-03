@@ -9,7 +9,10 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public SynonymProfile()
         {
             CreateMap<Synonym, SynonymDto>();
-            CreateMap<SynonymDto, Synonym>();
+            CreateMap<SynonymDto, Synonym>()
+                .ForMember(entity => entity.Gene, opt => opt.Ignore())
+                .ForMember(entity => entity.GeneId, opt => opt.Ignore())
+                ;
         }
     }
 }

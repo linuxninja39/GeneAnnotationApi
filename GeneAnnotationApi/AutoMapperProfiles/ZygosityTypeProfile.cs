@@ -9,7 +9,9 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public ZygosityTypeProfile()
         {
             CreateMap<ZygosityType, ZygosityTypeDto>();
-            CreateMap<ZygosityTypeDto, ZygosityType>();
+            CreateMap<ZygosityTypeDto, ZygosityType>()
+                .ForMember(entity => entity.GeneVariant, opt => opt.Ignore())
+                ;
         }
     }
 }

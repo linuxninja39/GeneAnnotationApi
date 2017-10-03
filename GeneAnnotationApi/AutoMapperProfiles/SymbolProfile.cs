@@ -9,7 +9,10 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public SymbolProfile()
         {
             CreateMap<Symbol, SymbolDto>();
-            CreateMap<SymbolDto, Symbol>();
+            CreateMap<SymbolDto, Symbol>()
+                .ForMember(entity => entity.Gene, opt => opt.Ignore())
+                .ForMember(entity => entity.GeneId, opt => opt.Ignore())
+                ;
         }
     }
 }

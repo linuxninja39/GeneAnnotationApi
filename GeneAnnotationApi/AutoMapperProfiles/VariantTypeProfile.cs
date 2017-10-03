@@ -9,7 +9,9 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public VariantTypeProfile()
         {
             CreateMap<VariantType, VariantTypeDto>();
-            CreateMap<VariantTypeDto, VariantType>();
+            CreateMap<VariantTypeDto, VariantType>()
+                .ForMember(entity => entity.GeneVariant, opt => opt.Ignore())
+                ;
         }
     }
 }
