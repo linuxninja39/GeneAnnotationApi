@@ -33,20 +33,16 @@ namespace GeneAnnotationApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            
+
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
-                ;
+            ;
 
-            //const string connection = @"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015";
-            // local Server=localhost;Database=master;Trusted_Connection=True;
-            var connection = Environment.GetEnvironmentVariable("GA_DB_CONNECTION_STRING");
-
-            services.AddDbContext<GeneAnnotationDBContext>(options => options.UseSqlServer(connection));
+            SetupDatabase(services);
 
             services.AddAutoMapper();
         }
@@ -57,24 +53,39 @@ namespace GeneAnnotationApi
             IHostingEnvironment env,
             ILoggerFactory loggerFactory,
             GeneAnnotationDBContext context
-            )
+        )
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+
             app.UseCors(
-                builder => {
+                builder =>
+                {
                     builder.WithOrigins("http://localhost:4200")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials()
                         ;
-                    }
-                );
+                }
+            );
 
             app.UseMvc();
-            
+
+            InitializeDatabase(context);
+        }
+
+        public virtual void InitializeDatabase(GeneAnnotationDBContext context)
+        {
             DbInitializer.Initialize(context);
+        }
+
+        public virtual void SetupDatabase(IServiceCollection services)
+        {
+            //const string connection = @"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015";
+            // local Server=localhost;Database=master;Trusted_Connection=True;
+            var connection = Environment.GetEnvironmentVariable("GA_DB_CONNECTION_STRING");
+
+            services.AddDbContext<GeneAnnotationDBContext>(options => options.UseSqlServer(connection));
         }
     }
 }

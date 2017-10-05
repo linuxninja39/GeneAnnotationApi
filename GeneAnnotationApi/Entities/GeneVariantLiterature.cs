@@ -36,7 +36,7 @@ namespace GeneAnnotationApi.Entities
         [InverseProperty("GeneVariantLiterature")]
         public virtual GeneVariant GeneVariant { get; set; }
         [ForeignKey("LiteratureId")]
-        [InverseProperty("GeneVariantLiterature")]
+        [InverseProperty("GeneVariantLiteratures")]
         public virtual Literature Literature { get; set; }
         [ForeignKey("AppUserId")]
         [InverseProperty("GeneVariantLiteratures")]

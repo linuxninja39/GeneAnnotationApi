@@ -25,7 +25,7 @@ namespace GeneAnnotationApi.Entities
         [InverseProperty("VariantType")]
         public virtual ICollection<GeneVariant> GeneVariant { get; set; }
         [InverseProperty("Parent")]
-        public virtual ICollection<VariantType> Children { get; set; }
+        public virtual IList<VariantType> Children { get; set; }
         
         // [InverseProperty("Children")]
         [ForeignKey("ParentId")]

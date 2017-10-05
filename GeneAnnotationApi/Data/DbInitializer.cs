@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeneAnnotationApi.Entities;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeneAnnotationApi.Data
@@ -11,13 +10,14 @@ namespace GeneAnnotationApi.Data
     {
         public static void Initialize(GeneAnnotationDBContext context)
         {
-        /*
             context.Database.EnsureCreated();
 
+            /*
             if (context.Gene.Any())
             {
 //                return;
             }
+            */
             
             ClearTables(context);
             AppUserTable(context);
@@ -215,8 +215,8 @@ namespace GeneAnnotationApi.Data
         {
             var geneLocations = new[]
             {
-                new GeneLocation{Gene = genes[0], Chr = "1", Start = 444, End = 555, Locus = "locus", HgVersion = 19},
-                new GeneLocation{Gene = genes[0], Chr = "1", Start = 446, End = 558, Locus = "locus", HgVersion = 38}
+                new GeneLocation{Gene = genes[0], Start = 444, End = 555, Locus = "locus", HgVersion = 19},
+                new GeneLocation{Gene = genes[0], Start = 446, End = 558, Locus = "locus", HgVersion = 38}
             };
 
             foreach (var geneLocation in geneLocations)
@@ -239,10 +239,7 @@ namespace GeneAnnotationApi.Data
                 new Gene
                 {
                     GeneNameExpansion = "bob",
-                    KnownFunction = "cool function",
-                    LastModifiedBy = "joe",
-                    LastModifiedDate = DateTime.Now,
-                    Chromosome = chromosomes[0]
+                    KnownFunction = "cool function"
                 }
             };
             
@@ -286,10 +283,8 @@ namespace GeneAnnotationApi.Data
             {
                 new GeneVariant
                 {
-                    Gene = genes[0],
                     ZygosityType = zygosityTypes[0],
                     VariantType = variantTypes[0],
-                    CallType = callTypes[0]
                 }
             };
             foreach (var geneVariant in geneVariants)
@@ -322,7 +317,6 @@ namespace GeneAnnotationApi.Data
             }
             context.SaveChanges();
             return chromosomes.ToArray();
-    */
         }
     }
 }
