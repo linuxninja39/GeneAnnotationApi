@@ -5,8 +5,8 @@ namespace GeneAnnotationApi.Dtos
 {
     public class GeneDto: BaseDto
     {
-        public List<SymbolDto> Symbol { get; set; }
-        public ICollection<GeneNameDto> GeneName { get; set; }
+        public IList<SymbolDto> Symbol { get; set; }
+        public IList<GeneNameDto> GeneName { get; set; }
         public List<SynonymDto> Synonym { get; set; }
         public string GeneNameExpansion { get;  set; }
         public string KnownFunction { get;  set; }
