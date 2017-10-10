@@ -27,15 +27,25 @@ namespace GeneAnnotationApi.Controllers
 
         // GET: api/Genes
         [HttpGet]
-        public IEnumerable<GeneDto> GetGene()
+        public IEnumerable<GeneDto> GetGenes([FromQuery] string start, [FromQuery] string end)
         {
-            if (_context.Gene != null)
+            var dbGenes = _context.Gene;
+            IList<GeneDto> genes;
+            if (start != null && end != null)
             {
-                var dbGenes = _context.Gene;
-                var genes = dbGenes.ProjectTo<GeneDto>().ToList();
-                return genes;
+                var geneEntitties = from gene in _context.Gene
+                    join geneLocation in _context.GeneLocation on gene.Id equals geneLocation.GeneId
+                    where geneLocation.HgVersion == 19
+                          && geneLocation.Start <= Convert.ToInt32(start)
+                          && geneLocation.End >= Convert.ToInt32(end)
+                    select gene;
+                genes = geneEntitties.ProjectTo<GeneDto>().ToList();
             }
-            return null;
+            else
+            {
+                genes = dbGenes.ProjectTo<GeneDto>().ToList();
+            }
+            return genes;
         }
 
         // GET: api/Genes/5
@@ -53,8 +63,8 @@ namespace GeneAnnotationApi.Controllers
                 .Include(g => g.GeneLocation)
                 .Include(g => g.GeneOriginType)
                 .Include(g => g.AnnotationGene)
-                    .ThenInclude(annotationGene => annotationGene.Annotation)
-                        .ThenInclude(annotation => annotation.AppUser)
+                .ThenInclude(annotationGene => annotationGene.Annotation)
+                .ThenInclude(annotation => annotation.AppUser)
                 .Include(g => g.Symbol)
                 .Include(g => g.Synonym)
                 .Include(g => g.GeneLocation)
@@ -66,7 +76,7 @@ namespace GeneAnnotationApi.Controllers
             }
 
             var geneDto = _mapper.Map<GeneDto>(gene);
-            
+
             return Ok(geneDto);
         }
 
@@ -117,7 +127,7 @@ namespace GeneAnnotationApi.Controllers
             _context.Gene.Add(gene);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGene", new { id = gene.Id }, gene);
+            return CreatedAtAction("GetGene", new {id = gene.Id}, gene);
         }
 
         // DELETE: api/Genes/5
