@@ -11,10 +11,9 @@ namespace GeneAnnotationApi.Data
 {
     public static class InitializeConstants
     {
-        public static readonly string GA_DB_RESET_VARIABLE_NAME = "GA_DB_RESET";
+        public const string GA_DB_RESET_VARIABLE_NAME = "GA_DB_RESET";
 
-        private static readonly string DELETE_STRING = "DELETE FROM "
-                                                       + "{0}";
+        private const string DELETE_STRING = "DELETE FROM " + "{0}";
 
         public static void Initialize(GeneAnnotationDBContext context)
         {

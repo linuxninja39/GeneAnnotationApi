@@ -29,23 +29,30 @@ namespace GeneAnnotationApi.Controllers
         [HttpGet]
         public IEnumerable<GeneDto> GetGenes([FromQuery] string start, [FromQuery] string end)
         {
-            var dbGenes = _context.Gene;
-            IList<GeneDto> genes;
+            IQueryable<Gene> geneEntities;
             if (start != null && end != null)
             {
-                var geneEntitties = from gene in _context.Gene
+                geneEntities = from gene in _context.Gene
                     join geneLocation in _context.GeneLocation on gene.Id equals geneLocation.GeneId
                     where geneLocation.HgVersion == 19
                           && geneLocation.Start <= Convert.ToInt32(start)
                           && geneLocation.End >= Convert.ToInt32(end)
                     select gene;
-                genes = geneEntitties.ProjectTo<GeneDto>().ToList();
             }
             else
             {
-                genes = dbGenes.ProjectTo<GeneDto>().ToList();
+                geneEntities = _context.Gene;
             }
-            return genes;
+            IList<Gene> bla = geneEntities
+                .Include(gene => gene.GeneLocation)
+                .ThenInclude(geneLocation => geneLocation.Chromosome)
+                .ToList();
+
+            IList<GeneDto> geneDtos = geneEntities
+                .Include(gene => gene.GeneLocation)
+                .ThenInclude(geneLocation => geneLocation.Chromosome)
+                .ProjectTo<GeneDto>().ToList();
+            return geneDtos;
         }
 
         // GET: api/Genes/5

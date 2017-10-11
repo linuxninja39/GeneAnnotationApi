@@ -45,6 +45,7 @@ namespace GeneAnnotationApi.Migrations
                 principalTable: "gene_variant",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Cascade);
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

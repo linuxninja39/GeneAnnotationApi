@@ -9,6 +9,7 @@ namespace GeneAnnotationApi.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            
             migrationBuilder.CreateTable(
                 name: "app_user",
                 columns: table => new
@@ -826,6 +827,9 @@ namespace GeneAnnotationApi.Migrations
                 table: "zygosity_type",
                 column: "name",
                 unique: true);
+            
+            InitialCreationData.Up(migrationBuilder);
+            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
