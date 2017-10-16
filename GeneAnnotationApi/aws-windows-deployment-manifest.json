@@ -1,0 +1,15 @@
+{
+    "manifestVersion": 2,
+    "deployments": {
+        "aspNetCoreWeb": [
+            {
+                "name": "GeneAnnotationApi",
+                "parameters": {
+                    "appBundle": "site.zip",
+                    "iisPath": "/",
+                    "iisWebSite": "Default Web Site"
+                }
+            }
+        ]
+    }
+}

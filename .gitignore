@@ -286,3 +286,6 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/GeneAnnotationApi/GeneAnnotationApi.zip
+/GeneAnnotationApi/site.zip
+GeneAnnotationApi/site/
