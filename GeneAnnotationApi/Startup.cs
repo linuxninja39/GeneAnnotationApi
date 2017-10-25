@@ -70,6 +70,7 @@ namespace GeneAnnotationApi
             );
 
             app.UseMvc();
+            app.UseStaticFiles();
 
             InitializeDatabase(context);
         }

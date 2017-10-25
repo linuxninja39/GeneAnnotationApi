@@ -7,6 +7,7 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="2.16.3" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.2" />
   </ItemGroup>
   <ItemGroup>
@@ -40,4 +41,10 @@
     <Reference Include="System.Private.CoreLib" />
     <Reference Include="System.Private.CoreLib" />
   </ItemGroup>
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="hugo.txt" DestinationFolder="$(OutDir)" />
+  </Target>
+  <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="hugo.txt" DestinationFolder="$(PublishDir)" />
+  </Target>
 </Project>

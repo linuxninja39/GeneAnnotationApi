@@ -11,7 +11,7 @@ namespace GeneAnnotationApi.Entities
         [Column("id")]
         public int Id { get; set; }
         [Column("gene_id")]
-        public int? GeneId { get; set; }
+        public int GeneId { get; set; }
         [Required]
         [Column("name", TypeName = "varchar(250)")]
         public string Name { get; set; }
