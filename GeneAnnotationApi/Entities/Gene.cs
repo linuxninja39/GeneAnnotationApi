@@ -22,18 +22,9 @@ namespace GeneAnnotationApi.Entities
 
         [Column("id")]
         public int Id { get; set; }
-        [Column("gene_name_expansion", TypeName = "varchar(1000)")]
-        public string GeneNameExpansion { get; set; }
         [Column("known_function", TypeName = "varchar(2000)")]
         public string KnownFunction { get; set; }
-        [Column("omim_id")]
-        public int? OmimId { get; set; }
-        [Column("refseq", TypeName = "varchar(250)")]
-        public string Refseq { get; set; }
-        [Column("ensemble_id", TypeName = "varchar(250)")]
-        public string EnsembleId { get; set; }
-        [Column("ucsc", TypeName = "varchar(250)")]
-        public string Ucsc { get; set; }
+  
 
         [InverseProperty("Gene")]
         public virtual ICollection<Accession> Accession { get; set; }

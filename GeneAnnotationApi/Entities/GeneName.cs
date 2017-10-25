@@ -15,6 +15,9 @@ namespace GeneAnnotationApi.Entities
         [Required]
         [Column("name", TypeName = "varchar(250)")]
         public string Name { get; set; }
+        [Column("gene_name_expantion")]
+        public string GeneNameExpansion { get; set; }
+            
 
         [ForeignKey("GeneId")]
         [InverseProperty("GeneName")]

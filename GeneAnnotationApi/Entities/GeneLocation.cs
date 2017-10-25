@@ -15,10 +15,6 @@ namespace GeneAnnotationApi.Entities
         [Required]
         [Column("chromosome_id")]
         public int ChromosomeId { get; set; }
-        [Column("start")]
-        public int Start { get; set; }
-        [Column("end")]
-        public int End { get; set; }
         [Required]
         [Column("locus", TypeName = "varchar(20)")]
         public string Locus { get; set; }
