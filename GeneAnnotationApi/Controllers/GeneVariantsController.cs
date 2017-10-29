@@ -99,13 +99,13 @@ namespace GeneAnnotationApi.Controllers
             try
             {
                 var geneVariantLiteratures = _context.GeneVariantLiterature
+                    .Where(gvl => gvl.GeneVariantId == geneVariantId)
                     .Include(gvl => gvl.AnnotationGeneVariantLiterature)
                         .ThenInclude(gvl => gvl.Annotation)
                             .ThenInclude(a => a.AppUser)
                     .Include(gvl => gvl.Literature)
                         .ThenInclude(l => l.AuthorLiterature)
                             .ThenInclude(al => al.Author)
-                    .Where(gvl => gvl.GeneVariantId == geneVariantId)
                     .ToList()
                     ;
 
