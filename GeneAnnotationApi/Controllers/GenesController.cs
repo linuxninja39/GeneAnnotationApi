@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GeneAnnotationApi.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GeneAnnotationApi.Entities;
+using GeneAnnotationApi.Repositories;
 
 namespace GeneAnnotationApi.Controllers
 {
@@ -18,11 +18,13 @@ namespace GeneAnnotationApi.Controllers
     {
         private readonly GeneAnnotationDBContext _context;
         private readonly IMapper _mapper;
+        private readonly IGeneRepository _geneRepository;
 
-        public GenesController(GeneAnnotationDBContext context, IMapper mapper)
+        public GenesController(GeneAnnotationDBContext context, IMapper mapper, IGeneRepository geneRepository)
         {
             _context = context;
             _mapper = mapper;
+            _geneRepository = geneRepository;
         }
 
         // GET: api/Genes
@@ -32,21 +34,12 @@ namespace GeneAnnotationApi.Controllers
             IQueryable<Gene> geneEntities;
             if (start != null && end != null)
             {
-                geneEntities = from gene in _context.Gene
-                    join geneLocation in _context.GeneLocation on gene.Id equals geneLocation.GeneId
-                    where geneLocation.HgVersion == 19
-                          && geneLocation.Start <= Convert.ToInt32(start)
-                          && geneLocation.End >= Convert.ToInt32(end)
-                    select gene;
+                geneEntities = _geneRepository.FindByStartAndEnd(Convert.ToInt32(start), Convert.ToInt32(end));
             }
             else
             {
-                geneEntities = _context.Gene;
+                geneEntities = _geneRepository.All();
             }
-            IList<Gene> bla = geneEntities
-                .Include(gene => gene.GeneLocation)
-                .ThenInclude(geneLocation => geneLocation.Chromosome)
-                .ToList();
 
             IList<GeneDto> geneDtos = geneEntities
                 .Include(gene => gene.GeneLocation)
@@ -64,8 +57,7 @@ namespace GeneAnnotationApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var gene = await _context
-                .Gene
+            var gene = await _geneRepository.All()
                 .Include(g => g.GeneName)
                 .Include(g => g.GeneLocation)
                 .Include(g => g.GeneOriginType)

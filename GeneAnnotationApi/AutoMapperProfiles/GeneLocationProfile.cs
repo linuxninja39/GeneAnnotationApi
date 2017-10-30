@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GeneAnnotationApi.AutoMapperProfiles.CustomResolvers;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
 
@@ -8,7 +9,16 @@ namespace GeneAnnotationApi.AutoMapperProfiles
     {
         public GeneLocationProfile()
         {
-            CreateMap<GeneLocation, GeneLocationDto>();
+            CreateMap<GeneLocation, GeneLocationDto>()
+                .ForMember(
+                    geneLocationDto => geneLocationDto.Start,
+                    opt => opt.ResolveUsing<GeneCoordinateStartToGeneLocationDto>()
+                    )
+                .ForMember(
+                    geneLocationDto => geneLocationDto.End,
+                    opt => opt.ResolveUsing<GeneCoordinateEndToGeneLocationDto>()
+                    )
+                ;
             CreateMap<GeneLocationDto, GeneLocation>();
         }
     }

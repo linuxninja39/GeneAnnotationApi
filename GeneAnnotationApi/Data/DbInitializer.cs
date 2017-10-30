@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using GeneAnnotationApi.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -215,8 +214,8 @@ namespace GeneAnnotationApi.Data
         {
             var geneLocations = new[]
             {
-                new GeneLocation{Gene = genes[0], Start = 444, End = 555, Locus = "locus", HgVersion = 19},
-                new GeneLocation{Gene = genes[0], Start = 446, End = 558, Locus = "locus", HgVersion = 38}
+                new GeneLocation{Gene = genes[0], Locus = "locus", HgVersion = 19},
+                new GeneLocation{Gene = genes[0], Locus = "locus", HgVersion = 38}
             };
 
             foreach (var geneLocation in geneLocations)
@@ -238,7 +237,6 @@ namespace GeneAnnotationApi.Data
             {
                 new Gene
                 {
-                    GeneNameExpansion = "bob",
                     KnownFunction = "cool function"
                 }
             };

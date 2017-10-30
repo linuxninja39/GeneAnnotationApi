@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
+using GeneAnnotationApi.Repositories;
 
 namespace GeneAnnotationApi.AutoMapperProfiles.CustomResolvers
 {
@@ -25,5 +26,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles.CustomResolvers
                 })
                 .ToList();
         }
+
+
     }
 }

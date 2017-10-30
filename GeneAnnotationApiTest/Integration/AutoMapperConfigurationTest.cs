@@ -8,15 +8,14 @@ namespace GeneAnnotationApiTest.Integration
 {
     public class AutoMapperConfigurationTest
     {
-        private readonly TestServer _testServer;
         
         public AutoMapperConfigurationTest()
         {
             // just to make sure mapper is initialzed
-            _testServer = new TestServer(
+            var testServer = new TestServer(
                 new WebHostBuilder()
-                .UseStartup<Startup>()
-                );
+                    .UseStartup<TestStartup>()
+            );
         }
         
         [Fact]

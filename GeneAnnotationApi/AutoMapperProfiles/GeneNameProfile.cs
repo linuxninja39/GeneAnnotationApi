@@ -9,7 +9,16 @@ namespace GeneAnnotationApi.AutoMapperProfiles
         public GeneNameProfile()
         {
             CreateMap<GeneName, GeneNameDto>();
-            CreateMap<GeneNameDto, GeneName>();
+            CreateMap<GeneNameDto, GeneName>()
+                .ForMember(
+                    geneName => geneName.GeneId,
+                    opt => opt.Ignore()
+                    )
+                .ForMember(
+                    geneName => geneName.Gene,
+                    opt => opt.Ignore()
+                    )
+                ;
         }
     }
 }

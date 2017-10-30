@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using GeneAnnotationApi.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,11 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
         }
         
         public T Get(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IQueryable<T> All()
         {
             throw new System.NotImplementedException();
         }

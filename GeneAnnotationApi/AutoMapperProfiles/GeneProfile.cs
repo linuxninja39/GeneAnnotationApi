@@ -41,23 +41,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                    opt => opt.Ignore()
                    )
                .ForMember(
-                   geneEntity => geneEntity.EnsembleId,
-                   opt => opt.Ignore()
-                   )
-               .ForMember(
-                   geneEntity => geneEntity.Ucsc,
-                   opt => opt.Ignore()
-                   )
-               .ForMember(
                    geneEntity => geneEntity.Accession,
-                   opt => opt.Ignore()
-                   )
-               .ForMember(
-                   geneEntity => geneEntity.Refseq,
-                   opt => opt.Ignore()
-                   )
-               .ForMember(
-                   geneEntity => geneEntity.OmimId,
                    opt => opt.Ignore()
                    )
                 ;

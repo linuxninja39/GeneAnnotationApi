@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using GeneAnnotationApi.Entities;
-using Microsoft.EntityFrameworkCore.Design.Internal;
-using Microsoft.Extensions.Logging;
 
 namespace GeneAnnotationApi.Data
 {
@@ -58,8 +55,6 @@ namespace GeneAnnotationApi.Data
 
         private static void populateGene(Gene gene, IReadOnlyList<string> cells)
         {
-                    if (cells[24].Length > 0) gene.OmimId = Convert.ToInt32(cells[24]);
-                    if (cells[24].Length > 0) gene.Refseq = cells[25];
         }
 
         private static void SaveSymbols(GeneAnnotationDBContext context, Gene gene, string[] cells)

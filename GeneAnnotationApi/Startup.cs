@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using GeneAnnotationApi.Entities;
+using GeneAnnotationApi.Repositories;
+using GeneAnnotationApi.Repositories.EntityFramework;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,6 +45,7 @@ namespace GeneAnnotationApi
             ;
 
             SetupDatabase(services);
+            services.AddScoped<IGeneRepository, GeneEfRepository>();
 
             services.AddAutoMapper();
         }
