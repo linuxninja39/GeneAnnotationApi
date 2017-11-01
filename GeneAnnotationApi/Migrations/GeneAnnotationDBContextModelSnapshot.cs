@@ -345,28 +345,9 @@ namespace GeneAnnotationApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id");
 
-                    b.Property<string>("EnsembleId")
-                        .HasColumnName("ensemble_id")
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<string>("GeneNameExpansion")
-                        .HasColumnName("gene_name_expansion")
-                        .HasColumnType("varchar(1000)");
-
                     b.Property<string>("KnownFunction")
                         .HasColumnName("known_function")
                         .HasColumnType("varchar(2000)");
-
-                    b.Property<int?>("OmimId")
-                        .HasColumnName("omim_id");
-
-                    b.Property<string>("Refseq")
-                        .HasColumnName("refseq")
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<string>("Ucsc")
-                        .HasColumnName("ucsc")
-                        .HasColumnType("varchar(250)");
 
                     b.HasKey("Id");
 
@@ -382,9 +363,6 @@ namespace GeneAnnotationApi.Migrations
                     b.Property<int>("ChromosomeId")
                         .HasColumnName("chromosome_id");
 
-                    b.Property<int>("End")
-                        .HasColumnName("end");
-
                     b.Property<int>("GeneId")
                         .HasColumnName("gene_id");
 
@@ -397,9 +375,6 @@ namespace GeneAnnotationApi.Migrations
                         .IsRequired()
                         .HasColumnName("locus")
                         .HasColumnType("varchar(20)");
-
-                    b.Property<int>("Start")
-                        .HasColumnName("start");
 
                     b.HasKey("Id");
 
@@ -426,6 +401,9 @@ namespace GeneAnnotationApi.Migrations
 
                     b.Property<int?>("GeneId")
                         .HasColumnName("gene_id");
+
+                    b.Property<string>("GeneNameExpansion")
+                        .HasColumnName("gene_name_expantion");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -474,14 +452,12 @@ namespace GeneAnnotationApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id");
 
-                    b.Property<string>("CodeingChange")
+                    b.Property<string>("CodingChange")
                         .HasColumnName("coding_change")
                         .HasColumnType("varchar(100)");
 
                     b.Property<int>("End")
                         .HasColumnName("end");
-
-                    b.Property<int?>("GeneId");
 
                     b.Property<int>("Start")
                         .HasColumnName("start");
@@ -494,13 +470,11 @@ namespace GeneAnnotationApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
-
                     b.HasIndex("VariantTypeId");
 
                     b.HasIndex("ZygosityTypeId");
 
-                    b.HasIndex("Start", "End", "CodeingChange")
+                    b.HasIndex("Start", "End", "CodingChange")
                         .IsUnique()
                         .HasName("uniq_start_end_codingchange");
 
@@ -708,7 +682,7 @@ namespace GeneAnnotationApi.Migrations
                         .HasColumnName("active_date")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("GeneId")
+                    b.Property<int>("GeneId")
                         .HasColumnName("gene_id");
 
                     b.Property<string>("Name")
@@ -907,10 +881,6 @@ namespace GeneAnnotationApi.Migrations
 
             modelBuilder.Entity("GeneAnnotationApi.Entities.GeneVariant", b =>
                 {
-                    b.HasOne("GeneAnnotationApi.Entities.Gene", "Gene")
-                        .WithMany("GeneVariant")
-                        .HasForeignKey("GeneId");
-
                     b.HasOne("GeneAnnotationApi.Entities.VariantType", "VariantType")
                         .WithMany("GeneVariant")
                         .HasForeignKey("VariantTypeId")
@@ -935,7 +905,7 @@ namespace GeneAnnotationApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GeneAnnotationApi.Entities.Literature", "Literature")
-                        .WithMany("GeneVariantLiterature")
+                        .WithMany("GeneVariantLiteratures")
                         .HasForeignKey("LiteratureId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -976,7 +946,8 @@ namespace GeneAnnotationApi.Migrations
                 {
                     b.HasOne("GeneAnnotationApi.Entities.Gene", "Gene")
                         .WithMany("Synonym")
-                        .HasForeignKey("GeneId");
+                        .HasForeignKey("GeneId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("GeneAnnotationApi.Entities.VariantType", b =>

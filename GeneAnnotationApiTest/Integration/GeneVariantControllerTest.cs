@@ -12,7 +12,7 @@ using GeneAnnotationApi.Dtos;
 
 namespace GeneAnnotationApiTest.Integration
 {
-    public class GeneVariantControllerTest
+    public class GeneVariantControllerTest: IDisposable
     {
         private readonly TestServer _testServer;
         public HttpClient Client { get; }
@@ -35,7 +35,7 @@ namespace GeneAnnotationApiTest.Integration
         }
 
         [Fact]
-        public async void ShouldGet200()
+        public void ShouldGet200()
         {
 //            var res = await Client.GetAsync("/api/genevariants/1");
 //            res.EnsureSuccessStatusCode();
@@ -43,7 +43,7 @@ namespace GeneAnnotationApiTest.Integration
         }
 
         [Fact]
-        public async void ShouldGetGeneVariants()
+        public void ShouldGetGeneVariants()
         {
             /*
             var res = await Client.GetAsync("/api/genevariants/1");

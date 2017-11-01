@@ -20,22 +20,16 @@ namespace GeneAnnotationApi.Data
             var reset = Environment.GetEnvironmentVariable(GA_DB_RESET_VARIABLE_NAME);
 
             if (reset == null) return;
-            InitCallTypes(context);
-            InitOriginTypes(context);
-            InitPathogenicSupportCategories(context);
-            InitVariantTypes(context, null);
-            InitZygosityTypes(context);
+            if (!context.CallType.Any()) InitCallTypes(context);
+            if (!context.OriginType.Any()) InitOriginTypes(context);
+            if (!context.PathogenicSupportCategory.Any()) InitPathogenicSupportCategories(context);
+            if (!context.VariantType.Any()) InitVariantTypes(context, null);
+            if (!context.ZygosityType.Any()) InitZygosityTypes(context);
         }
 
         private static void InitCallTypes(GeneAnnotationDBContext context)
         {
-            context.Database.ExecuteSqlCommand(string.Format(DELETE_STRING, "call_type"));
-
-            foreach (var callType in CallTypeConstants.CallTypes)
-            {
-                context.CallType.Add(callType);
-            }
-            context.SaveChanges();
+            BasicInit(context, "call_type", CallTypeConstants.CallTypes);
         }
 
         private static void InitOriginTypes(GeneAnnotationDBContext context)
@@ -73,9 +67,6 @@ namespace GeneAnnotationApi.Data
             IEnumerable<T> objects
             ) where T : class
         {
-            
-            context.Database.ExecuteSqlCommand(string.Format(DELETE_STRING, tableName));
-
             var passedType = typeof(T);
             var typeString = passedType.Name;
 

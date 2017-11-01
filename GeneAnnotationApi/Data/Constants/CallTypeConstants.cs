@@ -6,8 +6,8 @@ namespace GeneAnnotationApi.Data.Constants
     {
         public static CallType[] CallTypes = new[]
         {
-            new CallType {Id = 1, Name = "CAll1"},
-            new CallType {Id = 2, Name = "CAll2"}
+            new CallType {Name = "CAll1"},
+            new CallType {Name = "CAll2"}
         };
     }
 }

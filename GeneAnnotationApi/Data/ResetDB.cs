@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Reflection;
 using GeneAnnotationApi.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyModel;
 
 namespace GeneAnnotationApi.Data
 {
@@ -25,7 +21,7 @@ namespace GeneAnnotationApi.Data
 
         public static IList<string> GetDbTableList()
         {
-            return new string[]
+            return new[]
             {
                 "accession",
                 "annotation",

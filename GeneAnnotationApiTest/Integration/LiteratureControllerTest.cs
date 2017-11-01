@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using AutoMapper;
 using GeneAnnotationApi;
+using GeneAnnotationApi.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
@@ -12,21 +13,8 @@ using GeneAnnotationApi.Dtos;
 
 namespace GeneAnnotationApiTest.Integration
 {
-    public class LiteratureControllerTest
+    public class LiteratureControllerTest: BaseControllerTest, IDisposable
     {
-        private readonly TestServer _testServer;
-        public HttpClient Client { get; }
-        
-        public LiteratureControllerTest()
-        {
-            // just to make sure mapper is initialzed
-            _testServer = new TestServer(
-                new WebHostBuilder()
-                .UseStartup<Startup>()
-                );
-            Client = _testServer.CreateClient();
-            Client.BaseAddress = new Uri("http://localhost");
-        }
         
         public void Dispose()
         {

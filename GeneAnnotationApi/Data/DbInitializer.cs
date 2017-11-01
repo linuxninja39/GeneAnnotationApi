@@ -69,7 +69,6 @@ namespace GeneAnnotationApi.Data
                 var sqlString = "DELETE FROM "
                                 + tableName
                                 + "; "
-                                + "DBCC CHECKIDENT ('" + tableName + "',RESEED, 0)"
                     ;
                 context.Database.ExecuteSqlCommand(sqlString);
             }

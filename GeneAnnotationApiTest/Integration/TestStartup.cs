@@ -23,6 +23,7 @@ namespace GeneAnnotationApiTest.Integration
             //DbInitializer.Initialize(context);
             context.Database.OpenConnection();
             context.Database.EnsureCreated();
+            ResetDB.ClearTables(context);
             InitializeConstants.Initialize(context);
         }
 
