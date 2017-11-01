@@ -28,8 +28,8 @@ namespace GeneAnnotationApi.Controllers
         public ObjectResult GetLiteratures()
         {
             if (_context.Literature == null) return new ObjectResult(BadRequest());
-            var literatureEntities = _context.Literature
-                ;
+            var literatureEntities = _context.Literature;
+            var lits = literatureEntities.ToList();
             var literatureDtos = literatureEntities.ProjectTo<LiteratureDto>().ToList();
             return Ok(literatureDtos);
         }
