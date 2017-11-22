@@ -41,7 +41,7 @@ namespace GeneAnnotationApiTest.Integration
         {
             Environment.SetEnvironmentVariable(InitializeConstants.GA_DB_RESET_VARIABLE_NAME, "1");
             InitializeConstants.Initialize(_context);
-            var gv = (from r in _context.VariantType select r);
+            var gv = from r in _context.VariantType select r;
             var c = gv.Count();
             Assert.InRange(c, 1, 30);
         }

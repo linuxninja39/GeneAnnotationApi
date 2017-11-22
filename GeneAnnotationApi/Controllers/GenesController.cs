@@ -41,10 +41,13 @@ namespace GeneAnnotationApi.Controllers
                 geneEntities = _geneRepository.All();
             }
 
-            IList<GeneDto> geneDtos = geneEntities
+            var genes = geneEntities
                 .Include(gene => gene.GeneLocation)
                 .ThenInclude(geneLocation => geneLocation.Chromosome)
-                .ProjectTo<GeneDto>().ToList();
+                .ToList();
+
+            var geneDtos = _mapper.Map<IList<GeneDto>>(genes);
+
             return geneDtos;
         }
 

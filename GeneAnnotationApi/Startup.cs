@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using GeneAnnotationApi.Data;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using GeneAnnotationApi.Entities;
 using GeneAnnotationApi.Repositories;
 using GeneAnnotationApi.Repositories.EntityFramework;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeneAnnotationApi
@@ -45,17 +41,22 @@ namespace GeneAnnotationApi
             ;
 
             SetupDatabase(services);
-            services.AddScoped<IGeneRepository, GeneEfRepository>();
+            AddRepositories(services);
 
             services.AddAutoMapper();
+        }
+
+        private void AddRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IGeneRepository, GeneEfRepository>();
+            services.AddScoped<IGeneCoordinateRepository, GeneCoordinateEfRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app,
             IHostingEnvironment env,
-            ILoggerFactory loggerFactory,
-            GeneAnnotationDBContext context
+            ILoggerFactory loggerFactory
         )
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -75,12 +76,22 @@ namespace GeneAnnotationApi
             app.UseMvc();
             app.UseStaticFiles();
 
-            InitializeDatabase(context);
+            using (
+                var serviceScope = app
+                    .ApplicationServices
+                    .GetRequiredService<IServiceScopeFactory>()
+                    .CreateScope()
+            )
+            {
+                var context = serviceScope.ServiceProvider.GetService<GeneAnnotationDBContext>();
+                InitializeDatabase(context);
+            }
         }
 
         public virtual void InitializeDatabase(GeneAnnotationDBContext context)
         {
-            DbInitializer.Initialize(context);
+            context.Database.Migrate();
+            InitializeConstants.Initialize(context);
         }
 
         public virtual void SetupDatabase(IServiceCollection services)

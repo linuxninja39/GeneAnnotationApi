@@ -7,8 +7,8 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
 {
     public class BaseEfRepository<T>: IBaseRepository<T> where T : class
     {
-        private GeneAnnotationDBContext _context;
-        private DbSet<T> _dbSet;
+        protected readonly GeneAnnotationDBContext _context;
+        protected readonly DbSet<T> _dbSet;
 
         public BaseEfRepository(GeneAnnotationDBContext context)
         {
@@ -18,7 +18,7 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
                 .GetType()
                 .GetProperty(typeName);
 
-            var dbSet = propertyInfo.GetValue(_context, null);
+            _dbSet = (DbSet<T>)propertyInfo.GetValue(_context, null);
         }
         
         public T Get(int id)
@@ -28,7 +28,7 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
 
         public IQueryable<T> All()
         {
-            throw new System.NotImplementedException();
+            return _dbSet;
         }
 
         public void Save(T entity)

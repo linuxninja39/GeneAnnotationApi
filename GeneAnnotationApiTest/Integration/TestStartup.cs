@@ -13,6 +13,8 @@ namespace GeneAnnotationApiTest.Integration
 {
     public class TestStartup: Startup
     {
+        private SqliteConnection inMemorySqlite;
+        
         public TestStartup(IHostingEnvironment env) : base(env)
         {
         }
@@ -23,15 +25,14 @@ namespace GeneAnnotationApiTest.Integration
             //DbInitializer.Initialize(context);
             context.Database.OpenConnection();
             context.Database.EnsureCreated();
-            ResetDB.ClearTables(context);
             InitializeConstants.Initialize(context);
         }
 
         public override void SetupDatabase(IServiceCollection services)
         {
-            var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = ":memory:" };
-            var connection = connectionStringBuilder.ToString();
-            services.AddDbContext<GeneAnnotationDBContext>(options => options.UseSqlite(connection));
+            inMemorySqlite = new SqliteConnection("Data Source=:memory:");
+            inMemorySqlite.Open();
+            services.AddDbContext<GeneAnnotationDBContext>(options => options.UseSqlite(inMemorySqlite));
         }
     }
 }

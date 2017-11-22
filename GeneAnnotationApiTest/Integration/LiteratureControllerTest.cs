@@ -19,7 +19,7 @@ namespace GeneAnnotationApiTest.Integration
     public class LiteratureControllerTest: BaseControllerTest, IDisposable
     {
 
-        public LiteratureControllerTest()
+        public LiteratureControllerTest(): base(false)
         {
             var context = _testServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
             context.Literature.Add(
@@ -38,6 +38,8 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public async void ShouldGetLiteratures()
         {
+            var context = _testServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
+            var lits = context.Literature.ToList();
             var res = await Client.GetAsync("/api/literatures");
             Assert.True(res.StatusCode.Equals(HttpStatusCode.OK));
             var jsonString = await res.Content.ReadAsStringAsync();
