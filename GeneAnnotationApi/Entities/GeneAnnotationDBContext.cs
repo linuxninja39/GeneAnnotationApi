@@ -20,7 +20,11 @@ namespace GeneAnnotationApi.Entities
         public virtual DbSet<CallTypeGeneVariant> CallTypeGeneVariant { get; set; }
         public virtual DbSet<Chromosome> Chromosome { get; set; }
         public virtual DbSet<Disorder> Disorder { get; set; }
+        public virtual DbSet<ForeignEntity> ForeignEntity { get; set; }
+        public virtual DbSet<ForeignIdentity> ForeignIdentity { get; set; }
+        public virtual DbSet<ForeignIdentityGeneCoordinate> ForeignIdentityGeneCoordinate { get; set; }
         public virtual DbSet<Gene> Gene { get; set; }
+        public virtual DbSet<GeneCoordinate> GeneCoordinate { get; set; }
         public virtual DbSet<GeneLocation> GeneLocation { get; set; }
         public virtual DbSet<GeneName> GeneName { get; set; }
         public virtual DbSet<GeneOriginType> GeneOriginType { get; set; }

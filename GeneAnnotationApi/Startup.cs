@@ -39,14 +39,15 @@ namespace GeneAnnotationApi
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
             ;
+            
+            AddRepositories(services);
 
             SetupDatabase(services);
-            AddRepositories(services);
 
             services.AddAutoMapper();
         }
 
-        private void AddRepositories(IServiceCollection services)
+        private static void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IGeneRepository, GeneEfRepository>();
             services.AddScoped<IGeneCoordinateRepository, GeneCoordinateEfRepository>();

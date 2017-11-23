@@ -12,7 +12,7 @@ namespace GeneAnnotationApi.Entities
         {
             Accession = new HashSet<Accession>();
             AnnotationGene = new HashSet<AnnotationGene>();
-            GeneLocation = new HashSet<GeneLocation>();
+            GeneLocations = new HashSet<GeneLocation>();
             GeneName = new HashSet<GeneName>();
             GeneOriginType = new HashSet<GeneOriginType>();
             NameSynonym = new HashSet<NameSynonym>();
@@ -31,7 +31,7 @@ namespace GeneAnnotationApi.Entities
         [InverseProperty("Gene")]
         public virtual ICollection<AnnotationGene> AnnotationGene { get; set; }
         [InverseProperty("Gene")]
-        public virtual ICollection<GeneLocation> GeneLocation { get; set; }
+        public virtual ICollection<GeneLocation> GeneLocations { get; set; }
         [InverseProperty("Gene")]
         public virtual ICollection<GeneName> GeneName { get; set; }
         [InverseProperty("Gene")]

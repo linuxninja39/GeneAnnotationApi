@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using GeneAnnotationApi.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using GeneAnnotationApi.Entities;
 
 namespace GeneAnnotationApi.Repositories.EntityFramework
 {
@@ -12,6 +10,7 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
 
         public int FindMaxByGene(Gene gene)
         {
+            /*
             var max = _dbSet
                 .Include(geneCoordinate => geneCoordinate.GeneLocation)
                 .ThenInclude(geneLocation => geneLocation.Gene)
@@ -23,6 +22,7 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
                     )
                 .Max(geneCoordinate => geneCoordinate.Start)
                 ;
+                */
             return 2;
         }
 

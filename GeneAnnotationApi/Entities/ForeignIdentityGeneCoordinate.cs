@@ -13,11 +13,11 @@ namespace GeneAnnotationApi.Entities
         public int GeneCoordinateId { get; set; }
         
         [ForeignKey("ForeignIdentityId")]
-        [InverseProperty("ForeignIndentity")]
+        [InverseProperty("ForeignIdentityGeneCoordinates")]
         public virtual ForeignIdentity ForeignIdentity{ get; set; }
         
         [ForeignKey("GeneCoordinateId")]
-        [InverseProperty("GeneCoordinate")]
+        [InverseProperty("ForeignIdentityGeneCoordinates")]
         public virtual GeneCoordinate GeneCoordinate { get; set; }
         
     }

@@ -17,7 +17,7 @@ namespace GeneAnnotationApi.Entities
         public int End { get; set; }
         
         [ForeignKey("GeneLocationId")]
-        [InverseProperty("GeneCoordinate")]
+        [InverseProperty("GeneCoordinates")]
         public virtual GeneLocation GeneLocation { get; set; }
         
         [InverseProperty("GeneCoordinate")]

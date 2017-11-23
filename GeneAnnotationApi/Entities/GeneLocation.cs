@@ -22,10 +22,13 @@ namespace GeneAnnotationApi.Entities
         public int HgVersion { get; set; }
 
         [ForeignKey("GeneId")]
-        [InverseProperty("GeneLocation")]
+        [InverseProperty("GeneLocations")]
         public virtual Gene Gene { get; set; }
-        [ForeignKey("GeneLocationId")]
-        [InverseProperty("GeneLocation")]
+        [ForeignKey("ChromosomeId")]
+        [InverseProperty("GeneLocations")]
         public virtual Chromosome Chromosome { get; set; }
+        
+        [InverseProperty("GeneLocation")]
+        public virtual ICollection<GeneCoordinate> GeneCoordinates { get; set; }
     }
 }

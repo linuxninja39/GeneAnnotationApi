@@ -11,7 +11,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
             CreateMap<Chromosome, ChromosomeDto>();
             CreateMap<ChromosomeDto, Chromosome>()
                 .ForMember(
-                    chromosomeDto => chromosomeDto.GeneLocation,
+                    chromosome => chromosome.GeneLocations,
                     opt => opt.Ignore()
                     )
                 ;

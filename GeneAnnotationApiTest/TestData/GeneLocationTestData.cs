@@ -5,7 +5,13 @@ namespace GeneAnnotationApiTest.TestData
     public class GeneLocationTestData
     {
         public static GeneLocation[] GeneLocations = {
-            new GeneLocation{ Gene = GeneTestData.Genes[0], HgVersion = 19, Locus = "locus"}
+            new GeneLocation
+            {
+                Gene = GeneTestData.Genes[0],
+                HgVersion = 19,
+                Locus = "locus",
+                Chromosome = ChromosomeTestData.Chromosomes[0]
+            }
         };
     }
 }

@@ -13,10 +13,12 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                 .ForMember(
                     geneLocationDto => geneLocationDto.Start,
                     opt => opt.ResolveUsing<GeneCoordinateStartToGeneLocationDto>()
+                    //opt => opt.Ignore()
                     )
                 .ForMember(
                     geneLocationDto => geneLocationDto.End,
-                    opt => opt.ResolveUsing<GeneCoordinateEndToGeneLocationDto>()
+                    //opt => opt.ResolveUsing<GeneCoordinateEndToGeneLocationDto>()
+                    opt => opt.Ignore()
                     )
                 ;
             CreateMap<GeneLocationDto, GeneLocation>();

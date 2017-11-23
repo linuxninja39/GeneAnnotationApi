@@ -18,6 +18,7 @@ namespace GeneAnnotationApiTest.Integration
             // just to make sure mapper is initialzed
             _testServer = new TestServer(
                 new WebHostBuilder()
+                    .UseEnvironment("Development")
                     .UseStartup<TestStartup>()
             );
             Client = _testServer.CreateClient();

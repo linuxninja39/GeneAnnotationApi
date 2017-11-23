@@ -39,7 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Private.CoreLib" />
-    <Reference Include="System.Private.CoreLib" />
   </ItemGroup>
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
     <Copy SourceFiles="hugo.txt" DestinationFolder="$(OutDir)" />

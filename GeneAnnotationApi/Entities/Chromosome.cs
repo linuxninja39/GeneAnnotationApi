@@ -10,7 +10,7 @@ namespace GeneAnnotationApi.Entities
     {
         public Chromosome()
         {
-            GeneLocation = new HashSet<GeneLocation>();
+            GeneLocations = new HashSet<GeneLocation>();
         }
 
         [Column("id")]
@@ -20,6 +20,6 @@ namespace GeneAnnotationApi.Entities
         public string Name { get; set; }
 
         [InverseProperty("Chromosome")]
-        public virtual ICollection<GeneLocation> GeneLocation { get; set; }
+        public virtual ICollection<GeneLocation> GeneLocations { get; set; }
     }
 }

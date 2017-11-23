@@ -20,7 +20,9 @@ namespace GeneAnnotationApi.Controllers
         private readonly IMapper _mapper;
         private readonly IGeneRepository _geneRepository;
 
-        public GenesController(GeneAnnotationDBContext context, IMapper mapper, IGeneRepository geneRepository)
+        public GenesController(GeneAnnotationDBContext context, IMapper mapper, IGeneRepository geneRepository,
+            IGeneCoordinateRepository geneCoordinateRepository
+        )
         {
             _context = context;
             _mapper = mapper;
@@ -42,7 +44,7 @@ namespace GeneAnnotationApi.Controllers
             }
 
             var genes = geneEntities
-                .Include(gene => gene.GeneLocation)
+                .Include(gene => gene.GeneLocations)
                 .ThenInclude(geneLocation => geneLocation.Chromosome)
                 .ToList();
 
@@ -62,14 +64,14 @@ namespace GeneAnnotationApi.Controllers
 
             var gene = await _geneRepository.All()
                 .Include(g => g.GeneName)
-                .Include(g => g.GeneLocation)
+                .Include(g => g.GeneLocations)
                 .Include(g => g.GeneOriginType)
                 .Include(g => g.AnnotationGene)
                 .ThenInclude(annotationGene => annotationGene.Annotation)
                 .ThenInclude(annotation => annotation.AppUser)
                 .Include(g => g.Symbol)
                 .Include(g => g.Synonym)
-                .Include(g => g.GeneLocation)
+                .Include(g => g.GeneLocations)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (gene == null)

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeneAnnotationApi.Entities
 {
@@ -9,5 +10,8 @@ namespace GeneAnnotationApi.Entities
         public int Id { get; set; }
         [Column("name")]
         public string Name { get; set; }
+        
+        [InverseProperty("ForeignEntity")]
+        public virtual ICollection<ForeignIdentity> ForeignIdentities { get; set; }
     }
 }

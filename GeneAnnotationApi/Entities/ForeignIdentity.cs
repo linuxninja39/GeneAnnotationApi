@@ -14,7 +14,7 @@ namespace GeneAnnotationApi.Entities
         public int ForeignEntityId { get; set; }
         
         [ForeignKey("ForeignEntityId")]
-        [InverseProperty("ForeignEntity")]
+        [InverseProperty("ForeignIdentities")]
         public virtual ForeignEntity ForeignEntity { get; set; }
         
         [InverseProperty("ForeignIdentity")]

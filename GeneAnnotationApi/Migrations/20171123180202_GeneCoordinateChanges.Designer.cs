@@ -8,9 +8,10 @@ using GeneAnnotationApi.Entities;
 namespace GeneAnnotationApi.Migrations
 {
     [DbContext(typeof(GeneAnnotationDBContext))]
-    partial class GeneAnnotationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20171123180202_GeneCoordinateChanges")]
+    partial class GeneCoordinateChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
