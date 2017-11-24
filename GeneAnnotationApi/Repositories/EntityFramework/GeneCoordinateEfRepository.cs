@@ -51,8 +51,9 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
 
                 throw e;
             }
-        }
 
+        }
+        
         private IQueryable<GeneCoordinate> GetCoords(Gene gene)
         {
             return _dbSet
@@ -66,4 +67,5 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
                 );
         }
     }
+    
 }

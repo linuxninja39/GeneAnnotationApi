@@ -17,8 +17,7 @@ namespace GeneAnnotationApi.AutoMapperProfiles
                     )
                 .ForMember(
                     geneLocationDto => geneLocationDto.End,
-                    //opt => opt.ResolveUsing<GeneCoordinateEndToGeneLocationDto>()
-                    opt => opt.Ignore()
+                    opt => opt.ResolveUsing<GeneCoordinateEndToGeneLocationDto>()
                     )
                 ;
             CreateMap<GeneLocationDto, GeneLocation>();

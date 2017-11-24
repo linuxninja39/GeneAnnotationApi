@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -41,7 +42,9 @@ namespace GeneAnnotationApiTest.Integration
         {
             _context.Gene.Add(GeneTestData.Genes[0]);
             _context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
+            _context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
             _context.SaveChanges();
+
             var res = await Client.GetAsync("/api/genes");
             Assert.True(res.StatusCode.Equals(HttpStatusCode.OK));
             var jsonString = await res.Content.ReadAsStringAsync();
@@ -49,7 +52,8 @@ namespace GeneAnnotationApiTest.Integration
                 .DeserializeObject<IList<GeneDto>>(jsonString);
 
             Assert.Equal(GeneTestData.Genes[0].KnownFunction, geneDtos[0].KnownFunction);
-            Assert.True(true);
+            Assert.Equal(GeneCoordinateTestData.GeneCoordinates[0].Start, geneDtos[0].GeneLocations[0].Start);
+            Assert.Equal(GeneCoordinateTestData.GeneCoordinates[0].End, geneDtos[0].GeneLocations[0].End);
         }
     }
 }

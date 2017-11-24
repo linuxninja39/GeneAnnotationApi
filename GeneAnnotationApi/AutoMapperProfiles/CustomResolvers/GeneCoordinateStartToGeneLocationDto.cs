@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
@@ -7,7 +8,7 @@ using GeneAnnotationApi.Repositories;
 namespace GeneAnnotationApi.AutoMapperProfiles.CustomResolvers
 {
     public class GeneCoordinateStartToGeneLocationDto:
-        IValueResolver<GeneLocation, GeneLocationDto, int>
+        IValueResolver<GeneLocation, GeneLocationDto, Nullable<int>>
     {
         private readonly IGeneCoordinateRepository _geneCoordinateRepository;
 
@@ -18,11 +19,10 @@ namespace GeneAnnotationApi.AutoMapperProfiles.CustomResolvers
             _geneCoordinateRepository = geneCoordinateRepository;
         }
 
-        public int Resolve(GeneLocation source, GeneLocationDto destination, int destMember,
+        public int? Resolve(GeneLocation source, GeneLocationDto destination, int? destMember,
             ResolutionContext context)
         {
-            var min = _geneCoordinateRepository.FindMinByGene(source.Gene);
-            return 1;
+            return _geneCoordinateRepository.FindMinByGene(source.Gene);
         }
     }
 }
