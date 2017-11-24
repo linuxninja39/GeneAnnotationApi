@@ -1,8 +1,11 @@
-﻿using GeneAnnotationApi.Entities;
+﻿using System;
+using System.Linq;
+using GeneAnnotationApi.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeneAnnotationApi.Repositories.EntityFramework
 {
-    public class GeneCoordinateEfRepository: BaseEfRepository<GeneCoordinate>, IGeneCoordinateRepository
+    public class GeneCoordinateEfRepository : BaseEfRepository<GeneCoordinate>, IGeneCoordinateRepository
     {
         public GeneCoordinateEfRepository(GeneAnnotationDBContext context) : base(context)
         {
@@ -10,25 +13,48 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
 
         public int FindMaxByGene(Gene gene)
         {
-            /*
             var max = _dbSet
-                .Include(geneCoordinate => geneCoordinate.GeneLocation)
-                .ThenInclude(geneLocation => geneLocation.Gene)
-                .Where(
-                    geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
+                    .Include(geneCoordinate => geneCoordinate.GeneLocation)
+                    .ThenInclude(geneLocation => geneLocation.Gene)
+                    .Where(
+                        geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
                     )
-                .Where(
-                    geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)
+                    .Where(
+                        geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)
                     )
-                .Max(geneCoordinate => geneCoordinate.Start)
+                    .Max(geneCoordinate => geneCoordinate.Start)
                 ;
-                */
             return 2;
         }
 
-        public int FindMinByGene(Gene gene)
+        public int? FindMinByGene(Gene gene)
         {
-            return 1;
+            try
+            {
+                return _dbSet
+                        .Include(geneCoordinate => geneCoordinate.GeneLocation)
+                        .ThenInclude(geneLocation => geneLocation.Gene)
+                        .Where(
+                            geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
+                        )
+                        .Where(
+                            geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)
+                        )
+                        .Min(
+                            geneCoordinate => geneCoordinate.Start
+                        )
+                    ;
+            }
+            catch (InvalidOperationException e)
+            {
+                if (e.Message.Equals("Sequence contains no elements"))
+                {
+                    return null;
+                }
+
+                throw e;
+            }
+
         }
     }
 }

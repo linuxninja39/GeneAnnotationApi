@@ -15,13 +15,13 @@ namespace GeneAnnotationApi.AutoMapperProfiles.CustomResolvers
             IGeneCoordinateRepository geneCoordinateRepository
             )
         {
-            //_geneCoordinateRepository = geneCoordinateRepository;
+            _geneCoordinateRepository = geneCoordinateRepository;
         }
 
         public int Resolve(GeneLocation source, GeneLocationDto destination, int destMember,
             ResolutionContext context)
         {
-            //return _geneCoordinateRepository.FindMinByGene(source.Gene);
+            var min = _geneCoordinateRepository.FindMinByGene(source.Gene);
             return 1;
         }
     }
