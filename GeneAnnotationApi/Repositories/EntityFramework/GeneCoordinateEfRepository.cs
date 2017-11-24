@@ -11,35 +11,32 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
         {
         }
 
-        public int FindMaxByGene(Gene gene)
+        public int? FindMaxByGene(Gene gene)
         {
-            var max = _dbSet
-                    .Include(geneCoordinate => geneCoordinate.GeneLocation)
-                    .ThenInclude(geneLocation => geneLocation.Gene)
-                    .Where(
-                        geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
-                    )
-                    .Where(
-                        geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)
-                    )
-                    .Max(geneCoordinate => geneCoordinate.Start)
-                ;
-            return 2;
+            try
+            {
+                return GetCoords(gene)
+                        .Max(
+                            geneCoordinate => geneCoordinate.End
+                        )
+                    ;
+            }
+            catch (InvalidOperationException e)
+            {
+                if (e.Message.Equals("Sequence contains no elements"))
+                {
+                    return null;
+                }
+
+                throw e;
+            }
         }
 
         public int? FindMinByGene(Gene gene)
         {
             try
             {
-                return _dbSet
-                        .Include(geneCoordinate => geneCoordinate.GeneLocation)
-                        .ThenInclude(geneLocation => geneLocation.Gene)
-                        .Where(
-                            geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
-                        )
-                        .Where(
-                            geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)
-                        )
+                return GetCoords(gene)
                         .Min(
                             geneCoordinate => geneCoordinate.Start
                         )
@@ -54,7 +51,19 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
 
                 throw e;
             }
+        }
 
+        private IQueryable<GeneCoordinate> GetCoords(Gene gene)
+        {
+            return _dbSet
+                .Include(geneCoordinate => geneCoordinate.GeneLocation)
+                .ThenInclude(geneLocation => geneLocation.Gene)
+                .Where(
+                    geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
+                )
+                .Where(
+                    geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)
+                );
         }
     }
 }
