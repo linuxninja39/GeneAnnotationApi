@@ -8,19 +8,19 @@ namespace GeneAnnotationApiTest.Integration
     public class GeneCoordinateEfRepositoryTest: BaseRepositoryTest<GeneCoordinateEfRepository, GeneCoordinate>
     {
 
-        public GeneCoordinateEfRepositoryTest()
+        public GeneCoordinateEfRepositoryTest() : base(true)
         {
-            _context.Gene.Add(GeneTestData.Genes[0]);
-            _context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
-            _context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
-            _context.SaveChanges();
+            Context.Gene.Add(GeneTestData.Genes[0]);
+            Context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
+            Context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
+            Context.SaveChanges();
         }
         
         [Fact]
         public void TestMin()
         {
-            var gene = _context.Gene.Find(1);
-            var min = _repository.FindMinByGene(gene);
+            var gene = Context.Gene.Find(1);
+            var min = Repository.FindMinByGene(gene);
             
             Assert.True(min == GeneCoordinateTestData.GeneCoordinates[0].Start);
         }
@@ -28,8 +28,8 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void TestMax()
         {
-            var gene = _context.Gene.Find(1);
-            var max = _repository.FindMaxByGene(gene);
+            var gene = Context.Gene.Find(1);
+            var max = Repository.FindMaxByGene(gene);
             
             Assert.True(max == GeneCoordinateTestData.GeneCoordinates[0].End);
         }
