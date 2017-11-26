@@ -33,19 +33,35 @@ namespace GeneAnnotationApiTest.Integration
             Context.SaveChanges();
             var gene = Context.Gene.Find(1);
 
+            var names = new[]
+            {
+                "dat cool name",
+                "tripartite motif-containing 49-like",
+                "\"tripartite motif containing 49-like 1\"",
+                "\"tripartite motif containing 49D2, pseudogene\""
+            };
             var cells = new[]
             {
                 "",
                 "",
-                "dat cool name",
+                names[0],
                 "",
                 "",
                 "",
                 "",
-                "tripartite motif-containing 49-like, \"tripartite motif containing 49-like 1\", \"tripartite motif containing 49D2, pseudogene\""
+                string.Join(", ", names[1], names[2], names[3])
             };
             loadHugoData.addToGeneNames(gene, cells);
             Context.SaveChanges();
+            var found = gene
+                .GeneName
+                .Sum(
+                    geneName => names
+                        .Select(name => name.Replace("\"", string.Empty))
+                        .Count(quotelessName => geneName.Name.Equals(quotelessName))
+                    );
+
+            Assert.True(found == 4);
         }
     }
 }
