@@ -7,29 +7,42 @@ using GeneAnnotationApi.Entities;
 
 namespace GeneAnnotationApi.Data
 {
-    public static class LoadHugoData
+    public class LoadHugoData
     {
-        public static void LoadData(GeneAnnotationDBContext context, string fileName)
+        private const int COL_NAME = 2;
+        private const int ColPrevName = 7;
+        private const string ComaQuoteSplitPattern = "\"[^\"]*\"|\\w[^\",]*";
+
+        private readonly GeneAnnotationDBContext Context;
+        private string _fileName = "hugo.txt";
+
+        public LoadHugoData(GeneAnnotationDBContext context, string fileName)
         {
-            var path = Directory.GetCurrentDirectory();
-            if (fileName == null)
-            {
-                fileName = @"hugo.txt";
-            }
-
-            fileName = path + Path.DirectorySeparatorChar + fileName;
-
-            if (!File.Exists(fileName))
-            {
-                return;
-            }
-
-            var fileStream = new FileStream(fileName, FileMode.Open);
-
-            doImport(context, fileStream);
+            Context = context;
+            _fileName = fileName;
         }
 
-        private static void doImport(GeneAnnotationDBContext context, Stream fileStream)
+        public void LoadData()
+        {
+            var path = Directory.GetCurrentDirectory();
+            if (_fileName == null)
+            {
+                _fileName = @"hugo.txt";
+            }
+
+            var fullPath = path + Path.DirectorySeparatorChar + _fileName;
+
+            if (!File.Exists(fullPath))
+            {
+                throw new FileNotFoundException("File not found: " + fullPath);
+            }
+
+            var fileStream = new FileStream(fullPath, FileMode.Open);
+
+            doImport(fileStream);
+        }
+
+        private void doImport(Stream fileStream)
         {
             using (var reader = new StreamReader(fileStream))
             {
@@ -42,58 +55,82 @@ namespace GeneAnnotationApi.Data
                         firstLineSkipped = true;
                         continue;
                     }
+
                     var cells = line.Split("\t".ToCharArray());
                     var gene = new Gene();
-                    populateGene(gene, cells);
-                    context.Gene.Add(gene);
-                    context.SaveChanges();
-                    SaveSymbols(context, gene, cells);
-                    SaveNames(context, gene, cells);
+                    PopulateGene(gene, cells);
+                    Context.Gene.Add(gene);
+                    Context.SaveChanges();
+                    SaveSymbols(gene, cells);
+                    SaveNames(gene, cells);
                 }
             }
         }
 
-        private static void populateGene(Gene gene, IReadOnlyList<string> cells)
+        private void PopulateGene(Gene gene, IReadOnlyList<string> cells)
         {
         }
 
-        private static void SaveSymbols(GeneAnnotationDBContext context, Gene gene, string[] cells)
+        public void addToGeneNames(Gene gene, IReadOnlyList<string> cells)
+        {
+            var dateTime = DateTime.Now;
+            var geneName = new GeneName
+            {
+                Gene = gene,
+                ActiveDate = dateTime,
+                Name = cells[COL_NAME]
+            };
+            Context.GeneName.Add(geneName);
+            Context.SaveChanges();
+            var matches = Regex.Matches(cells[ColPrevName], ComaQuoteSplitPattern);
+            foreach (Match match in matches)
+            {
+                dateTime = dateTime.AddMinutes(1);
+                if (match.Length == 0) continue;
+                var previousName = match.Value.Replace("\"", string.Empty);
+                if (Context.GeneName.Count(geneNameEntity => geneName.Name.Equals(previousName)) < 0) continue;
+
+                Context.Add(new GeneName {Name = previousName, ActiveDate = dateTime, Gene = gene});
+                Context.SaveChanges();
+            }
+        }
+
+        private void SaveSymbols(Gene gene, string[] cells)
         {
             var now = DateTime.Now;
-            if (context.Symbol.Count(symbol => symbol.Name.Equals(cells[1])) < 0) return;
-            context.Add(new Symbol {Name = cells[1], ActiveDate = now, Gene = gene});
-            context.SaveChanges();
+            if (Context.Symbol.Count(symbol => symbol.Name.Equals(cells[1])) < 0) return;
+            Context.Add(new Symbol {Name = cells[1], ActiveDate = now, Gene = gene});
+            Context.SaveChanges();
             var date = now.AddMinutes(1);
             foreach (var previousSymbol in cells[6].Split(','))
             {
                 if (previousSymbol.Length == 0) continue;
-                if (context.Symbol.Count(symbol => symbol.Name.Equals(previousSymbol)) < 0) continue;
-                
-                context.Add(new Symbol {Name = previousSymbol, ActiveDate = date, Gene = gene});
-                context.SaveChanges();
+                if (Context.Symbol.Count(symbol => symbol.Name.Equals(previousSymbol)) < 0) continue;
+
+                Context.Add(new Symbol {Name = previousSymbol, ActiveDate = date, Gene = gene});
+                Context.SaveChanges();
                 date = date.AddMinutes(1);
             }
         }
 
-        private static void SaveNames(GeneAnnotationDBContext context, Gene gene, IReadOnlyList<string> cells)
+        private void SaveNames(Gene gene, IReadOnlyList<string> cells)
         {
             var now = DateTime.Now;
-            if (context.GeneName.Count(geneName => geneName.Name.Equals(cells[2])) < 0) return;
+            if (Context.GeneName.Count(geneName => geneName.Name.Equals(cells[2])) < 0) return;
 
-            context.Add(new GeneName {Name = cells[2], ActiveDate = now, Gene = gene});
-            context.SaveChanges();
+            Context.Add(new GeneName {Name = cells[2], ActiveDate = now, Gene = gene});
+            Context.SaveChanges();
             var date = now.AddMinutes(1);
-           
-            const string pattern = "\"[^\"]*\"|\\w[^\",]*";
-            var matches = Regex.Matches(cells[7], pattern);
+
+            var matches = Regex.Matches(cells[7], ComaQuoteSplitPattern);
             foreach (Match match in matches)
             {
                 var previousName = match.Value.Replace("\"", string.Empty);
                 if (previousName.Length == 0) continue;
-                if (context.GeneName.Count(geneName => geneName.Name.Equals(previousName)) < 0) continue;
-                
-                context.Add(new GeneName {Name = previousName, ActiveDate = date, Gene = gene});
-                context.SaveChanges();
+                if (Context.GeneName.Count(geneName => geneName.Name.Equals(previousName)) < 0) continue;
+
+                Context.Add(new GeneName {Name = previousName, ActiveDate = date, Gene = gene});
+                Context.SaveChanges();
                 date = date.AddMinutes(1);
             }
         }
