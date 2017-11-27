@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using GeneAnnotationApi.Data;
-using GeneAnnotationApi.Entities;
 using GeneAnnotationApiTest.TestData;
-using Microsoft.AspNetCore.JsonPatch.Internal;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
@@ -25,6 +22,17 @@ namespace GeneAnnotationApiTest.Integration
             logger.LogDebug("bla");
 
             Assert.Equal(19, Context.Gene.Count());
+        }
+
+        [Fact]
+        public void PopulateGeneTest()
+        {
+            var cells = new[]
+            {
+                "",
+                ""
+            };
+
         }
 
         [Fact]
@@ -55,7 +63,7 @@ namespace GeneAnnotationApiTest.Integration
                 "",
                 string.Join(", ", names[1], names[2], names[3])
             };
-            loadHugoData.addToGeneNames(gene, cells);
+            loadHugoData.SaveNames(gene, cells);
             Context.SaveChanges();
             var found = gene
                 .GeneName

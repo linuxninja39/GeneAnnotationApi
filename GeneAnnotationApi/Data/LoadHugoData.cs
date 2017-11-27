@@ -9,9 +9,14 @@ namespace GeneAnnotationApi.Data
 {
     public class LoadHugoData
     {
+        private const int ColSymbol = 1;
         private const int ColName = 2;
+        private const int ColPrevSymbol = 6;
         private const int ColPrevName = 7;
+        private const int ColSynonyms = 8;
         public const int ColChromosome = 10;
+        public const int ColEnsemblId = 16;
+
         private const string ComaQuoteSplitPattern = "\"[^\"]*\"|\\w[^\",]*";
 
         public static readonly Regex LocusRegex = new Regex("^([0-9xy]{1,2})[pq]{0,1}.*", RegexOptions.IgnoreCase);
@@ -61,78 +66,66 @@ namespace GeneAnnotationApi.Data
 
                     var cells = line.Split("\t".ToCharArray());
                     var gene = new Gene();
-                    PopulateGene(gene, cells);
                     _context.Gene.Add(gene);
                     _context.SaveChanges();
                     SaveSymbols(gene, cells);
                     SaveNames(gene, cells);
+                    SaveSynonyms(gene, cells);
                 }
             }
         }
 
-        private void PopulateGene(Gene gene, IReadOnlyList<string> cells)
+        public void SaveNames(Gene gene, IReadOnlyList<string> cells)
         {
-        }
+            var now = DateTime.Now;
+            if (_context.GeneName.Count(geneName => geneName.Name.Equals(cells[ColName])) < 0) return;
 
-        public void addToGeneNames(Gene gene, IReadOnlyList<string> cells)
-        {
-            var dateTime = DateTime.Now;
-            var geneName = new GeneName
-            {
-                Gene = gene,
-                ActiveDate = dateTime,
-                Name = cells[ColName]
-            };
-            _context.GeneName.Add(geneName);
+            _context.Add(new GeneName {Name = cells[ColName], ActiveDate = now, Gene = gene});
             _context.SaveChanges();
+            now = now.AddMinutes(1);
+
             var matches = Regex.Matches(cells[ColPrevName], ComaQuoteSplitPattern);
             foreach (Match match in matches)
             {
-                dateTime = dateTime.AddMinutes(1);
-                if (match.Length == 0) continue;
+                now = now.AddMinutes(1);
                 var previousName = match.Value.Replace("\"", string.Empty);
-                if (_context.GeneName.Count(geneNameEntity => geneName.Name.Equals(previousName)) < 0) continue;
+                if (previousName.Length == 0) continue;
+                if (_context.GeneName.Count(geneName => geneName.Name.Equals(previousName)) < 0) continue;
 
-                _context.Add(new GeneName {Name = previousName, ActiveDate = dateTime, Gene = gene});
+                _context.Add(new GeneName {Name = previousName, ActiveDate = now, Gene = gene});
                 _context.SaveChanges();
             }
         }
 
-        private void SaveSymbols(Gene gene, string[] cells)
+        private void SaveSymbols(Gene gene, IReadOnlyList<string> cells)
         {
-            var now = DateTime.Now;
-            if (_context.Symbol.Count(symbol => symbol.Name.Equals(cells[1])) < 0) return;
-            _context.Add(new Symbol {Name = cells[1], ActiveDate = now, Gene = gene});
-            _context.SaveChanges();
-            var date = now.AddMinutes(1);
-            foreach (var previousSymbol in cells[6].Split(','))
+            var date = DateTime.Now;
+            if (_context.Symbol.Count(symbol => symbol.Name.Equals(cells[ColSymbol])) > 1)
             {
+                _context.Add(new Symbol {Name = cells[ColSymbol], ActiveDate = date, Gene = gene});
+                _context.SaveChanges();
+            }
+
+            foreach (var previousSymbol in cells[ColPrevSymbol].Split(','))
+            {
+                date = date.AddMinutes(1);
                 if (previousSymbol.Length == 0) continue;
                 if (_context.Symbol.Count(symbol => symbol.Name.Equals(previousSymbol)) < 0) continue;
 
                 _context.Add(new Symbol {Name = previousSymbol, ActiveDate = date, Gene = gene});
                 _context.SaveChanges();
-                date = date.AddMinutes(1);
             }
         }
 
-        private void SaveNames(Gene gene, IReadOnlyList<string> cells)
+        private void SaveSynonyms(Gene gene, IReadOnlyList<string> cells)
         {
-            var now = DateTime.Now;
-            if (_context.GeneName.Count(geneName => geneName.Name.Equals(cells[2])) < 0) return;
-
-            _context.Add(new GeneName {Name = cells[2], ActiveDate = now, Gene = gene});
-            _context.SaveChanges();
-            var date = now.AddMinutes(1);
-
-            var matches = Regex.Matches(cells[7], ComaQuoteSplitPattern);
-            foreach (Match match in matches)
+            var date = DateTime.Now;
+            foreach (var synonymName in cells[ColSynonyms].Split(','))
             {
-                var previousName = match.Value.Replace("\"", string.Empty);
-                if (previousName.Length == 0) continue;
-                if (_context.GeneName.Count(geneName => geneName.Name.Equals(previousName)) < 0) continue;
+                if (synonymName.Length == 0) continue;
+                if (_context.Synonym.Count(synonym => synonym.Name.Equals(synonymName)) < 0) continue;
 
-                _context.Add(new GeneName {Name = previousName, ActiveDate = date, Gene = gene});
+                _context.Synonym.Add(new Synonym {Name = synonymName, ActiveDate = date, Gene = gene});
                 _context.SaveChanges();
                 date = date.AddMinutes(1);
             }
@@ -164,6 +157,33 @@ namespace GeneAnnotationApi.Data
                 ;
             _context.GeneLocation.Add(location);
             _context.SaveChanges();
+        }
+
+        // TODO: finish
+        public void SaveEnsemblId(Gene gene, IReadOnlyList<string> cells)
+        {
+            var foreignEntity = _context.ForeignEntity.SingleOrDefault(fe => fe.Name.Equals("Ensembl"));
+            if (foreignEntity == null)
+            {
+                foreignEntity = new ForeignEntity
+                {
+                    Name = "Ensembl"
+                };
+                _context.ForeignEntity.Add(foreignEntity);
+                _context.SaveChanges();
+            }
+
+            var matches = Regex.Matches(cells[ColEnsemblId], ComaQuoteSplitPattern);
+
+            foreach (Match match in matches)
+            {
+                var foreignId = match.Value;
+                if (foreignId.Length == 0) continue;
+                if (_context.ForeignIdentity.Count(fi => fi.Name.Equals(foreignId)) < 0) continue;
+
+
+                _context.SaveChanges();
+            }
         }
     }
 }
