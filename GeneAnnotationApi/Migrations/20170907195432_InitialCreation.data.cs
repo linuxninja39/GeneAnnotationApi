@@ -24,7 +24,7 @@ namespace GeneAnnotationApi.Migrations
                 .CallTypes
                 .Select(
                     callType => string.Format(
-                        MigrationConstants.INSERT_STRING_FORMAT,
+                        MigrationConstants.InsertStringFormat,
                         MigrationConstants.GetTableName(typeof(CallType)),
                         string.Join(",", columns),
                         string.Join(",", "'" + callType.Name + "'")

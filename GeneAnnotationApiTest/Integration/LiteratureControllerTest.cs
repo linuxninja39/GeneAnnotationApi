@@ -22,8 +22,9 @@ namespace GeneAnnotationApiTest.Integration
         public LiteratureControllerTest(): base(false)
         {
             var context = _testServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
+            if (context == null) return;
             context.Literature.Add(
-                new Literature { Url = "http://lit1", Title = "lit1" }
+                new Literature {Url = "http://lit1", Title = "lit1"}
             );
             context.SaveChanges();
             var lits = context.Literature.ToList();
