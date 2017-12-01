@@ -10,10 +10,12 @@ namespace GeneAnnotationApi.Migrations
     {
         public static void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             foreach (var sqlString in CallTypeStatements())
             {
                 migrationBuilder.Sql(sqlString);
             }
+            */
         }
         public static void Down(MigrationBuilder migrationBuilder) {}
 
