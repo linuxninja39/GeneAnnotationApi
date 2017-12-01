@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using GeneAnnotationApi.Entities;
 
 namespace GeneAnnotationApi.Data
@@ -6,14 +8,15 @@ namespace GeneAnnotationApi.Data
     public class LoadUcscData
     {
         private readonly GeneAnnotationDBContext _context;
-        private string _fileName;
+        private readonly string _fileName;
         private FileStream _fileStream;
-        private Gene _gene;
+        public Gene CurrentGene;
+        public IList<string> CurrentRow;
 
-        public const int ColChromosome = 1;
-        public const int ColStart = 2;
-        public const int ColEnd = 3;
-        public const int ColSymbol = 3;
+        public static int ColChromosome = 1;
+        public static int ColStart = 2;
+        public static int ColEnd = 3;
+        public static int ColSymbol = 4;
 
         /*
          * this file will load data from ucsc hgTables from the following columns in this order
@@ -25,7 +28,7 @@ namespace GeneAnnotationApi.Data
             _fileName = fileName ?? "ucsc.txt";
         }
 
-        public void LoadFile() 
+        public void LoadFile()
         {
             var path = Directory.GetCurrentDirectory();
 
@@ -39,9 +42,96 @@ namespace GeneAnnotationApi.Data
             _fileStream = new FileStream(fullPath, FileMode.Open);
         }
 
-        public Gene findOrCreateGene()
+        public void ParseFile()
         {
-            return null;
+            using (var reader = new StreamReader(_fileStream))
+            {
+                string line;
+                var firstLineSkipped = false;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (!firstLineSkipped)
+                    {
+                        firstLineSkipped = true;
+                        continue;
+                    }
+
+                    CurrentRow = line.Split("\t".ToCharArray());
+                    FindOrCreateGene();
+                }
+            }
+        }
+
+        public void FindOrCreateGene()
+        {
+            var row = CurrentRow;
+            var symbol = _context.Symbol.SingleOrDefault(s => s.Name == row[ColSymbol]);
+            if (symbol == null)
+            {
+                if (int.TryParse(row[ColStart], out var start) && int.TryParse(row[ColEnd], out var end))
+                {
+                    var coord = _context.GeneCoordinate.SingleOrDefault(c => c.Start == start && c.End == end);
+                    CurrentGene = coord == null ? new Gene() : coord.GeneLocation.Gene;
+                }
+                else
+                {
+                    CurrentGene = new Gene();
+                }
+            }
+            else
+            {
+                CurrentGene = symbol.Gene;
+            }
+
+            if (CurrentGene.Id != 0) return;
+            _context.Gene.Add(CurrentGene);
+            _context.SaveChanges();
+        }
+
+        public void AddLocation()
+        {
+            if (!int.TryParse(CurrentRow[ColStart], out var start) ||
+                !int.TryParse(CurrentRow[ColEnd], out var end)) return;
+
+            var chromosomeName = CurrentRow[ColChromosome].Substring(2);
+            if (chromosomeName == null) return;
+            
+            var coord = _context.GeneCoordinate.SingleOrDefault(c => c.Start == start && c.End == end);
+            if (coord != null) return;
+
+            var geneLocation =
+                _context.GeneLocation.SingleOrDefault(gl => gl.HgVersion == 19 && gl.Gene == CurrentGene);
+            if (geneLocation == null)
+            {
+                var chromosome = _context.Chromosome.SingleOrDefault(c => c.Name == chromosomeName);
+                if (chromosome == null)
+                {
+                    chromosome = new Chromosome
+                    {
+                        Name = chromosomeName
+                    };
+                    _context.Chromosome.Add(chromosome);
+                    _context.SaveChanges();
+                }
+                geneLocation = new GeneLocation
+                {
+                    Gene = CurrentGene,
+                    HgVersion = 19,
+                    Chromosome = chromosome
+                };
+                _context.GeneLocation.Add(geneLocation);
+                _context.SaveChanges();
+            }
+            
+            coord = new GeneCoordinate
+            {
+                GeneLocation = geneLocation,
+                Start = start,
+                End = end
+            };
+
+            _context.GeneCoordinate.Add(coord);
+            _context.SaveChanges();
         }
     }
 }
