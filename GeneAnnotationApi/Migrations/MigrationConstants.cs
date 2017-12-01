@@ -11,17 +11,13 @@ namespace GeneAnnotationApi.Migrations
 
         public static string GetTableName(Type type)
         {
-            /*
             var attribute = type.GetTypeInfo().GetCustomAttribute<TableAttribute>();
             return attribute.Name;
-            */
-            return null;
         }
 
         public static IEnumerable<string> GetColumnNames(Type type)
         {
             var ret = new List<string>();
-            /*
             foreach (var propertyInfo in type.GetProperties())
             {
                 var attribute = propertyInfo.GetCustomAttribute<ColumnAttribute>();
@@ -34,7 +30,6 @@ namespace GeneAnnotationApi.Migrations
                     ret.Add(attribute.Name);
                 }
             }
-            */
             return ret;
         }
     }

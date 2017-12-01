@@ -10,14 +10,20 @@ namespace GeneAnnotationApi.Migrations
     {
         public static void Up(MigrationBuilder migrationBuilder)
         {
-            /*
             foreach (var sqlString in CallTypeStatements())
             {
                 migrationBuilder.Sql(sqlString);
             }
-            */
+
+            foreach (var sqlString in OriginTypeStatements())
+            {
+                migrationBuilder.Sql(sqlString);
+            }
         }
-        public static void Down(MigrationBuilder migrationBuilder) {}
+
+        public static void Down(MigrationBuilder migrationBuilder)
+        {
+        }
 
         private static IEnumerable<string> CallTypeStatements()
         {
@@ -30,8 +36,24 @@ namespace GeneAnnotationApi.Migrations
                         MigrationConstants.GetTableName(typeof(CallType)),
                         string.Join(",", columns),
                         string.Join(",", "'" + callType.Name + "'")
-                        )
                     )
+                )
+                .ToList();
+        }
+
+        private static IEnumerable<string> OriginTypeStatements()
+        {
+            var columns = MigrationConstants.GetColumnNames(typeof(OriginType));
+            return OriginTypeConstants
+                .OriginTypes
+                .Select(
+                    callType => string.Format(
+                        MigrationConstants.InsertStringFormat,
+                        MigrationConstants.GetTableName(typeof(OriginType)),
+                        string.Join(",", columns),
+                        string.Join(",", "'" + callType.Name + "'")
+                    )
+                )
                 .ToList();
         }
     }

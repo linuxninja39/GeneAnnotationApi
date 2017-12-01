@@ -44,7 +44,7 @@ namespace GeneAnnotationApi
 
             SetupDatabase(services);
 
-            services.AddAutoMapper();
+            //services.AddAutoMapper();
         }
 
         private static void AddRepositories(IServiceCollection services)
