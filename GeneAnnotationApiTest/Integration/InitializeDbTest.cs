@@ -46,18 +46,6 @@ namespace GeneAnnotationApiTest.Integration
             Assert.InRange(c, 1, 30);
         }
 
-        [Fact]
-        public void ResetDbTest()
-        {
-            var tableList = ResetDB.GetDbTableList();
-            var contextProperties = _context.GetType().GetProperties();
-            Assert.Equal(contextProperties.Length - 1, tableList.Count);
-            
-            ResetDB.ClearTables(_context);
-            
-            Assert.False(_context.Gene.Any());
-        }
-
         public void Dispose()
         {
             _context?.Database.CloseConnection();

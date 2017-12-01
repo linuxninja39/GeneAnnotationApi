@@ -15,17 +15,12 @@ namespace GeneAnnotationApi
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,6 +28,7 @@ namespace GeneAnnotationApi
             services.AddCors();
 
             // Add framework services.
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc()
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling =
@@ -44,7 +40,6 @@ namespace GeneAnnotationApi
 
             SetupDatabase(services);
 
-            //services.AddAutoMapper();
         }
 
         private static void AddRepositories(IServiceCollection services)
@@ -77,6 +72,7 @@ namespace GeneAnnotationApi
             app.UseMvc();
             app.UseStaticFiles();
 
+            /*
             using (
                 var serviceScope = app
                     .ApplicationServices
@@ -87,12 +83,7 @@ namespace GeneAnnotationApi
                 var context = serviceScope.ServiceProvider.GetService<GeneAnnotationDBContext>();
                 InitializeDatabase(context);
             }
-        }
-
-        public virtual void InitializeDatabase(GeneAnnotationDBContext context)
-        {
-            context.Database.Migrate();
-            InitializeConstants.Initialize(context);
+            */
         }
 
         public virtual void SetupDatabase(IServiceCollection services)

@@ -9,7 +9,7 @@ namespace GeneAnnotationApi.Data
     {
         public static void ClearTables(GeneAnnotationDBContext context)
         {
-            foreach (var tableName in GetDbTableList())
+            foreach (var tableName in GetDbTableList(context))
             {
                 var sqlString = "DELETE FROM "
                                 + tableName
@@ -19,8 +19,10 @@ namespace GeneAnnotationApi.Data
             }
         }
 
-        public static IList<string> GetDbTableList()
+        public static IList<string> GetDbTableList(GeneAnnotationDBContext context)
         {
+            
+            var contextProperties = context.GetType().GetProperties();
             return new[]
             {
                 "accession",

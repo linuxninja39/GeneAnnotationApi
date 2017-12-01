@@ -26,6 +26,9 @@ namespace GeneAnnotationApiTest.Integration
             context.Literature.Add(
                 new Literature {Url = "http://lit1", Title = "lit1"}
             );
+            context.Literature.Add(
+                new Literature {Url = "http://lit2", Title = "lit2"}
+            );
             context.SaveChanges();
             var lits = context.Literature.ToList();
         }
@@ -46,7 +49,7 @@ namespace GeneAnnotationApiTest.Integration
             var jsonString = await res.Content.ReadAsStringAsync();
             var literatureDtos = JsonConvert
                 .DeserializeObject<List<LiteratureDto>>(jsonString);
-            Assert.True(literatureDtos.Count == 2);
+            Assert.Equal(literatureDtos.Count, 2);
         }
     }
 }

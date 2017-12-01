@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -15,12 +16,12 @@ namespace GeneAnnotationApiTest.Integration
     {
         private SqliteConnection inMemorySqlite;
         
-        public TestStartup(IHostingEnvironment env) : base(env)
+        public TestStartup(IConfiguration configuration) : base(configuration)
         {
         }
 
         /// <inheritdoc />
-        public override void InitializeDatabase(GeneAnnotationDBContext context)
+        public static void InitializeDatabase(GeneAnnotationDBContext context)
         {
             //DbInitializer.Initialize(context);
             context.Database.OpenConnection();

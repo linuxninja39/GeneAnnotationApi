@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using GeneAnnotationApi;
 using GeneAnnotationApi.Data;
 using GeneAnnotationApi.Entities;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ namespace GeneAnnotationApiTest.Integration
     {
         protected readonly TestServer _testServer;
         protected HttpClient Client { get; }
+        protected readonly GeneAnnotationDBContext _context;
 
         public BaseControllerTest(bool initDb = true)
         {
@@ -23,6 +25,8 @@ namespace GeneAnnotationApiTest.Integration
             );
             Client = _testServer.CreateClient();
             Client.BaseAddress = new Uri("http://localhost");
+            _context = _testServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
+            TestStartup.InitializeDatabase(_context);
         }
     }
 }

@@ -12,11 +12,9 @@ namespace GeneAnnotationApiTest.Integration
 {
     public class GeneControllerTest: BaseControllerTest, IDisposable
     {
-       private readonly GeneAnnotationDBContext _context;
 
         public GeneControllerTest()
         {
-            _context = _testServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
             
         }
 
