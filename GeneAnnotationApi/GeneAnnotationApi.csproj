@@ -32,8 +32,14 @@
   </ItemGroup>
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
     <Copy SourceFiles="hugo.txt" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="hugo.txt.short" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="ucsc.txt" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="ucsc.txt.short" DestinationFolder="$(OutDir)" />
   </Target>
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
     <Copy SourceFiles="hugo.txt" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="hugo.txt.short" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="ucsc.txt" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="ucsc.txt.short" DestinationFolder="$(PublishDir)" />
   </Target>
 </Project>

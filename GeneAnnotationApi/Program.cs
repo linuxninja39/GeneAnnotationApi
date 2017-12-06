@@ -19,6 +19,7 @@ namespace GeneAnnotationApi
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<GeneAnnotationDBContext>();
+                StaticLoggerFactory.LoggerFactory = services.GetRequiredService<ILoggerFactory>();
                 InitializeDatabase(context);
 
             } 
@@ -36,6 +37,20 @@ namespace GeneAnnotationApi
         {
             context.Database.Migrate();
             InitializeConstants.Initialize(context);
+            
+            var loadHugo = Environment.GetEnvironmentVariable("GA_DB_LOAD_HUGO");
+            if (loadHugo != null)
+            {
+                var hugoLoader = new LoadHugoData(context, "hugo.txt.short");
+                hugoLoader.LoadData();
+            }
+            
+            var loadUcsc = Environment.GetEnvironmentVariable("GA_DB_LOAD_UCSC");
+            if (loadUcsc != null)
+            {
+                var ucscLoader = new LoadUcscData(context,"ucsc.txt.short");
+                ucscLoader.LoadData();
+            }
         }
     }
 }

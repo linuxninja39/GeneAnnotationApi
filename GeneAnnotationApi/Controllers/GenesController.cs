@@ -48,6 +48,9 @@ namespace GeneAnnotationApi.Controllers
                 .ThenInclude(geneLocation => geneLocation.Chromosome)
                 .Include(gene => gene.GeneLocations)
                 .ThenInclude(geneLocation => geneLocation.GeneCoordinates)
+                .Include(gene => gene.Symbol)
+                .Include(gene => gene.GeneName)
+                .Include(gene => gene.Synonym)
                 .ToList();
             
             var geneDtos = _mapper.Map<IList<GeneDto>>(genes);

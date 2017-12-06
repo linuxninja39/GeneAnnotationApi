@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using GeneAnnotationApi.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeneAnnotationApi.Data
 {
@@ -26,6 +27,12 @@ namespace GeneAnnotationApi.Data
         {
             _context = context;
             _fileName = fileName ?? "ucsc.txt";
+        }
+
+        public void LoadData()
+        {
+            LoadFile();
+            ParseFile();
         }
 
         public void LoadFile()
@@ -58,6 +65,7 @@ namespace GeneAnnotationApi.Data
 
                     CurrentRow = line.Split("\t".ToCharArray());
                     FindOrCreateGene();
+                    AddLocation();
                 }
             }
         }
@@ -70,7 +78,11 @@ namespace GeneAnnotationApi.Data
             {
                 if (int.TryParse(row[ColStart], out var start) && int.TryParse(row[ColEnd], out var end))
                 {
-                    var coord = _context.GeneCoordinate.SingleOrDefault(c => c.Start == start && c.End == end);
+                    var coord = _context
+                        .GeneCoordinate
+                        .Include(gc => gc.GeneLocation)
+                        .ThenInclude(gl => gl.Gene)
+                        .SingleOrDefault(c => c.Start == start && c.End == end);
                     CurrentGene = coord == null ? new Gene() : coord.GeneLocation.Gene;
                 }
                 else
@@ -95,7 +107,7 @@ namespace GeneAnnotationApi.Data
 
             var chromosomeName = CurrentRow[ColChromosome].Substring(2);
             if (chromosomeName == null) return;
-            
+
             var coord = _context.GeneCoordinate.SingleOrDefault(c => c.Start == start && c.End == end);
             if (coord != null) return;
 
@@ -113,6 +125,7 @@ namespace GeneAnnotationApi.Data
                     _context.Chromosome.Add(chromosome);
                     _context.SaveChanges();
                 }
+
                 geneLocation = new GeneLocation
                 {
                     Gene = CurrentGene,
@@ -122,7 +135,7 @@ namespace GeneAnnotationApi.Data
                 _context.GeneLocation.Add(geneLocation);
                 _context.SaveChanges();
             }
-            
+
             coord = new GeneCoordinate
             {
                 GeneLocation = geneLocation,

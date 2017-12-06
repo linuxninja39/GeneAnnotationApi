@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GeneAnnotationApi.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace GeneAnnotationApi.Data
 {
@@ -24,10 +25,13 @@ namespace GeneAnnotationApi.Data
         private readonly GeneAnnotationDBContext _context;
         private string _fileName;
 
+        private ILogger<LoadHugoData> _logger;
+
         public LoadHugoData(GeneAnnotationDBContext context, string fileName)
         {
             _context = context;
             _fileName = fileName ?? "hugo.txt";
+            _logger = StaticLoggerFactory.LoggerFactory.CreateLogger<LoadHugoData>();
         }
 
         public void LoadData()
@@ -69,6 +73,7 @@ namespace GeneAnnotationApi.Data
                     _context.Gene.Add(gene);
                     _context.SaveChanges();
                     SaveSymbols(gene, cells);
+                    SaveLocation(gene, cells);
                     SaveNames(gene, cells);
                     SaveSynonyms(gene, cells);
                 }
@@ -78,7 +83,7 @@ namespace GeneAnnotationApi.Data
         public void SaveNames(Gene gene, IReadOnlyList<string> cells)
         {
             var now = DateTime.Now;
-            if (_context.GeneName.Count(geneName => geneName.Name.Equals(cells[ColName])) < 0) return;
+            if (_context.GeneName.Count(geneName => geneName.Name.Equals(cells[ColName])) > 0) return;
 
             _context.Add(new GeneName {Name = cells[ColName], ActiveDate = now, Gene = gene});
             _context.SaveChanges();
@@ -90,7 +95,7 @@ namespace GeneAnnotationApi.Data
                 now = now.AddMinutes(1);
                 var previousName = match.Value.Replace("\"", string.Empty);
                 if (previousName.Length == 0) continue;
-                if (_context.GeneName.Count(geneName => geneName.Name.Equals(previousName)) < 0) continue;
+                if (_context.GeneName.Count(geneName => geneName.Name.Equals(previousName)) > 0) continue;
 
                 _context.Add(new GeneName {Name = previousName, ActiveDate = now, Gene = gene});
                 _context.SaveChanges();
@@ -100,17 +105,17 @@ namespace GeneAnnotationApi.Data
         private void SaveSymbols(Gene gene, IReadOnlyList<string> cells)
         {
             var date = DateTime.Now;
-            if (_context.Symbol.Count(symbol => symbol.Name.Equals(cells[ColSymbol])) > 1)
-            {
-                _context.Add(new Symbol {Name = cells[ColSymbol], ActiveDate = date, Gene = gene});
-                _context.SaveChanges();
-            }
+            if (_context.Symbol.Count(symbolEntity => symbolEntity.Name.Equals(cells[ColSymbol])) > 0) return;
+
+            var s = new Symbol {Name = cells[ColSymbol], ActiveDate = date, Gene = gene};
+            _context.Add(s);
+            _context.SaveChanges();
 
             foreach (var previousSymbol in cells[ColPrevSymbol].Split(','))
             {
                 date = date.AddMinutes(1);
                 if (previousSymbol.Length == 0) continue;
-                if (_context.Symbol.Count(symbol => symbol.Name.Equals(previousSymbol)) < 0) continue;
+                if (_context.Symbol.Count(symbol => symbol.Name.Equals(previousSymbol)) > 0) continue;
 
                 _context.Add(new Symbol {Name = previousSymbol, ActiveDate = date, Gene = gene});
                 _context.SaveChanges();
@@ -123,11 +128,19 @@ namespace GeneAnnotationApi.Data
             foreach (var synonymName in cells[ColSynonyms].Split(','))
             {
                 if (synonymName.Length == 0) continue;
-                if (_context.Synonym.Count(synonym => synonym.Name.Equals(synonymName)) < 0) continue;
+                if (_context.Synonym.Count(synonym => synonym.Name.Equals(synonymName)) > 0) continue;
 
-                _context.Synonym.Add(new Synonym {Name = synonymName, ActiveDate = date, Gene = gene});
-                _context.SaveChanges();
-                date = date.AddMinutes(1);
+                try
+                {
+                    _logger.LogInformation("adding " + synonymName);
+                    _context.Synonym.Add(new Synonym {Name = synonymName, ActiveDate = date, Gene = gene});
+                    _context.SaveChanges();
+                    date = date.AddMinutes(1);
+                }
+                catch (Exception)
+                {
+                    var bla = "";
+                }
             }
         }
 
@@ -179,7 +192,7 @@ namespace GeneAnnotationApi.Data
             {
                 var foreignId = match.Value;
                 if (foreignId.Length == 0) continue;
-                if (_context.ForeignIdentity.Count(fi => fi.Name.Equals(foreignId)) < 0) continue;
+                if (_context.ForeignIdentity.Count(fi => fi.Name.Equals(foreignId)) > 0) continue;
 
 
                 _context.SaveChanges();

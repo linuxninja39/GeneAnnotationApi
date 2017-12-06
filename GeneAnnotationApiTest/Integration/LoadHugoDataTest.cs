@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GeneAnnotationApi;
 using GeneAnnotationApi.Data;
 using GeneAnnotationApiTest.TestData;
 using Microsoft.Extensions.Logging;
@@ -14,12 +15,11 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void LoadDataTest()
         {
+            StaticLoggerFactory.LoggerFactory = new LoggerFactory();
+            StaticLoggerFactory.LoggerFactory.AddConsole();
+            StaticLoggerFactory.LoggerFactory.AddDebug();
             var loadHugoData = new LoadHugoData(Context, "hugo.txt.short");
             loadHugoData.LoadData();
-
-            var logger = LoggerFactory.CreateLogger<LoadHugoDataTest>();
-
-            logger.LogDebug("bla");
 
             Assert.Equal(19, Context.Gene.Count());
         }

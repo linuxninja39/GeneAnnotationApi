@@ -13,59 +13,46 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
 
         public int? FindMaxByGene(Gene gene)
         {
-            try
+            var coords = GetCoords(gene);
+            if (!coords.Any())
             {
-                return GetCoords(gene)
-                        .Max(
-                            geneCoordinate => geneCoordinate.End
-                        )
-                    ;
+                return null;
             }
-            catch (InvalidOperationException e)
-            {
-                if (e.Message.Equals("Sequence contains no elements"))
-                {
-                    return null;
-                }
 
-                throw e;
-            }
+            return coords
+                    .Max(
+                        geneCoordinate => geneCoordinate.End
+                    )
+                ;
         }
 
         public int? FindMinByGene(Gene gene)
         {
-            try
+            var coords = GetCoords(gene);
+            if (!coords.Any())
             {
-                return GetCoords(gene)
-                        .Min(
-                            geneCoordinate => geneCoordinate.Start
-                        )
-                    ;
-            }
-            catch (InvalidOperationException e)
-            {
-                if (e.Message.Equals("Sequence contains no elements"))
-                {
-                    return null;
-                }
-
-                throw e;
+                return null;
             }
 
+            return GetCoords(gene)
+                    .Min(
+                        geneCoordinate => geneCoordinate.Start
+                    )
+                ;
         }
-        
+
         private IQueryable<GeneCoordinate> GetCoords(Gene gene)
         {
             return _dbSet
-                .Include(geneCoordinate => geneCoordinate.GeneLocation)
-                .ThenInclude(geneLocation => geneLocation.Gene)
-                .Where(
-                    geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
-                )
-                .Where(
-                    geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)
-                );
+                    .Include(geneCoordinate => geneCoordinate.GeneLocation)
+                    .ThenInclude(geneLocation => geneLocation.Gene)
+                    .Where(
+                        geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
+                    )
+                    .Where(
+                        geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)
+                    )
+                ;
         }
     }
-    
 }

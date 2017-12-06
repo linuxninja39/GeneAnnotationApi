@@ -13,7 +13,7 @@ namespace GeneAnnotationApi.Entities
         [Column("gene_id")]
         public int? GeneId { get; set; }
         [Required]
-        [Column("name", TypeName = "varchar(10)")]
+        [Column("name", TypeName = "varchar(100)")]
         public string Name { get; set; }
 
         [ForeignKey("GeneId")]

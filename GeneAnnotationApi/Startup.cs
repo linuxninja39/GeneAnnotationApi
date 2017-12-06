@@ -55,7 +55,8 @@ namespace GeneAnnotationApi
             ILoggerFactory loggerFactory
         )
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole();
             loggerFactory.AddDebug();
 
             app.UseCors(
