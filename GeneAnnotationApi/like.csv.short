@@ -1,0 +1,500 @@
+Symbol	Bed chr (hg19)	start	end	chr locus	Annotator	Date updated	Origin	Expansion of gene name	Known function of gene	Variant type	Hom or Het	Variant chr	Variant start	Variant end	Call	Literature 1 (Title; PMID; Lit score)	Literature 2 (Title; PMID; Lit score)	Literature 3 (Title; PMID; Lit score)	Literature 4 (Title; PMID; Lit score)	Literature 5 (Title; PMID; Lit score)	Literature 6 (Title; PMID; Lit score)	Literature 7 (Title; PMID; Lit score)	Free text comments		Pathway
+NOC2L	chr1	879582	894679	1p36.33			Index gene	NOC2 like nucleolar associated transcriptional repressor																	
+AGRN	chr1	955502	991499	1p36.33			Index gene	agrin																	
+SDF4	chr1	1152287	1167447	1p36.33			Index gene	stromal cell derived factor 4																	
+UBE2J2	chr1	1189291	1209234	1p36.33			Index gene	ubiquitin conjugating enzyme E2 J2																	
+ACAP3	chr1	1227763	1243269	1p36.33			Index gene	ArfGAP with coiled-coil, ankyrin repeat and PH domains 3																	
+CPSF3L	chr1	1246964	1260067	#N/A			Index gene	#N/A																	
+CPTP	chr1	1260142	1264276	1p36.33			Index gene	ceramide-1-phosphate transfer protein																	
+DVL1	chr1	1270657	1284492	1p36.33			Index gene	dishevelled segment polarity protein 1																	
+AURKAIP1	chr1	1309109	1310818	1p36.33			Index gene	aurora kinase A interacting protein 1																	
+MRPL20	chr1	1337275	1342693	1p36.33			Index gene	mitochondrial ribosomal protein L20																	
+TMEM240	chr1	1470157	1475740	1p36.33			Index gene	transmembrane protein 240																	
+SSU72	chr1	1477052	1510262	1p36.33			Index gene	SSU72 homolog, RNA polymerase II CTD phosphatase																	
+CDK11B	chr1	1570602	1655859	1p36.33			Index gene	cyclin dependent kinase 11B																	
+NADK	chr1	1682670	1711508	1p36.33			Index gene	NAD kinase																	
+GNB1	chr1	1716723	1822556	1p36.33			Index gene	G protein subunit beta 1																	
+PRKCZ	chr1	1981908	2116834	1p36.33	KH	8/30/2017	Index gene	protein kinase C zeta		1	Het				VOUS	PRKCZ mice have normal learning and memory; PMID: 23283171; 2	Microarray analysis of 50 patients reveals the critical chromosomal regions responsible for 1p36 deletion syndrome-related complications;  PMID: 25172301; 2 								
+PRKCZ	chr1	1981908	2116834	1p36.33	KH	8/30/2017	Index gene	protein kinase C zeta		3	Het				VOUS										
+FAAP20	chr1	2115898	2144159	1p36.33			Index gene	Fanconi anemia core complex associated protein 20																	
+SKI	chr1	2160133	2241652	1p36.33-p36.32	KH	8/30/2017	Index gene	SKI proto-oncogene		1	Het				P	The SMAD-binding domain of SKI: a hotspot for de novo mutations causing Shprintzen-Goldberg syndrome; PMID: 24736733; 1	576 kb deletion in 1p36.33-p36.32 containing SKI is associated with limb malformation, congenital heart disease and epilepsy; PMID: 23892090 ; 1	Shprintzen-Goldberg Syndrome; PMID: 20301454; 1					Het missense mutations sufficient to cause variable ID, craniofacial, skeletal, and cardiovascular features		Wnt; PMID: 14583455
+SKI	chr1	2160133	2241652	1p36.33-p36.32	KH	8/30/2017	Index gene	SKI proto-oncogene		3	Het				VOUS										Wnt; PMID: 14583455
+RER1	chr1	2323213	2336885	1p36.32	KH	8/30/2017	Index gene	retention in endoplasmic reticulum sorting receptor 1		1	Het				LP	RER1 related to Charcot Marie Tooth 1A; PMID: 25385046; 1	The sorting receptor Rer1 controls Purkinje cell function via voltage gated sodium channels; PMID: 28117367; 1	Retention in endoplasmic reticulum 1 (RER1) modulates amyloid-β (Aβ) production by altering trafficking of γ-secretase and amyloid precursor protein (APP); PMID: 23043097; 1							amyloid precursor protein; PMID: 23043097
+RER1	chr1	2323213	2336885	1p36.32	KH	8/30/2017	Index gene	retention in endoplasmic reticulum sorting receptor 1		3	Het				VOUS										amyloid precursor protein; PMID: 23043097
+PEX10	chr1	2336240	2344010	1p36.32	KH	8/30/2017	Index gene	peroxisomal biogenesis factor 10	This gene encodes a protein involved in import of peroxisomal matrix proteins. This protein localizes to the peroxisomal membrane. Mutations in this gene result in phenotypes within the Zellweger spectrum of peroxisomal biogenesis disorders, ranging from neonatal adrenoleukodystrophy to Zellweger syndrome	1	Het				CARRIER	Expanding the spectrum of PEX10-related peroxisomal biogenesis disorders: slowly progressive recessive ataxia; PMID: 27230853; 1									
+PEX10	chr1	2336240	2344010	1p36.32	KH	8/30/2017	Index gene	peroxisomal biogenesis factor 10	This gene encodes a protein involved in import of peroxisomal matrix proteins. This protein localizes to the peroxisomal membrane. Mutations in this gene result in phenotypes within the Zellweger spectrum of peroxisomal biogenesis disorders, ranging from neonatal adrenoleukodystrophy to Zellweger syndrome	3	Het				LP	The first patient with a pure 1p36 microtriplication associated with severe clinical phenotypes; PMID: 25324898; 1									
+FAM213B	chr1	2517898	2522908	1p36.32			Index gene	family with sequence similarity 213 member B																	
+MMEL1	chr1	2522080	2564481	1p36.32			Index gene	membrane metalloendopeptidase like 1																	
+TPRG1L	chr1	3541555	3546694	1p36.32			Index gene	tumor protein p63 regulated 1 like																	
+LRRC47	chr1	3696783	3713068	1p36.32			Index gene	leucine rich repeat containing 47																	
+RPL22	chr1	6245079	6259679	1p36.31			Index gene	ribosomal protein L22																	
+ACOT7	chr1	6324331	6453826	1p36.31			Index gene	acyl-CoA thioesterase 7																	
+THAP3	chr1	6684924	6695646	1p36.31			Index gene	THAP domain containing 3																	
+DNAJC11	chr1	6694227	6761966	1p36.31			Index gene	DnaJ heat shock protein family (Hsp40) member C11																	
+CAMTA1	chr1	6845383	7829766	1p36.31-p36.23			Index gene	calmodulin binding transcription activator 1																	
+PARK7	chr1	8021713	8045342	1p36.23			Index gene	Parkinsonism associated deglycase																	
+RERE	chr1	8412463	8877699	1p36.23			Index gene	arginine-glutamic acid dipeptide repeats																	
+ENO1	chr1	8921058	8939151	1p36.23			Index gene	enolase 1																	
+CLSTN1	chr1	9789078	9884584	1p36.22			Index gene	calsyntenin 1																	
+CTNNBIP1	chr1	9908333	9970316	1p36.22			Index gene	catenin beta interacting protein 1																	
+LZIC	chr1	9982170	10003485	1p36.22			Index gene	leucine zipper and CTNNBIP1 domain containing																	
+UBE4B	chr1	10093040	10241296	1p36.22			Index gene	ubiquitination factor E4B																	
+KIF1B	chr1	10270763	10441661	1p36.22			Index gene	kinesin family member 1B																	
+PGD	chr1	10459048	10480568	1p36.22			Index gene	phosphogluconate dehydrogenase																	
+PEX14	chr1	10535002	10690815	1p36.22			Index gene	peroxisomal biogenesis factor 14																	
+TARDBP	chr1	11072678	11085549	1p36.22			Index gene	TAR DNA binding protein																	
+SRM	chr1	11114648	11120091	1p36.22			Index gene	spermidine synthase																	
+EXOSC10	chr1	11126669	11159967	1p36.22			Index gene	exosome component 10																	
+MTOR	chr1	11166587	11322608	1p36.22			Index gene	mechanistic target of rapamycin																	
+FBXO44	chr1	11714431	11723384	1p36.22			Index gene	F-box protein 44																	
+MAD2L2	chr1	11734536	11751678	1p36.22			Index gene	mitotic arrest deficient 2 like 2																	
+CLCN6	chr1	11866152	11903201	1p36.22			Index gene	chloride voltage-gated channel 6																	
+KIAA2013	chr1	11979644	11986485	1p36.22			Index gene	KIAA2013																	
+PLOD1	chr1	11994723	12035599	1p36.22			Index gene	procollagen-lysine,2-oxoglutarate 5-dioxygenase 1																	
+MFN2	chr1	12040237	12073572	1p36.22			Index gene	mitofusin 2																	
+PRDM2	chr1	14026734	14151574	1p36.21			Index gene	PR/SET domain 2																	
+PLEKHM2	chr1	16010826	16061264	1p36.21			Index gene	pleckstrin homology and RUN domain containing M2																	
+UQCRHL	chr1	16133656	16134194	1p36.21			Index gene	ubiquinol-cytochrome c reductase hinge protein like																	
+SPEN	chr1	16174358	16266950	1p36.21-p36.13			Index gene	spen family transcriptional repressor																	
+ZBTB17	chr1	16268363	16302627	1p36.13			Index gene	zinc finger and BTB domain containing 17																	
+SZRD1	chr1	16693524	16724643	1p36.13			Index gene	SUZ RNA binding domain containing 1																	
+SPATA21	chr1	16725137	16763919	1p36.13			Index gene	spermatogenesis associated 21																	
+ATP13A2	chr1	17312452	17338467	1p36.13			Index gene	ATPase 13A2																	
+SDHB	chr1	17345224	17380665	1p36.13			Index gene	succinate dehydrogenase complex iron sulfur subunit B																	
+RCC2	chr1	17733250	17766250	1p36.13			Index gene	regulator of chromosome condensation 2																	
+IGSF21	chr1	18434239	18704977	1p36.13			Index gene	immunoglobin superfamily member 21																	
+UBR4	chr1	19400999	19536746	1p36.13			Index gene	ubiquitin protein ligase E3 component n-recognin 4																	
+EMC1	chr1	19542157	19578053	1p36.13			Index gene	ER membrane protein complex subunit 1																	
+MRTO4	chr1	19578074	19586622	1p36.13			Index gene	MRT4 homolog, ribosome maturation factor																	
+AKR7A2	chr1	19629201	19638640	1p36.13			Index gene	aldo-keto reductase family 7 member A2																	
+CAPZB	chr1	19665266	19812135	1p36.13			Index gene	capping actin protein of muscle Z-line beta subunit																	
+MINOS1	chr1	19923470	19956315	1p36.13			Index gene	mitochondrial inner membrane organizing system 1																	
+NBL1	chr1	19969722	19984949	1p36.13			Index gene	neuroblastoma 1, DAN family BMP antagonist																	
+MUL1	chr1	20825940	20834674	1p36.12			Index gene	mitochondrial E3 ubiquitin protein ligase 1																	
+PINK1	chr1	20959947	20978004	1p36.12			Index gene	PTEN induced putative kinase 1																	
+DDOST	chr1	20978259	20988037	1p36.12			Index gene	dolichyl-diphosphooligosaccharide--protein glycosyltransferase non-catalytic subunit																	
+HP1BP3	chr1	21069170	21113181	1p36.12			Index gene	heterochromatin protein 1 binding protein 3																	
+EIF4G3	chr1	21132784	21503381	1p36.12			Index gene	eukaryotic translation initiation factor 4 gamma 3																	
+RAP1GAP	chr1	21922707	21995856	1p36.12			Index gene	RAP1 GTPase activating protein																	
+USP48	chr1	22004791	22109688	1p36.12			Index gene	ubiquitin specific peptidase 48																	
+CDC42	chr1	22379119	22419436	1p36.12			Index gene	cell division cycle 42																	
+KDM1A	chr1	23345940	23410184	1p36.12			Index gene	lysine demethylase 1A																	
+HNRNPR	chr1	23631180	23670857	1p36.12			Index gene	heterogeneous nuclear ribonucleoprotein R																	
+RPL11	chr1	24018268	24022915	1p36.11			Index gene	ribosomal protein L11																	
+PITHD1	chr1	24104875	24114722	1p36.11			Index gene	PITH domain containing 1																	
+CLIC4	chr1	25071759	25170815	1p36.11			Index gene	chloride intracellular channel 4																	
+SYF2	chr1	25548766	25559013	1p36.11			Index gene	SYF2 pre-mRNA splicing factor																	
+TMEM50A	chr1	25664788	25688852	1p36.11			Index gene	transmembrane protein 50A																	
+TMEM57	chr1	25757348	25826698	1p36.11			Index gene	transmembrane protein 57																	
+SEPN1	chr1	26126666	26144713	#N/A			Index gene	#N/A																	
+MTFR1L	chr1	26146396	26159433	1p36.11			Index gene	mitochondrial fission regulator 1 like																	
+STMN1	chr1	26210676	26233368	1p36.11			Index gene	stathmin 1																	
+SH3BGRL3	chr1	26606212	26608013	1p36.11			Index gene	SH3 domain binding glutamate rich protein like 3																	
+UBXN11	chr1	26608772	26644756	1p36.11	HT	12/6/2017	Index gene	UBX domain protein 11		1	het				VOUS	Socius, a novel binding partner of Galpha12/13, promotes the Galpha12-induced RhoA activation; PMID: 16202387; 4									
+ARID1A	chr1	27022521	27108601	1p36.11			Index gene	AT-rich interaction domain 1A																	
+NUDC	chr1	27248212	27273362	1p36.11			Index gene	nuclear distribution C, dynein complex regulator																	
+TRNP1	chr1	27320194	27327377	1p36.11			Index gene	TMF1-regulated nuclear protein 1																	
+WDTC1	chr1	27561006	27635124	1p36.11			Index gene	WD and tetratricopeptide repeats 1																	
+TMEM222	chr1	27648635	27662891	1p36.11			Index gene	transmembrane protein 222																	
+IFI6	chr1	27992571	27998724	1p35.3			Index gene	interferon alpha inducible protein 6																	
+STX12	chr1	28099693	28150963	1p35.3			Index gene	syntaxin 12																	
+PPP1R8	chr1	28157251	28178183	1p35.3			Index gene	protein phosphatase 1 regulatory subunit 8																	
+RPA2	chr1	28218035	28241308	1p35.3			Index gene	replication protein A2																	
+DNAJC8	chr1	28526789	28559542	1p35.3			Index gene	DnaJ heat shock protein family (Hsp40) member C8																	
+ATPIF1	chr1	28562601	28564616	1p35.3			Index gene	ATPase inhibitory factor 1																	
+TRNAU1AP	chr1	28879528	28905057	1p35.3			Index gene	tRNA selenocysteine 1 associated protein 1																	
+TAF12	chr1	28929608	28969604	1p35.3			Index gene	TATA-box binding protein associated factor 12																	
+YTHDF2	chr1	29063132	29096287	1p35.3			Index gene	YTH N6-methyladenosine RNA binding protein 2																	
+SRSF4	chr1	29474249	29508637	1p35.3			Index gene	serine and arginine rich splicing factor 4																	
+MECR	chr1	29519168	29557470	1p35.3			Index gene	mitochondrial trans-2-enoyl-CoA reductase																	
+SDC3	chr1	31342312	31381480	1p35.2			Index gene	syndecan 3																	
+PUM1	chr1	31404352	31538564	1p35.2			Index gene	pumilio RNA binding family member 1																	
+SNRNP40	chr1	31732414	31769644	1p35.2			Index gene	small nuclear ribonucleoprotein U5 subunit 40																	
+ZCCHC17	chr1	31769828	31837800	1p35.2			Index gene	zinc finger CCHC-type containing 17																	
+FABP3	chr1	31838099	31846135	1p35.2			Index gene	fatty acid binding protein 3																	
+PEF1	chr1	32095462	32110838	1p35.2			Index gene	penta-EF-hand domain containing 1																	
+ADGRB2	chr1	32192705	32229664	1p35.2			Index gene	adhesion G protein-coupled receptor B2																	
+PTP4A2	chr1	32372021	32403988	1p35.2			Index gene	protein tyrosine phosphatase type IVA, member 2																	
+KHDRBS1	chr1	32479294	32526460	1p35.2			Index gene	KH RNA binding domain containing, signal transduction associated 1																	
+KPNA6	chr1	32573643	32642168	1p35.2			Index gene	karyopherin subunit alpha 6																	
+CCDC28B	chr1	32665986	32670991	1p35.2			Index gene	coiled-coil domain containing 28B																	
+EIF3I	chr1	32687184	32697205	1p35.2			Index gene	eukaryotic translation initiation factor 3 subunit I																	
+MARCKSL1	chr1	32799429	32801840	1p35.1			Index gene	MARCKS like 1																	
+BSDC1	chr1	32830233	32860062	1p35.1			Index gene	BSD domain containing 1																	
+RBBP4	chr1	33116748	33151812	1p35.1			Index gene	RB binding protein 4, chromatin remodeling factor																	
+SYNC	chr1	33145506	33168361	1p35.1			Index gene	syncoilin, intermediate filament protein																	
+YARS	chr1	33240839	33283633	1p35.1			Index gene	tyrosyl-tRNA synthetase																	
+HPCA	chr1	33352097	33360247	1p35.1			Index gene	hippocalcin																	
+RNF19B	chr1	33402046	33430414	1p35.1			Index gene	ring finger protein 19B																	
+ZNF362	chr1	33722173	33766320	1p35.1	HT	12/6/2017	Index gene	zinc finger protein 362		1	het				VOUS	Proximity biotinylation and affinity purification are complementary approaches for the interactome mapping of chromatin-associated protein complexes; PMID: 25281560; 4									
+PHC2	chr1	33789223	33841194	1p35.1			Index gene	polyhomeotic homolog 2																	
+DLGAP3	chr1	35331036	35395186	1p34.3			Index gene	DLG associated protein 3																	
+SFPQ	chr1	35641978	35658746	1p34.3			Index gene	splicing factor proline and glutamine rich																	
+ZMYM4	chr1	35734567	35887545	1p34.3			Index gene	zinc finger MYM-type containing 4																	
+KIAA0319L	chr1	35899090	36023037	1p34.3			Index gene	KIAA0319 like																	
+NCDN	chr1	36023392	36032380	1p34.3			Index gene	neurochondrin																	
+PSMB2	chr1	36065142	36107445	1p34.3			Index gene	proteasome subunit beta 2																	
+C1orf216	chr1	36179476	36184790	1p34.3			Index gene	chromosome 1 open reading frame 216																	
+ADPRHL2	chr1	36554452	36559533	1p34.3	KH	12/6/2017	Index gene	ADP-ribosylhydrolase like 2	This gene encodes a member of the ADP-ribosylglycohydrolase family. The encoded enzyme catalyzes the removal of ADP-ribose from ADP-ribosylated proteins. This enzyme localizes to the mitochondria, in addition to the nucleus and cytoplasm		Het				VOUS										Mito
+TRAPPC3	chr1	36602169	36621654	1p34.3			Index gene	trafficking protein particle complex 3																	
+MAP7D1	chr1	36621565	36646451	1p34.3			Index gene	MAP7 domain containing 1																	
+THRAP3	chr1	36690012	36770957	1p34.3			Index gene	thyroid hormone receptor associated protein 3																	
+STK40	chr1	36805219	36851528	1p34.3			Index gene	serine/threonine kinase 40																	
+LSM10	chr1	36859020	36863560	1p34.3			Index gene	LSM10, U7 small nuclear RNA associated																	
+MRPS15	chr1	36921361	36930040	1p34.3			Index gene	mitochondrial ribosomal protein S15																	
+MEAF6	chr1	37955560	37980420	1p34.3			Index gene	MYST/Esa1 associated factor 6																	
+MANEAL	chr1	38259773	38267278	1p34.3			Index gene	mannosidase endo-alpha like																	
+C1orf122	chr1	38273472	38275126	1p34.3			Index gene	chromosome 1 open reading frame 122																	
+SF3A3	chr1	38422651	38455782	1p34.3			Index gene	splicing factor 3a subunit 3																	
+UTP11	chr1	38478383	38490497	1p34.3			Index gene	UTP11, small subunit processome component homolog (S. cerevisiae)																	
+RRAGC	chr1	39303868	39325495	1p34.3			Index gene	Ras related GTP binding C																	
+AKIRIN1	chr1	39456915	39471737	1p34.3			Index gene	akirin 1																	
+NDUFS5	chr1	39491966	39500308	1p34.3			Index gene	NADH:ubiquinone oxidoreductase subunit S5																	
+MACF1	chr1	39549838	39952810	1p34.3			Index gene	microtubule-actin crosslinking factor 1																	
+PABPC4	chr1	40026484	40042521	1p34.3			Index gene	poly(A) binding protein cytoplasmic 4																	
+HPCAL4	chr1	40144319	40157382	1p34.2			Index gene	hippocalcin like 4																	
+PPIE	chr1	40204516	40229586	1p34.2			Index gene	peptidylprolyl isomerase E																	
+CAP1	chr1	40506254	40538321	1p34.2			Index gene	adenylate cyclase associated protein 1																	
+PPT1	chr1	40538381	40563142	1p34.2			Index gene	palmitoyl-protein thioesterase 1																	
+SMAP2	chr1	40839377	40888998	1p34.2			Index gene	small ArfGAP2																	
+RIMS3	chr1	41086351	41131324	1p34.2			Index gene	regulating synaptic membrane exocytosis 3																	
+NFYC	chr1	41157241	41237276	1p34.2			Index gene	nuclear transcription factor Y subunit gamma																	
+SCMH1	chr1	41492870	41707815	1p34.2			Index gene	sex comb on midleg homolog 1 (Drosophila)																	
+FOXJ3	chr1	42642209	42801548	1p34.2			Index gene	forkhead box J3																	
+PPCS	chr1	42922011	42939049	1p34.2			Index gene	phosphopantothenoylcysteine synthetase																	
+PPIH	chr1	43124047	43142429	1p34.2			Index gene	peptidylprolyl isomerase H																	
+YBX1	chr1	43147905	43169474	1p34.2			Index gene	Y-box binding protein 1																	
+C1orf50	chr1	43232915	43241413	1p34.2			Index gene	chromosome 1 open reading frame 50																	
+SLC2A1	chr1	43391045	43424847	1p34.2			Index gene	solute carrier family 2 member 1																	
+EBNA1BP2	chr1	43629844	43638241	1p34.2			Index gene	EBNA1 binding protein 2																	
+MED8	chr1	43849578	43855483	1p34.2			Index gene	mediator complex subunit 8																	
+HYI	chr1	43916673	43919660	1p34.2			Index gene	hydroxypyruvate isomerase (putative)																	
+PTPRF	chr1	43991707	44089343	1p34.2			Index gene	protein tyrosine phosphatase, receptor type F																	
+KDM4A	chr1	44115796	44171189	1p34.2-p34.1			Index gene	lysine demethylase 4A																	
+ST3GAL3	chr1	44173203	44396837	1p34.1			Index gene	ST3 beta-galactoside alpha-2,3-sialyltransferase 3																	
+IPO13	chr1	44412477	44433694	1p34.1			Index gene	importin 13																	
+ATP6V0B	chr1	44440319	44443972	1p34.1			Index gene	ATPase H+ transporting V0 subunit b																	
+B4GALT2	chr1	44444873	44456843	1p34.1			Index gene	beta-1,4-galactosyltransferase 2																	
+DMAP1	chr1	44679124	44686351	1p34.1			Index gene	DNA methyltransferase 1 associated protein 1																	
+ERI3	chr1	44686741	44820951	1p34.1			Index gene	ERI1 exoribonuclease family member 3																	
+RNF220	chr1	44870831	45117396	1p34.1			Index gene	ring finger protein 220																	
+TMEM53	chr1	45118918	45140280	1p34.1			Index gene	transmembrane protein 53																	
+RPS8	chr1	45241245	45244412	1p34.1			Index gene	ribosomal protein S8																	
+EIF2B3	chr1	45316193	45452394	1p34.1			Index gene	eukaryotic translation initiation factor 2B subunit gamma																	
+HECTD3	chr1	45468219	45477027	1p34.1			Index gene	HECT domain E3 ubiquitin protein ligase 3																	
+UROD	chr1	45477804	45481341	1p34.1			Index gene	uroporphyrinogen decarboxylase																	
+PRDX1	chr1	45976706	45988562	1p34.1			Index gene	peroxiredoxin 1																	
+AKR1A1	chr1	46016454	46035723	1p34.1			Index gene	aldo-keto reductase family 1 member A1																	
+NASP	chr1	46049659	46084578	1p34.1			Index gene	nuclear autoantigenic sperm protein																	
+GPBP1L1	chr1	46092975	46152302	1p34.1			Index gene	GC-rich promoter binding protein 1 like 1																	
+MAST2	chr1	46269278	46501796	1p34.1			Index gene	microtubule associated serine/threonine kinase 2																	
+POMGNT1	chr1	46654352	46685977	1p34.1			Index gene	protein O-linked mannose N-acetylglucosaminyltransferase 1 (beta 1,2-)																	
+LRRC41	chr1	46744071	46769038	1p34.1-p33			Index gene	leucine rich repeat containing 41																	
+UQCRH	chr1	46769284	46782449	1p33			Index gene	ubiquinol-cytochrome c reductase hinge protein																	
+FAAH	chr1	46859938	46879520	1p33			Index gene	fatty acid amide hydrolase																	
+ATPAF1	chr1	47100710	47134099	1p33			Index gene	ATP synthase mitochondrial F1 complex assembly factor 1																	
+EFCAB14	chr1	47140830	47184736	1p33			Index gene	EF-hand calcium binding domain 14																	
+CMPK1	chr1	47799468	47844511	1p33			Index gene	cytidine/uridine monophosphate kinase 1																	
+BEND5	chr1	49193194	49242641	1p33			Index gene	BEN domain containing 5																	
+FAF1	chr1	50906934	51425936	1p32.3			Index gene	Fas associated factor 1																	
+RNF11	chr1	51701944	51739119	1p32.3			Index gene	ring finger protein 11																	
+EPS15	chr1	51819934	51984995	1p32.3			Index gene	epidermal growth factor receptor pathway substrate 15																	
+OSBPL9	chr1	52082545	52254891	1p32.3			Index gene	oxysterol binding protein like 9																	
+NRDC	chr1	52254865	52344609	1p32.3			Index gene	nardilysin convertase																	
+TXNDC12	chr1	52485803	52521843	1p32.3			Index gene	thioredoxin domain containing 12																	
+ZFYVE9	chr1	52607765	52812358	1p32.3			Index gene	zinc finger FYVE-type containing 9																	
+ZYG11B	chr1	53192130	53293013	1p32.3			Index gene	zyg-11 family member B, cell cycle regulator																	
+SCP2	chr1	53392900	53517289	1p32.3			Index gene	sterol carrier protein 2																	
+C1orf123	chr1	53679771	53686311	1p32.3			Index gene	chromosome 1 open reading frame 123																	
+MAGOH	chr1	53692563	53704282	1p32.3			Index gene	mago homolog, exon junction complex core component																	
+YIPF1	chr1	54317391	54355504	1p32.3			Index gene	Yip1 domain family member 1																	
+TMEM59	chr1	54492353	54519246	1p32.3			Index gene	transmembrane protein 59																	
+MRPL37	chr1	54665839	54684056	1p32.3			Index gene	mitochondrial ribosomal protein L37																	
+SSBP3	chr1	54691103	54872068	1p32.3			Index gene	single stranded DNA binding protein 3																	
+MROH7	chr1	55107412	55175940	1p32.3			Index gene	maestro heat like repeat family member 7																	
+TTC4	chr1	55181494	55208328	1p32.3			Index gene	tetratricopeptide repeat domain 4																	
+DHCR24	chr1	55315299	55352921	1p32.3			Index gene	24-dehydrocholesterol reductase																	
+JUN	chr1	59246462	59249785	1p32.1			Index gene	Jun proto-oncogene, AP-1 transcription factor subunit																	
+JAK1	chr1	65298905	65533429	1p31.3			Index gene	Janus kinase 1																	
+DNAJC6	chr1	65730376	65881552	1p31.3			Index gene	DnaJ heat shock protein family (Hsp40) member C6																	
+PDE4B	chr1	66258192	66840262	1p31.3			Index gene	phosphodiesterase 4B																	
+SGIP1	chr1	66999251	67216822	1p31.3			Index gene	SH3 domain GRB2 like endophilin interacting protein 1																	
+SERBP1	chr1	67873492	67896123	1p31.3			Index gene	SERPINE1 mRNA binding protein 1																	
+WLS	chr1	68564141	68698284	1p31.3			Index gene	wntless Wnt ligand secretion mediator																	
+SRSF11	chr1	70671364	70717701	1p31.1			Index gene	serine and arginine rich splicing factor 11																	
+ZRANB2	chr1	71528973	71546972	1p31.1			Index gene	zinc finger RANBP2-type containing 2																	
+NEGR1	chr1	71868624	72748277	1p31.1			Index gene	neuronal growth regulator 1																	
+ACADM	chr1	76190031	76229363	1p31.1			Index gene	acyl-CoA dehydrogenase, C-4 to C-12 straight chain																	
+RABGGTB	chr1	76251878	76260775	1p31.1			Index gene	Rab geranylgeranyltransferase beta subunit																	
+PIGK	chr1	77554666	77685132	1p31.1			Index gene	phosphatidylinositol glycan anchor biosynthesis class K																	
+USP33	chr1	78161673	78225564	1p31.1			Index gene	ubiquitin specific peptidase 33																	
+FUBP1	chr1	78412166	78444889	1p31.1			Index gene	far upstream element binding protein 1																	
+PRKACB	chr1	84543657	84704181	1p31.1			Index gene	protein kinase cAMP-activated catalytic subunit beta																	
+GNG5	chr1	84964005	84972262	1p22.3			Index gene	G protein subunit gamma 5																	
+DDAH1	chr1	85784167	86044046	1p22.3			Index gene	dimethylarginine dimethylaminohydrolase 1																	
+SH3GLB1	chr1	87170252	87213867	1p22.3			Index gene	SH3 domain containing GRB2 like, endophilin B1																	
+SEP15	chr1	87328127	87380107	#N/A			Index gene	#N/A																	
+LMO4	chr1	87794150	87814607	1p22.3		12/6/2017	Index gene	LIM domain only 4		1	het				VOUS	A Selective Role for Lmo4 in Cue-Reward Learning; PMID: 26134647; 2	The Isl1-Lhx3 Complex Promotes Motor Neuron Specification by Activating Transcriptional Pathways that Enhance Its Own Expression and Formation; PMID: 28451636; 4	Cisplatin-induced apoptosis in auditory, renal, and neuronal cells is associated with nitration and downregulation of LMO4; PMID: 26925255; 4	Area-specific development of distinct projection neuron subclasses is regulated by postnatal epigenetic modifications; PMID: 26814051; 2	Lmo4 establishes rostral motor cortex projection neuron subtype diversity; PMID: 23575831; 2	The LIM adaptor protein LMO4 is an essential regulator of neural crest development; PMID: 22119055; 4	LMO4 controls the balance between excitatory and inhibitory spinal V2 interneurons; PMID: 19323994; 4			
+GTF2B	chr1	89318320	89357301	1p22.2			Index gene	general transcription factor IIB																	
+ZNF326	chr1	90460653	90501089	1p22.2			Index gene	zinc finger protein 326																	
+RPL5	chr1	93297593	93307481	1p22.1			Index gene	ribosomal protein L5																	
+DR1	chr1	93811477	93828148	1p22.1			Index gene	down-regulator of transcription 1																	
+DNTTIP2	chr1	94335013	94344762	1p22.1			Index gene	deoxynucleotidyltransferase terminal interacting protein 2																	
+ABCD3	chr1	94883932	94984219	1p21.3			Index gene	ATP binding cassette subfamily D member 3																	
+CNN3	chr1	95362504	95392779	1p21.3			Index gene	calponin 3																	
+PTBP2	chr1	97187160	97280605	1p21.3			Index gene	polypyrimidine tract binding protein 2																	
+MFSD14A	chr1	100503788	100548929	1p21.2			Index gene	major facilitator superfamily domain containing 14A																	
+RTCA	chr1	100731713	100758325	1p21.2			Index gene	RNA 3'-terminal phosphate cyclase																	
+CLCC1	chr1	109472129	109506121	1p13.3			Index gene	chloride channel CLIC like 1																	
+WDR47	chr1	109512837	109584850	1p13.3			Index gene	WD repeat domain 47																	
+TAF13	chr1	109606997	109618624	1p13.3			Index gene	TATA-box binding protein associated factor 13																	
+TMEM167B	chr1	109633362	109639556	1p13.3			Index gene	transmembrane protein 167B																	
+SARS	chr1	109756514	109780804	1p13.3			Index gene	seryl-tRNA synthetase																	
+CELSR2	chr1	109792640	109818378	1p13.3			Index gene	cadherin EGF LAG seven-pass G-type receptor 2																	
+SORT1	chr1	109852187	109940567	1p13.3			Index gene	sortilin 1																	
+PSMA5	chr1	109941652	109969108	1p13.3			Index gene	proteasome subunit alpha 5																	
+AMPD2	chr1	110162434	110174677	1p13.3			Index gene	adenosine monophosphate deaminase 2																	
+GSTM2	chr1	110210643	110226619	1p13.3			Index gene	glutathione S-transferase mu 2																	
+GSTM3	chr1	110276553	110283660	1p13.3			Index gene	glutathione S-transferase mu 3																	
+AHCYL1	chr1	110527386	110566364	1p13.3			Index gene	adenosylhomocysteinase like 1																	
+STRIP1	chr1	110574198	110597263	1p13.3			Index gene	striatin interacting protein 1																	
+LAMTOR5	chr1	110943876	110950546	1p13.3			Index gene	late endosomal/lysosomal adaptor, MAPK and MTOR activator 5																	
+WDR77	chr1	111982511	111991930	1p13.2			Index gene	WD repeat domain 77																	
+ATP5F1	chr1	111991742	112004525	1p13.2			Index gene	ATP synthase, H+ transporting, mitochondrial Fo complex subunit B1																	
+RAP1A	chr1	112162404	112259317	1p13.2			Index gene	RAP1A, member of RAS oncogene family																	
+CAPZA1	chr1	113162074	113214241	1p13.2	HT	12/6/2017	Index gene	capping actin protein of muscle Z-line alpha subunit 1		1	het				VOUS	Actin Capping Protein is required for Dendritic Spine Development and Synapse Formation; PMID: 21752999; 1									
+RHOC	chr1	113243748	113250025	1p13.2			Index gene	ras homolog family member C																	
+PPM1J	chr1	113252615	113257950	1p13.2			Index gene	protein phosphatase, Mg2+/Mn2+ dependent 1J																	
+HIPK1	chr1	114471995	114520491	1p13.2			Index gene	homeodomain interacting protein kinase 1																	
+BCAS2	chr1	115110180	115124265	1p13.2	HT	12/6/2017	Index gene	BCAS2, pre-mRNA processing factor		1	het				VOUS	BCAS2 is involved in alternative mRNA splicing in spermatogonia and the transition to meiosis; PMID: 28128212; 4	Amplification of the BCAS2 gene at chromosome 1p13.3-21 in human primary breast cancer; PMID: 12169396, 4	BCAS2 interacts with HSF4 and negatively regulates its protein stability via ubiquitination; PMID: 26319152; 4	Maternal BCAS2 protects genomic integrity in mouse early embryonic development; PMID: 26428007, 4	Conditional Knockout of Breast Carcinoma Amplified Sequence 2 (BCAS2) in Mouse Forebrain Causes Dendritic Malformation via β-catenin; PMID: 27713508; 2					
+CSDE1	chr1	115259533	115300671	1p13.2			Index gene	cold shock domain containing E1																	
+ATP1A1	chr1	116915794	116947396	1p13.1			Index gene	ATPase Na+/K+ transporting subunit alpha 1																	
+ATP1A1-AS1	chr1	116935486	116961244	1p13.1			Index gene	ATP1A1 antisense RNA 1																	
+MAN1A2	chr1	117910084	118068320	1p12			Index gene	mannosidase alpha class 1A member 2																	
+PDE4DIP	chr1	144851423	145076186	1q21.2			Index gene	phosphodiesterase 4D interacting protein																	
+SEC22B	chr1	145096406	145116997	1p12			Index gene	SEC22 homolog B, vesicle trafficking protein (gene/pseudogene)																	
+TXNIP	chr1	145438437	145442644	1q21.1	KH	12/6/2017	Index gene	thioredoxin interacting protein	This gene encodes a thioredoxin-binding protein that is a member of the alpha arrestin protein family. Thioredoxin is a thiol-oxidoreductase that is a major regulator of cellular redox signaling which protects cells from oxidative stress. This protein inhibits the antioxidative function of thioredoxin resulting in the accumulation of reactive oxygen species and cellular stress. This protein also functions as a regulator of cellular metabolism and of endoplasmic reticulum (ER) stress. This protein may also function as a tumor suppressor. 	1	Het				VOUS	Deletion of thioredoxin-interacting protein in mice impairs mitochondrial function but protects the myocardium from ischemia-reperfusion injury; PMID: 22201682; 1									oxidative stress
+TXNIP	chr1	145438437	145442644	1q21.1	KH	12/6/2017	Index gene	thioredoxin interacting protein	This gene encodes a thioredoxin-binding protein that is a member of the alpha arrestin protein family. Thioredoxin is a thiol-oxidoreductase that is a major regulator of cellular redox signaling which protects cells from oxidative stress. This protein inhibits the antioxidative function of thioredoxin resulting in the accumulation of reactive oxygen species and cellular stress. This protein also functions as a regulator of cellular metabolism and of endoplasmic reticulum (ER) stress. This protein may also function as a tumor suppressor. 	3	Het				VOUS	Expanding the phenotype of reciprocal 1q21.1 deletions and duplications: a case series; PMID: 28724436; 2							describes a balanced rearrangement, normal features		oxidative stress
+POLR3GL	chr1	145456235	145470387	1q21.1			Index gene	RNA polymerase III subunit G like																	
+RBM8A	chr1	145507556	145513535	1q21.1	KH	12/6/2017	Index gene	RNA binding motif protein 8A		1	Het				LP	Complex inheritance pattern resembling autosomal recessive inheritance involving a microdeletion in thrombocytopenia-absent radius syndrome; PMID: 17236129; 1	Compound inheritance of a low-frequency regulatory SNP and a rare null mutation in exon-junction complex subunit RBM8A causes TAR syndrome; PMID: 22366785; 1	Contribution of copy number variants involving nonsense-mediated mRNA decay pathway genes to neuro-developmental disorders; PMID: 23376982; 1	Prenatal detection of TAR syndrome in a fetus with compound inheritance of an RBM8A SNP and a 334‑kb deletion: a case report; PMID: 24220582; 1	Interstitial 1q21.1 Microdeletion Is Associated with Severe Skeletal Anomalies, Dysmorphic Face and Moderate Intellectual Disability; PMID: 27920638; 1	A critical role of RBM8a in proliferation and differentiation of embryonic neural progenitors; PMID: 26094033; 1				A good example of AR and loss of 1 copy not having same effects
+RBM8A	chr1	145507556	145513535	1q21.1	KH	12/6/2017	Index gene	RNA binding motif protein 8A		3	Het				LP	Contribution of copy number variants involving nonsense-mediated mRNA decay pathway genes to neuro-developmental disorders; PMID: 23376982; 1	An EJC factor RBM8a regulates anxiety behaviors; PMID: 23638902; 1								
+PEX11B	chr1	145516164	145523732	1q21.1	KH	12/6/2017	Index gene	peroxisomal biogenesis factor 11 beta		1	Het				CARRIER	Novel PEX11B Mutations Extend the Peroxisome Biogenesis Disorder 14B Phenotypic Spectrum and Underscore Congenital Cataract as an Early Feature; PMID: 28129423; 1	A novel defect of peroxisome division due to a homozygous non-sense mutation in the PEX11β gene; PMID: 22581968; 1								
+PEX11B	chr1	145516164	145523732	1q21.1	KH	12/6/2017	Index gene	peroxisomal biogenesis factor 11 beta		3	Het				VOUS										
+SV2A	chr1	149874871	149889434	1q21.2			Index gene	synaptic vesicle glycoprotein 2A																	
+SF3B4	chr1	149895208	149900144	1q21.2			Index gene	splicing factor 3b subunit 4																	
+VPS45	chr1	150039349	150117505	1q21.2			Index gene	vacuolar protein sorting 45 homolog																	
+PLEKHO1	chr1	150121623	150132260	1q21.2			Index gene	pleckstrin homology domain containing O1																	
+APH1A	chr1	150237798	150241609	1q21.2			Index gene	aph-1 homolog A, gamma-secretase subunit																	
+MRPS21	chr1	150266261	150281414	1q21.2			Index gene	mitochondrial ribosomal protein S21																	
+MCL1	chr1	150547026	150552214	1q21.2			Index gene	MCL1, BCL2 family apoptosis regulator																	
+ENSA	chr1	150594598	150602098	1q21.3			Index gene	endosulfine alpha																	
+CERS2	chr1	150937648	150947479	1q21.3			Index gene	ceramide synthase 2																	
+CDC42SE1	chr1	151023446	151032125	1q21.3			Index gene	CDC42 small effector 1																	
+MLLT11	chr1	151032150	151040973	1q21.3			Index gene	myeloid/lymphoid or mixed-lineage leukemia; translocated to, 11																	
+SCNM1	chr1	151138497	151142773	1q21.3			Index gene	sodium channel modifier 1																	
+VPS72	chr1	151148775	151162689	1q21.3			Index gene	vacuolar protein sorting 72 homolog																	
+PIP5K1A	chr1	151171020	151222007	1q21.3			Index gene	phosphatidylinositol-4-phosphate 5-kinase type 1 alpha																	
+PSMD4	chr1	151227196	151239954	1q21.3			Index gene	proteasome 26S subunit, non-ATPase 4																	
+PI4KB	chr1	151264272	151300191	1q21.3			Index gene	phosphatidylinositol 4-kinase beta																	
+PSMB4	chr1	151372040	151374412	1q21.3			Index gene	proteasome subunit beta 4																	
+POGZ	chr1	151375199	151431941	1q21.3			Index gene	pogo transposable element derived with ZNF domain																	
+SNX27	chr1	151584661	151671559	1q21.3			Index gene	sorting nexin family member 27																	
+CELF3	chr1	151672533	151689296	1q21.3	HT	12/6/2017	Index gene	CUGBP Elav-like family member 3		1	het				VOUS	Transcriptomic profile analysis of mouse neural tube development by RNA-Seq; PMID: 28691208; 2	The CELF family of RNA binding proteins is implicated in cell-specific and developmentally regulated alternative splicing; PMID: 11158314; 2								
+MRPL9	chr1	151732118	151736392	1q21.3			Index gene	mitochondrial ribosomal protein L9																	
+OAZ3	chr1	151735444	151743806	1q21.3			Index gene	ornithine decarboxylase antizyme 3																	
+CHTOP	chr1	153606457	153618782	1q21.3			Index gene	chromatin target of PRMT1																	
+SNAPIN	chr1	153631129	153634328	1q21.3			Index gene	SNAP associated protein																	
+ILF2	chr1	153634263	153643504	1q21.3			Index gene	interleukin enhancer binding factor 2																	
+INTS3	chr1	153700542	153747284	1q21.3			Index gene	integrator complex subunit 3																	
+DENND4B	chr1	153901976	153919154	1q21.3			Index gene	DENN domain containing 4B																	
+SLC39A1	chr1	153931574	153940660	1q21.3			Index gene	solute carrier family 39 member 1																	
+JTB	chr1	153946744	153950451	1q21.3			Index gene	jumping translocation breakpoint																	
+RPS27	chr1	153963238	153964631	1q21.3			Index gene	ribosomal protein S27																	
+TPM3	chr1	154127779	154164611	1q21.3			Index gene	tropomyosin 3																	
+C1orf43	chr1	154179176	154193273	1q21.3			Index gene	chromosome 1 open reading frame 43																	
+UBAP2L	chr1	154192647	154243986	1q21.3			Index gene	ubiquitin associated protein 2 like																	
+HAX1	chr1	154245038	154248355	1q21.3			Index gene	HCLS1 associated protein X-1																	
+UBE2Q1	chr1	154521050	154531120	1q21.3			Index gene	ubiquitin conjugating enzyme E2 Q1																	
+ADAR	chr1	154554533	154600456	1q21.3			Index gene	adenosine deaminase, RNA specific																	
+PMVK	chr1	154897207	154915126	1q21.3			Index gene	phosphomevalonate kinase																	
+PYGO2	chr1	154929501	154934258	1q21.3			Index gene	pygopus family PHD finger 2																	
+ADAM15	chr1	155023747	155035252	1q21.3			Index gene	ADAM metallopeptidase domain 15																	
+EFNA3	chr1	155051347	155060014	1q21.3			Index gene	ephrin A3																	
+DPM3	chr1	155112366	155112996	1q22			Index gene	dolichyl-phosphate mannosyltransferase subunit 3																	
+MTX1	chr1	155178489	155183630	1q22			Index gene	metaxin 1																	
+FAM189B	chr1	155216995	155225274	1q22			Index gene	family with sequence similarity 189 member B																	
+SCAMP3	chr1	155225769	155232176	1q22			Index gene	secretory carrier membrane protein 3																	
+FDPS	chr1	155278538	155290457	1q22			Index gene	farnesyl diphosphate synthase																	
+RUSC1-AS1	chr1	155290250	155293938	1q22			Index gene	RUSC1 antisense RNA 1																	
+RUSC1	chr1	155290639	155300909	1q22			Index gene	RUN and SH3 domain containing 1																	
+ASH1L	chr1	155305051	155532324	1q22	KH	12/6/2017	Index gene	ASH1 like histone lysine methyltransferase	This gene encodes a member of the trithorax group of transcriptional activators. The protein contains four AT hooks, a SET domain, a PHD-finger motif, and a bromodomain. It is localized to many small speckles in the nucleus, and also to cell-cell tight junctions	1	Het				LP	De novo genic mutations among a Chinese autism spectrum disorder cohort; PMID: 27824329; 1	De novo mutations in schizophrenia implicate synaptic networks; PMID: 24463507; 1	Diagnostic exome sequencing in persons with severe intellectual disability; PMID: 23033978; 1	Targeted Next-Generation Sequencing Analysis of 1,000 Individuals with Intellectual Disability; PMID: 26350204; 1	Molecular Diagnostic Yield of Chromosomal Microarray Analysis and Whole-Exome Sequencing in Children With Autism Spectrum Disorder; PMID: 26325558; 1	Novel MCA/ID syndrome with ASH1L mutation; PMID: 28394464; 1				Polycomb regulationPMID: 26549848
+ASH1L	chr1	155305051	155532324	1q22	KH	12/6/2017	Index gene	ASH1 like histone lysine methyltransferase	This gene encodes a member of the trithorax group of transcriptional activators. The protein contains four AT hooks, a SET domain, a PHD-finger motif, and a bromodomain. It is localized to many small speckles in the nucleus, and also to cell-cell tight junctions	3	Het				VOUS										
+YY1AP1	chr1	155629232	155658823	1q22			Index gene	YY1 associated protein 1																	
+DAP3	chr1	155658881	155708800	1q22			Index gene	death associated protein 3																	
+SYT11	chr1	155829259	155854990	1q22			Index gene	synaptotagmin 11																	
+ARHGEF2	chr1	155916629	155948336	1q22			Index gene	Rho/Rac guanine nucleotide exchange factor 2																	
+SSR2	chr1	155978838	155990758	1q22			Index gene	signal sequence receptor subunit 2																	
+UBQLN4	chr1	156005084	156023616	1q22			Index gene	ubiquilin 4																	
+LAMTOR2	chr1	156024516	156028301	1q22			Index gene	late endosomal/lysosomal adaptor, MAPK and MTOR activator 2																	
+LMNA	chr1	156052336	156109880	1q22			Index gene	lamin A/C																	
+SLC25A44	chr1	156163722	156182587	1q22			Index gene	solute carrier family 25 member 44																	
+PMF1	chr1	156182778	156209868	1q22			Index gene	polyamine modulated factor 1																	
+SMG5	chr1	156219014	156261289	1q22			Index gene	SMG5, nonsense mediated mRNA decay factor																	
+CCT3	chr1	156278751	156308206	1q22			Index gene	chaperonin containing TCP1 subunit 3																	
+C1orf61	chr1	156374043	156399340	1q22			Index gene	chromosome 1 open reading frame 61																	
+MEF2D	chr1	156433512	156470634	1q22			Index gene	myocyte enhancer factor 2D																	
+NAXE	chr1	156561557	156564091	1q22			Index gene	NAD(P)HX epimerase																	
+BCAN	chr1	156611739	156629324	1q23.1			Index gene	brevican																	
+MRPL24	chr1	156707093	156710923	1q23.1			Index gene	mitochondrial ribosomal protein L24																	
+HDGF	chr1	156711898	156722240	1q23.1			Index gene	heparin binding growth factor																	
+PRCC	chr1	156737273	156770609	1q23.1			Index gene	papillary renal cell carcinoma (translocation-associated)																	
+ARHGEF11	chr1	156904631	157015162	1q23.1			Index gene	Rho guanine nucleotide exchange factor 11																	
+CADM3	chr1	159141376	159172932	1q23.2			Index gene	cell adhesion molecule 3																	
+TAGLN2	chr1	159887896	159895332	1q23.2			Index gene	transgelin 2																	
+IGSF8	chr1	160061128	160068618	1q23.2			Index gene	immunoglobulin superfamily member 8																	
+ATP1A2	chr1	160085519	160113374	1q23.2			Index gene	ATPase Na+/K+ transporting subunit alpha 2																	
+PEA15	chr1	160175108	160185166	1q23.2			Index gene	phosphoprotein enriched in astrocytes 15																	
+DCAF8	chr1	160185504	160232350	1q23.2			Index gene	DDB1 and CUL4 associated factor 8																	
+PEX19	chr1	160246598	160254941	1q23.2			Index gene	peroxisomal biogenesis factor 19																	
+COPA	chr1	160258376	160313354	1q23.2	HT	12/6/2017	Index gene	coatomer protein complex subunit alpha		1	het				P	Copa Syndrome: a Novel Autosomal Dominant Immune Dysregulatory Disease; PMID: 27048656; 1									
+NCSTN	chr1	160313062	160328742	1q23.2			Index gene	nicastrin																	
+USF1	chr1	161009040	161015769	1q23.3			Index gene	upstream transcription factor 1																	
+PFDN2	chr1	161070345	161087866	1q23.3			Index gene	prefoldin subunit 2																	
+NIT1	chr1	161087861	161095235	1q23.3			Index gene	nitrilase 1																	
+DEDD	chr1	161090768	161102478	1q23.3			Index gene	death effector domain containing																	
+UFC1	chr1	161123533	161128646	1q23.3			Index gene	ubiquitin-fold modifier conjugating enzyme 1																	
+USP21	chr1	161129253	161135516	1q23.3			Index gene	ubiquitin specific peptidase 21																	
+B4GALT3	chr1	161141099	161147758	1q23.3			Index gene	beta-1,4-galactosyltransferase 3																	
+NDUFS2	chr1	161169104	161184184	1q23.3			Index gene	NADH:ubiquinone oxidoreductase core subunit S2																	
+TOMM40L	chr1	161195728	161200536	1q23.3			Index gene	translocase of outer mitochondrial membrane 40 like																	
+NR1I3	chr1	161199455	161208000	1q23.3			Index gene	nuclear receptor subfamily 1 group I member 3																	
+SDHC	chr1	161284165	161334535	1q23.3	KH	12/6/2017	Index gene	succinate dehydrogenase complex subunit C	This gene encodes one of four nuclear-encoded subunits that comprise succinate dehydrogenase, also known as mitochondrial complex II, a key enzyme complex of the tricarboxylic acid cycle and aerobic respiratory chains of mitochondria. The encoded protein is one of two integral membrane proteins that anchor other subunits of the complex, which form the catalytic core, to the inner mitochondrial membrane. There are several related pseudogenes for this gene on different chromosomes. Mutations in this gene have been associated with paragangliomas.	1	Het				P	Simple and rapid characterization of novel large germline deletions in SDHB, SDHC and SDHD-related paraganglioma; PMID: 27485256; 1							Lots of supportive lit in HGMD		Mitochondrial
+SDHC	chr1	161284165	161334535	1q23.3	KH	12/6/2017	Index gene	succinate dehydrogenase complex subunit C	This gene encodes one of four nuclear-encoded subunits that comprise succinate dehydrogenase, also known as mitochondrial complex II, a key enzyme complex of the tricarboxylic acid cycle and aerobic respiratory chains of mitochondria. The encoded protein is one of two integral membrane proteins that anchor other subunits of the complex, which form the catalytic core, to the inner mitochondrial membrane. There are several related pseudogenes for this gene on different chromosomes. Mutations in this gene have been associated with paragangliomas.	5	Het				LP										Mitochondrial
+MPZ				1q23.3	KH	12/6/2017		myelin protein zero		3	Het				LP	Increased gene dosage of myelin protein zero causes Charcot-Marie-Tooth disease; PMID: 22275255; 1							This is NOT an index gene but lies very close to one (SDHC), and the literature is compelling		
+UAP1	chr1	162531229	162569633	1q23.3			Index gene	UDP-N-acetylglucosamine pyrophosphorylase 1																	
+PBX1	chr1	164528596	164821060	1q23.3			Index gene	PBX homeobox 1																	
+MGST3	chr1	165600109	165625372	1q24.1			Index gene	microsomal glutathione S-transferase 3																	
+ALDH9A1	chr1	165631448	165667900	1q24.1			Index gene	aldehyde dehydrogenase 9 family member A1																	
+TMCO1	chr1	165693527	165738159	1q24.1			Index gene	transmembrane and coiled-coil domains 1																	
+POGK	chr1	166808640	166825581	1q24.1			Index gene	pogo transposable element derived with KRAB domain																	
+CREG1	chr1	167510250	167523056	1q24.2			Index gene	cellular repressor of E1A stimulated genes 1																	
+MPC2	chr1	167885912	167906307	1q24.2			Index gene	mitochondrial pyruvate carrier 2																	
+DCAF6	chr1	167905796	168045083	1q24.2			Index gene	DDB1 and CUL4 associated factor 6																	
+TIPRL	chr1	168148082	168171351	1q24.2			Index gene	TOR signaling pathway regulator																	
+ATP1B1	chr1	169075946	169101960	1q24.2			Index gene	ATPase Na+/K+ transporting subunit beta 1																	
+NME7	chr1	169101767	169337201	1q24.2			Index gene	NME/NM23 family member 7																	
+KIFAP3	chr1	169890469	170043879	1q24.2			Index gene	kinesin associated protein 3																	
+PRRC2C	chr1	171454665	171562650	1q24.3			Index gene	proline rich coiled-coil 2C																	
+PRDX6	chr1	173446485	173457946	1q25.1			Index gene	peroxiredoxin 6																	
+CACYBP	chr1	174968570	174981163	1q25.1			Index gene	calcyclin binding protein																	
+MRPS14	chr1	174982093	174992591	1q25.1			Index gene	mitochondrial ribosomal protein S14																	
+RFWD2	chr1	175913961	176176380	1q25.1-q25.2			Index gene	ring finger and WD repeat domain 2																	
+ASTN1	chr1	176826440	177134040	1q25.2			Index gene	astrotactin 1									Cleave but not leave: Astrotactin proteins in development and disease.; PMID: 28517363; 2								
+FAM20B	chr1	178994938	179045709	1q25.2			Index gene	FAM20B, glycosaminoglycan xylosylkinase																	
+QSOX1	chr1	180123967	180167169	1q25.2			Index gene	quiescin sulfhydryl oxidase 1																	
+ACBD6	chr1	180257351	180472022	1q25.2-q25.3			Index gene	acyl-CoA binding domain containing 6																	
+STX6	chr1	180941849	180992257	1q25.3			Index gene	syntaxin 6																	
+GLUL	chr1	182347227	182361341	1q25.3			Index gene	glutamate-ammonia ligase																	
+DHX9	chr1	182808438	182857117	1q25.3			Index gene	DExH-box helicase 9																	
+NMNAT2	chr1	183217371	183387634	1q25.3			Index gene	nicotinamide nucleotide adenylyltransferase 2																	
+SMG7	chr1	183441505	183523328	1q25.3			Index gene	SMG7, nonsense mediated mRNA decay factor																	
+ARPC5	chr1	183595327	183605076	1q25.3			Index gene	actin related protein 2/3 complex subunit 5																	
+RGL1	chr1	183605181	183897685	1q25.3			Index gene	ral guanine nucleotide dissociation stimulator like 1																	
+C1orf21	chr1	184356149	184598155	1q25.3			Index gene	chromosome 1 open reading frame 21																	
+IVNS1ABP	chr1	185265521	185286461	1q25.3			Index gene	influenza virus NS1A binding protein																	
+TPR	chr1	186280785	186344457	1q31.1			Index gene	translocated promoter region, nuclear basket protein																	
+RGS2	chr1	192778168	192781407	1q31.2			Index gene	regulator of G protein signaling 2																	
+UCHL5	chr1	192981495	193029237	1q31.2			Index gene	ubiquitin C-terminal hydrolase L5																	
+CAMSAP2	chr1	200708685	200829835	1q32.1			Index gene	calmodulin regulated spectrin associated protein family member 2																	
+KIF21B	chr1	200938513	200992828	1q32.1			Index gene	kinesin family member 21B																	
+TMEM9	chr1	201103898	201140710	1q32.1			Index gene	transmembrane protein 9																	
+IPO9	chr1	201798287	201853422	1q32.1			Index gene	importin 9																	
+SHISA4	chr1	201857796	201861715	1q32.1			Index gene	shisa family member 4																	
+TIMM17A	chr1	201924618	201939789	1q32.1			Index gene	translocase of inner mitochondrial membrane 17A																	
+ARL8A	chr1	202102531	202113871	1q32.1			Index gene	ADP ribosylation factor like GTPase 8A																	
+KLHL12	chr1	202860223	202897772	1q32.1			Index gene	kelch like family member 12																	
+ADIPOR1	chr1	202909952	202927700	1q32.1			Index gene	adiponectin receptor 1																	
+TMEM183A	chr1	202976494	202993976	1q32.1			Index gene	transmembrane protein 183A																	
+ADORA1	chr1	203096835	203136533	1q32.1			Index gene	adenosine A1 receptor																	
+ZC3H11A	chr1	203764664	203823256	1q32.1			Index gene	zinc finger CCCH-type containing 11A																	
+NFASC	chr1	204797781	204991950	1q32.1			Index gene	neurofascin																	
+CNTN2	chr1	205012339	205047171	1q32.1			Index gene	contactin 2																	
+TMCC2	chr1	205197037	205242471	1q32.1			Index gene	transmembrane and coiled-coil domain family 2																	
+ELK4	chr1	205577070	205602000	1q32.1			Index gene	ELK4, ETS transcription factor																	
+NUCKS1	chr1	205681946	205719372	1q32.1			Index gene	nuclear casein kinase and cyclin dependent kinase substrate 1																	
+SRGAP2	chr1	206516199	206637783	1q32.1			Index gene	SLIT-ROBO Rho GTPase activating protein 2																	
+MAPKAPK2	chr1	206858364	206907630	1q32.1			Index gene	mitogen-activated protein kinase-activated protein kinase 2																	
+CD46	chr1	207925382	207968861	1q32.2			Index gene	CD46 molecule																	
+NENF	chr1	212606228	212619721	1q32.3			Index gene	neudesin neurotrophic factor																	
+RPS6KC1	chr1	213224574	213446808	1q32.3			Index gene	ribosomal protein S6 kinase C1																	
+KCTD3	chr1	215740721	215795163	1q41			Index gene	potassium channel tetramerization domain containing 3																	
+EPRS	chr1	220141941	220220000	1q41			Index gene	glutamyl-prolyl-tRNA synthetase																	
+IARS2	chr1	220267454	220321383	1q41			Index gene	isoleucyl-tRNA synthetase 2, mitochondrial																	
+MIA3	chr1	222791443	222841354	1q41			Index gene	MIA family member 3, ER export factor																	
+CAPN2	chr1	223889294	223963720	1q41			Index gene	calpain 2																	
+TP53BP2	chr1	223967594	224033674	1q41			Index gene	tumor protein p53 binding protein 2																	
+DEGS1	chr1	224370909	224381142	1q42.11	AP	9/25/2017	Index gene	delta 4-desaturase, sphingolipid 1	This gene encodes a member of the membrane fatty acid desaturase family which is responsible for inserting double bonds into specific positions in fatty acids. This protein contains three His-containing consensus motifs that are characteristic of a group of membrane fatty acid desaturases. It is predicted to be a multiple membrane-spanning protein localized to the endoplasmic reticulum. Overexpression of this gene inhibited biosynthesis of the EGF receptor, suggesting a possible role of a fatty acid desaturase in regulating biosynthetic processing of the EGF receptor.	3					VOUS								No relevant literature		
+CNIH4	chr1	224544512	224567153	1q42.11			Index gene	cornichon family AMPA receptor auxiliary protein 4																	
+WDR26	chr1	224572844	224622001	1q42.11-q42.12			Index gene	WD repeat domain 26																	
+SRP9	chr1	225965514	225978168	1q42.12			Index gene	signal recognition particle 9																	
+EPHX1	chr1	225997775	226033262	1q42.12			Index gene	epoxide hydrolase 1																	
+PYCR2	chr1	226107576	226112040	1q42.12			Index gene	pyrroline-5-carboxylate reductase 2																	
+PARP1	chr1	226548391	226595801	1q42.12			Index gene	poly(ADP-ribose) polymerase 1																	
+COQ8A	chr1	227127937	227175246	1q42.13			Index gene	coenzyme Q8A																	
+CDC42BPA	chr1	227177565	227505826	1q42.13			Index gene	CDC42 binding protein kinase alpha																	
+SNAP47	chr1	227915868	227968932	1q42.13			Index gene	synaptosome associated protein 47																	
+ARF1	chr1	228270360	228286913	1q42.13			Index gene	ADP ribosylation factor 1																	
+GUK1	chr1	228327784	228336655	1q42.13			Index gene	guanylate kinase 1																	
+RNF187	chr1	228675067	228683889	1q42.13			Index gene	ring finger protein 187																	
+RAB4A	chr1	229406808	229441640	1q42.13			Index gene	RAB4A, member RAS oncogene family																	
+CCSAP	chr1	229456751	229478688	1q42.13			Index gene	centriole, cilia and spindle associated protein																	
+NUP133	chr1	229577043	229644088	1q42.13			Index gene	nucleoporin 133																	
+GALNT2	chr1	230193535	230417876	1q42.13			Index gene	polypeptide N-acetylgalactosaminyltransferase 2																	
+PGBD5	chr1	230457391	230561674	1q42.13			Index gene	piggyBac transposable element derived 5																	
+C1orf198	chr1	230972864	231005335	1q42.2			Index gene	chromosome 1 open reading frame 198																	
+ARV1	chr1	231114822	231136479	1q42.2			Index gene	ARV1 homolog, fatty acid homeostasis modulator																	
+GNPAT	chr1	231376918	231413719	1q42.2			Index gene	glyceronephosphate O-acyltransferase																	
+EGLN1	chr1	231499496	231560790	1q42.2			Index gene	egl-9 family hypoxia inducible factor 1																	
+TSNAX	chr1	231664398	231702269	1q42.2			Index gene	translin associated factor X																	
+SIPA1L2	chr1	232533711	232651354	1q42.2			Index gene	signal induced proliferation associated 1 like 2																	
+NTPCR	chr1	233086276	233114548	1q42.2			Index gene	nucleoside-triphosphatase, cancer-related																	
+COA6	chr1	234509182	234519795	1q42.2			Index gene	cytochrome c oxidase assembly factor 6																	
+IRF2BP2	chr1	234740014	234745271	1q42.3			Index gene	interferon regulatory factor 2 binding protein 2																	
+TOMM20	chr1	235272657	235292256	1q42.3			Index gene	translocase of outer mitochondrial membrane 20																	
+RBM34	chr1	235294497	235324571	1q42.3			Index gene	RNA binding motif protein 34																	
+ARID4B	chr1	235330209	235491534	1q42.3			Index gene	AT-rich interaction domain 4B																	
+GGPS1	chr1	235491752	235507844	1q42.3			Index gene	geranylgeranyl diphosphate synthase 1																	
+TBCE	chr1	235530674	235612283	1q42.3			Index gene	tubulin folding cofactor E																	
+GNG4	chr1	235710984	235814054	1q42.3			Index gene	G protein subunit gamma 4																	
+EDARADD	chr1	236557679	236648008	1q42.3-q43			Index gene	EDAR associated death domain																	
+HEATR1	chr1	236712304	236767841	1q43			Index gene	HEAT repeat containing 1																	
+FMN2	chr1	240255184	240638489	1q43			Index gene	formin 2																	
+RGS7	chr1	240938813	241520530	1q43			Index gene	regulator of G protein signaling 7																	
+FH	chr1	241660856	241683085	1q43			Index gene	fumarate hydratase																	
+SDCCAG8	chr1	243419306	243663393	1q43-q44			Index gene	serologically defined colon cancer antigen 8								SDCCAG8 regulates pericentriolar material recruitment and neuronal migration in the developing cortex; PMID: 25088364; 1									
+AKT3	chr1	243651534	244006886	1q43-q44	KH	12/6/2017	Index gene	AKT serine/threonine kinase 3		1	Het				LP	Phenotypes of AKT3 deletion: a case report and literature review; PMID: 25424989; 1									
+ZBTB18	chr1	244212240	244220780	1q44			Index gene	zinc finger and BTB domain containing 18																	
+ADSS	chr1	244571793	244615436	1q44			Index gene	adenylosuccinate synthase																	
+COX20	chr1	244998607	245008365	1q44			Index gene	COX20, cytochrome c oxidase assembly factor																	
+HNRNPU	chr1	245013601	245027827	1q44	KH	12/6/2017	Index gene	heterogeneous nuclear ribonucleoprotein U		1	Het				LP	A genomic copy number variant analysis implicates the MBD5 and HNRNPU genes in Chinese children with infantile spasms and expands the clinical spectrum of 2q23.1 deletion; PMID: 24885232; 1									
+SMYD3	chr1	245912641	246670644	1q44			Index gene	SET and MYND domain containing 3																	
+SCCPDH	chr1	246887377	246931440	1q44			Index gene	saccharopine dehydrogenase (putative)																	
+SH3BP5L	chr1	249104644	249120484	1q44			Index gene	SH3 binding domain protein 5 like																	
+ZMYND11	chr10	180404	300577	10p15.3			Index gene	zinc finger MYND-type containing 11																	
+DIP2C	chr10	320129	735608	10p15.3			Index gene	disco interacting protein 2 homolog C																	
+GTPBP4	chr10	1034348	1063708	10p15.3			Index gene	GTP binding protein 4																	
+IDI1	chr10	1085359	1102656	10p15.3			Index gene	isopentenyl-diphosphate delta isomerase 1																	
+PFKP	chr10	3109711	3178997	10p15.2			Index gene	phosphofructokinase, platelet																	
+PITRM1	chr10	3179918	3215033	10p15.2			Index gene	pitrilysin metallopeptidase 1																	
+GDI2	chr10	5807185	5855512	10p15.1			Index gene	GDP dissociation inhibitor 2																	
+FBXO18	chr10	5931534	5979558	10p15.1			Index gene	F-box protein, helicase, 18		1	Het					De novo mutations revealed by whole-exome sequencing are strongly associated with autism; PMID: 22495306; 1	Rare FBXO18 variations and risk of schizophrenia: Whole-exome sequencing in two parent-affected offspring trios followed by resequencing and case-control studies; PMID: 28317220; 3								
+RBM17	chr10	6130948	6159422	10p15.1			Index gene	RNA binding motif protein 17																	
+ATP5C1	chr10	7830066	7849762	10p14			Index gene	ATP synthase, H+ transporting, mitochondrial F1 complex, gamma polypeptide 1																	
+CELF2	chr10	10504477	11378672	10p14			Index gene	CUGBP Elav-like family member 2																	
+SEC61A2	chr10	12171639	12211957	10p14			Index gene	Sec61 translocon alpha 2 subunit																	
+CDC123	chr10	12237960	12292589	10p14-p13			Index gene	cell division cycle 123																	
+CAMK1D	chr10	12391541	12877545	10p13			Index gene	calcium/calmodulin dependent protein kinase ID																	
+OPTN	chr10	13142081	13180276	10p13			Index gene	optineurin																	
+PHYH	chr10	13319795	13342130	10p13			Index gene	phytanoyl-CoA 2-hydroxylase																	
+SEPHS1	chr10	13359437	13390298	10p13			Index gene	selenophosphate synthetase 1																	
+FAM107B	chr10	14560555	14816896	10p13			Index gene	family with sequence similarity 107 member B																	
