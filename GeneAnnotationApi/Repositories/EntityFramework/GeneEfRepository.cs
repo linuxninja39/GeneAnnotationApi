@@ -6,7 +6,7 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
 {
     public class GeneEfRepository: BaseEfRepository<Gene>, IGeneRepository
     {
-        private static readonly int assemblyVersion = 19;
+        public static readonly int AssemblyVersion = 19;
         public GeneEfRepository(GeneAnnotationDBContext context) : base(context)
         {
         }

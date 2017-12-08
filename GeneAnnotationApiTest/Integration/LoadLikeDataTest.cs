@@ -6,12 +6,12 @@ using Xunit;
 
 namespace GeneAnnotationApiTest.Integration
 {
-    public class LoadUcscDataTest : BaseDbTest
+    public class LoadLikeDataTest : BaseDbTest
     {
         private readonly Gene _insertedGeneWithSymbol;
         private readonly Gene _insertedGeneWithOutSymbol;
 
-        public LoadUcscDataTest()
+        public LoadLikeDataTest()
         {
             _insertedGeneWithSymbol = GeneTestData.Genes[0];
             _insertedGeneWithOutSymbol = GeneTestData.Genes[1];
@@ -24,9 +24,9 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void LoadFileTest()
         {
-            var ucscLoader = new LoadUcscData(Context, "ucsc.csv.short");
+            var likeLoader = new LoadLikeData(Context, "like.csv.short");
             var ex = Record.Exception(
-                () => { ucscLoader.LoadFile(); }
+                () => { likeLoader.LoadFile(); }
             );
 
             Assert.Null(ex);
@@ -35,8 +35,8 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void FindOrCreateNewGene()
         {
-            var ucscLoader = new LoadUcscData(Context, "ucsc.csv.short");
-            ucscLoader.CurrentRow = new[]
+            var likeLoader = new LoadLikeData(Context, "like.csv.short");
+            likeLoader.CurrentRow = new[]
             {
                 "bla",
                 "ch1",
@@ -44,16 +44,16 @@ namespace GeneAnnotationApiTest.Integration
                 "200",
                 "Bobs your ungle"
             };
-            ucscLoader.FindOrCreateGene();
+            likeLoader.FindOrCreateGene();
 
-            Assert.True(ucscLoader.CurrentGene.Id > 0);
+            Assert.True(likeLoader.CurrentGene.Id > 0);
         }
 
         [Fact]
         public void FindOrCreateExistingGene()
         {
-            var ucscLoader = new LoadUcscData(Context, "ucsc.csv.short");
-            ucscLoader.CurrentRow = new[]
+            var likeLoader = new LoadLikeData(Context, "like.csv.short");
+            likeLoader.CurrentRow = new[]
             {
                 "bla",
                 "ch1",
@@ -61,20 +61,20 @@ namespace GeneAnnotationApiTest.Integration
                 "200",
                 SymbolTestData.Symbols[0].Name
             };
-            ucscLoader.FindOrCreateGene();
+            likeLoader.FindOrCreateGene();
 
             Assert.True(
-                ucscLoader.CurrentGene.Symbol.SingleOrDefault(s => s.Name == SymbolTestData.Symbols[0].Name) != null
+                likeLoader.CurrentGene.Symbol.SingleOrDefault(s => s.Name == SymbolTestData.Symbols[0].Name) != null
             );
         }
 
         [Fact]
         public void AddLocation()
         {
-            var ucscLoader = new LoadUcscData(Context, "ucsc.csv.short");
+            var likeLoader = new LoadLikeData(Context, "like.csv.short");
             const int start = 2112;
             const int end = 4224;
-            ucscLoader.CurrentRow = new[]
+            likeLoader.CurrentRow = new[]
             {
                 "stuffz",
                 "ch13",
@@ -82,12 +82,12 @@ namespace GeneAnnotationApiTest.Integration
                 end.ToString(),
                 "priest of syrinx"
             };
-            ucscLoader.CurrentGene = _insertedGeneWithOutSymbol;
-            ucscLoader.AddLocation();
+            likeLoader.CurrentGene = _insertedGeneWithOutSymbol;
+            likeLoader.AddLocation();
 
             Assert.Equal(
                 1,
-                ucscLoader
+                likeLoader
                     .CurrentGene
                     .GeneLocations.Single(gl => gl.HgVersion == 19)
                     .GeneCoordinates

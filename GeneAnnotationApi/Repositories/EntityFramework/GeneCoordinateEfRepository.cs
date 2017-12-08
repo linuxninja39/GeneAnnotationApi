@@ -47,7 +47,7 @@ namespace GeneAnnotationApi.Repositories.EntityFramework
                     .Include(geneCoordinate => geneCoordinate.GeneLocation)
                     .ThenInclude(geneLocation => geneLocation.Gene)
                     .Where(
-                        geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(19)
+                        geneCoordinate => geneCoordinate.GeneLocation.HgVersion.Equals(GeneEfRepository.AssemblyVersion)
                     )
                     .Where(
                         geneCoordinate => geneCoordinate.GeneLocation.Gene.Equals(gene)

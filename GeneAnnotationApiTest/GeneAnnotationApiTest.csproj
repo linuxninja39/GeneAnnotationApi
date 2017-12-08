@@ -16,12 +16,19 @@
     <ProjectReference Include="..\GeneAnnotationApi\GeneAnnotationApi.csproj" />
   </ItemGroup>
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-    <Copy SourceFiles="hugo.txt" DestinationFolder="$(OutDir)" />
-    <Copy SourceFiles="hugo.txt.short" DestinationFolder="$(OutDir)" />
-    <Copy SourceFiles="ucsc.txt" DestinationFolder="$(OutDir)" />
-    <Copy SourceFiles="ucsc.txt.short" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="hugo.csv" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="hugo.csv.short" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="ucsc.csv" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="ucsc.csv.short" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="like.csv" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="like.csv.short" DestinationFolder="$(OutDir)" />
   </Target>
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
-    <Copy SourceFiles="hugo.txt" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="hugo.csv" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="hugo.csv.short" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="ucsc.csv" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="ucsc.csv.short" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="like.csv" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="like.csv.short" DestinationFolder="$(PublishDir)" />
   </Target>
 </Project>

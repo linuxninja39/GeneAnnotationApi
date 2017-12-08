@@ -18,7 +18,7 @@ namespace GeneAnnotationApiTest.Integration
             StaticLoggerFactory.LoggerFactory = new LoggerFactory();
             StaticLoggerFactory.LoggerFactory.AddConsole();
             StaticLoggerFactory.LoggerFactory.AddDebug();
-            var loadHugoData = new LoadHugoData(Context, "hugo.txt.short");
+            var loadHugoData = new LoadHugoData(Context, "hugo.csv.short");
             loadHugoData.LoadData();
 
             Assert.Equal(19, Context.Gene.Count());
@@ -38,7 +38,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void AddGeneNamesTest()
         {
-            var loadHugoData = new LoadHugoData(Context, "hugo.txt.short");
+            var loadHugoData = new LoadHugoData(Context, "hugo.csv.short");
             Context.Gene.Add(GeneTestData.Genes[0]);
             Context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
             Context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
@@ -81,7 +81,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void AddLocationTest()
         {
-            var loadHugoData = new LoadHugoData(Context, "hugo.txt.short");
+            var loadHugoData = new LoadHugoData(Context, "hugo.csv.short");
 
             var loci = new[]
             {

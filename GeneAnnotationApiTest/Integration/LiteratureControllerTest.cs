@@ -49,7 +49,7 @@ namespace GeneAnnotationApiTest.Integration
             var jsonString = await res.Content.ReadAsStringAsync();
             var literatureDtos = JsonConvert
                 .DeserializeObject<List<LiteratureDto>>(jsonString);
-            Assert.Equal(literatureDtos.Count, 2);
+            Assert.Equal(2,literatureDtos.Count);
         }
     }
 }

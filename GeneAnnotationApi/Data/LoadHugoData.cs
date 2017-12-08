@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GeneAnnotationApi.Entities;
+using GeneAnnotationApi.Repositories.EntityFramework;
 using Microsoft.Extensions.Logging;
 
 namespace GeneAnnotationApi.Data
@@ -30,7 +31,7 @@ namespace GeneAnnotationApi.Data
         public LoadHugoData(GeneAnnotationDBContext context, string fileName)
         {
             _context = context;
-            _fileName = fileName ?? "hugo.txt";
+            _fileName = fileName ?? "hugo.csv";
             _logger = StaticLoggerFactory.LoggerFactory.CreateLogger<LoadHugoData>();
         }
 
@@ -39,7 +40,7 @@ namespace GeneAnnotationApi.Data
             var path = Directory.GetCurrentDirectory();
             if (_fileName == null)
             {
-                _fileName = @"hugo.txt";
+                _fileName = @"hugo.csv";
             }
 
             var fullPath = path + Path.DirectorySeparatorChar + _fileName;
@@ -69,6 +70,8 @@ namespace GeneAnnotationApi.Data
                     }
 
                     var cells = line.Split("\t".ToCharArray());
+                    var symbolName = cells[ColSymbol].Trim();
+                    if (_context.Symbol.Any(s => s.Name == symbolName)) continue;
                     var gene = new Gene();
                     _context.Gene.Add(gene);
                     _context.SaveChanges();
@@ -85,7 +88,7 @@ namespace GeneAnnotationApi.Data
             var now = DateTime.Now;
             if (_context.GeneName.Count(geneName => geneName.Name.Equals(cells[ColName])) > 0) return;
 
-            _context.Add(new GeneName {Name = cells[ColName], ActiveDate = now, Gene = gene});
+            _context.Add(new GeneName {Name = cells[ColName].Trim(), ActiveDate = now, Gene = gene});
             _context.SaveChanges();
             now = now.AddMinutes(1);
 
@@ -97,7 +100,7 @@ namespace GeneAnnotationApi.Data
                 if (previousName.Length == 0) continue;
                 if (_context.GeneName.Count(geneName => geneName.Name.Equals(previousName)) > 0) continue;
 
-                _context.Add(new GeneName {Name = previousName, ActiveDate = now, Gene = gene});
+                _context.Add(new GeneName {Name = previousName.Trim(), ActiveDate = now, Gene = gene});
                 _context.SaveChanges();
             }
         }
@@ -107,7 +110,7 @@ namespace GeneAnnotationApi.Data
             var date = DateTime.Now;
             if (_context.Symbol.Count(symbolEntity => symbolEntity.Name.Equals(cells[ColSymbol])) > 0) return;
 
-            var s = new Symbol {Name = cells[ColSymbol], ActiveDate = date, Gene = gene};
+            var s = new Symbol {Name = cells[ColSymbol].Trim(), ActiveDate = date, Gene = gene};
             _context.Add(s);
             _context.SaveChanges();
 
@@ -117,7 +120,7 @@ namespace GeneAnnotationApi.Data
                 if (previousSymbol.Length == 0) continue;
                 if (_context.Symbol.Count(symbol => symbol.Name.Equals(previousSymbol)) > 0) continue;
 
-                _context.Add(new Symbol {Name = previousSymbol, ActiveDate = date, Gene = gene});
+                _context.Add(new Symbol {Name = previousSymbol.Trim(), ActiveDate = date, Gene = gene});
                 _context.SaveChanges();
             }
         }
@@ -127,20 +130,14 @@ namespace GeneAnnotationApi.Data
             var date = DateTime.Now;
             foreach (var synonymName in cells[ColSynonyms].Split(','))
             {
+                var synonymNameTrimed = synonymName.Trim();
                 if (synonymName.Length == 0) continue;
-                if (_context.Synonym.Count(synonym => synonym.Name.Equals(synonymName)) > 0) continue;
+                if (_context.Synonym.Count(synonym => synonym.Name.Equals(synonymNameTrimed)) > 0) continue;
 
-                try
-                {
-                    _logger.LogInformation("adding " + synonymName);
-                    _context.Synonym.Add(new Synonym {Name = synonymName, ActiveDate = date, Gene = gene});
-                    _context.SaveChanges();
-                    date = date.AddMinutes(1);
-                }
-                catch (Exception)
-                {
-                    var bla = "";
-                }
+                _logger.LogInformation("adding " + synonymNameTrimed);
+                _context.Synonym.Add(new Synonym {Name = synonymNameTrimed, ActiveDate = date, Gene = gene});
+                _context.SaveChanges();
+                date = date.AddMinutes(1);
             }
         }
 
@@ -148,13 +145,13 @@ namespace GeneAnnotationApi.Data
         {
             var locus = cells[ColChromosome];
             var match = LocusRegex.Match(locus);
-            var chromosomeName = match.Groups[1].Value;
+            var chromosomeName = match.Groups[1].Value.Trim();
             var chromosome = _context.Chromosome.SingleOrDefault(c => c.Name == chromosomeName);
             if (chromosome == null)
             {
                 chromosome = new Chromosome
                 {
-                    Name = chromosomeName
+                    Name = chromosomeName.Trim()
                 };
                 _context.Chromosome.Add(chromosome);
                 _context.SaveChanges();
@@ -165,7 +162,7 @@ namespace GeneAnnotationApi.Data
                     Gene = gene,
                     Locus = locus,
                     Chromosome = chromosome,
-                    HgVersion = 19
+                    HgVersion = GeneEfRepository.AssemblyVersion
                 }
                 ;
             _context.GeneLocation.Add(location);

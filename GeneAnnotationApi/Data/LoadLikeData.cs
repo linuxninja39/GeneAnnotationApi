@@ -5,10 +5,11 @@ using System.Linq;
 using GeneAnnotationApi.Entities;
 using Microsoft.EntityFrameworkCore;
 using Remotion.Linq.Clauses;
+using Xunit.Sdk;
 
 namespace GeneAnnotationApi.Data
 {
-    public class LoadUcscData
+    public class LoadLikeData
     {
         private readonly GeneAnnotationDBContext _context;
         private readonly string _fileName;
@@ -16,19 +17,36 @@ namespace GeneAnnotationApi.Data
         public Gene CurrentGene = null;
         public IList<string> CurrentRow;
 
+        public static int ColSymbol = 0;
         public static int ColChromosome = 1;
         public static int ColStart = 2;
         public static int ColEnd = 3;
-        public static int ColSymbol = 4;
+        public static int ColLocus = 4;
+        public static int ColAnnotator = 5;
+        public static int ColDateUpdated = 6;
+        public static int ColOrigin = 7;
+        public static int ColGeneNameExpansion = 8;
+        public static int ColKnownFunction = 9;
+        public static int ColVariantType = 10;
+        public static int ColHomHet = 11;
+        public static int ColCall = 15;
+        public static int ColLit1 = 16;
+        public static int ColLit2 = 17;
+        public static int ColLit3 = 18;
+        public static int ColLit4 = 19;
+        public static int ColLit5 = 20;
+        public static int ColLit6 = 21;
+        public static int ColLit7 = 22;
+        public static int ColAnnotation = 23;
 
         /*
          * this file will load data from ucsc hgTables from the following columns in this order
          * #hg19.refGene.name hg19.refGene.chrom hg19.refGene.txStart hg19.refGene.txEnd hgFixed.refLink.name
          */
-        public LoadUcscData(GeneAnnotationDBContext context, string fileName)
+        public LoadLikeData(GeneAnnotationDBContext context, string fileName)
         {
             _context = context;
-            _fileName = fileName ?? "ucsc.csv";
+            _fileName = fileName ?? "like.csv";
         }
 
         public void LoadData()
@@ -113,11 +131,15 @@ namespace GeneAnnotationApi.Data
 
         private Gene FindByCoord(int start, int end)
         {
+            var chromosomeName = CurrentRow[ColChromosome].Substring(3);
+            if (chromosomeName == null) throw new EmptyException("chromosome name required");
             var coord = _context
                 .GeneCoordinate
                 .Include(gc => gc.GeneLocation)
                 .ThenInclude(gl => gl.Gene)
-                .SingleOrDefault(c => c.Start == start && c.End == end);
+                .Include(gc => gc.GeneLocation)
+                .ThenInclude(gl => gl.Chromosome)
+                .SingleOrDefault(c => c.Start == start && c.End == end && c.GeneLocation.Chromosome.Name == chromosomeName);
             return coord?.GeneLocation?.Gene;
         }
 
@@ -152,8 +174,9 @@ namespace GeneAnnotationApi.Data
             var coord = _context.GeneCoordinate.SingleOrDefault(c => c.Start == start && c.End == end);
             if (coord != null) return;
 
-            var geneLocation =
-                _context.GeneLocation.SingleOrDefault(gl => gl.HgVersion == 19 && gl.Gene == CurrentGene);
+            var geneLocation = _context
+                .GeneLocation
+                .SingleOrDefault(gl => gl.HgVersion == 19 && gl.Gene == CurrentGene);
             if (geneLocation == null)
             {
                 var chromosome = _context.Chromosome.SingleOrDefault(c => c.Name == chromosomeName);
