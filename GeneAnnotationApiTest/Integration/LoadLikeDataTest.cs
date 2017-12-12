@@ -10,13 +10,16 @@ namespace GeneAnnotationApiTest.Integration
     {
         private readonly Gene _insertedGeneWithSymbol;
         private readonly Gene _insertedGeneWithOutSymbol;
+        private readonly Gene _insertedGeneWithOutKnowFunction;
 
         public LoadLikeDataTest()
         {
             _insertedGeneWithSymbol = GeneTestData.Genes[0];
             _insertedGeneWithOutSymbol = GeneTestData.Genes[1];
+            _insertedGeneWithOutKnowFunction = GeneTestData.Genes[7];
             Context.Gene.Add(_insertedGeneWithSymbol);
             Context.Gene.Add(_insertedGeneWithOutSymbol);
+            Context.Gene.Add(_insertedGeneWithOutKnowFunction);
             Context.Symbol.Add(SymbolTestData.Symbols[0]);
             Context.SaveChanges();
         }
@@ -55,11 +58,11 @@ namespace GeneAnnotationApiTest.Integration
             var likeLoader = new LoadLikeData(Context, "like.csv.short");
             likeLoader.CurrentRow = new[]
             {
-                "bla",
+                SymbolTestData.Symbols[0].Name,
                 "ch1",
                 "100",
                 "200",
-                SymbolTestData.Symbols[0].Name
+                "locus",
             };
             likeLoader.FindOrCreateGene();
 
@@ -92,6 +95,42 @@ namespace GeneAnnotationApiTest.Integration
                     .GeneLocations.Single(gl => gl.HgVersion == 19)
                     .GeneCoordinates
                     .Count(gc => gc.Start == start && gc.End == end)
+            );
+
+            Assert.Equal(
+                likeLoader.CurrentRow[LoadLikeData.ColLocus],
+                likeLoader
+                    .CurrentGene
+                    .GeneLocations.Single(gl => gl.HgVersion == 19)
+                    .Locus
+            );
+        }
+
+        [Fact]
+        public void AddKnownFunctionTest()
+        {
+            var likeLoader = new LoadLikeData(Context, "like.csv.short");
+            likeLoader.CurrentRow = new[]
+            {
+                "stuffz",
+                "ch13",
+                "1",
+                "2",
+                "priest of syrinx",
+                "",
+                "",
+                "",
+                "",
+                "God Of Balance"
+            };
+            likeLoader.CurrentGene = _insertedGeneWithOutKnowFunction;
+            likeLoader.AddKnownFunction();
+
+            Assert.Equal(
+                likeLoader.CurrentRow[LoadLikeData.ColKnownFunction],
+                likeLoader
+                    .CurrentGene
+                    .KnownFunction
             );
         }
     }

@@ -28,7 +28,7 @@ namespace GeneAnnotationApi.Data
         public static int ColGeneNameExpansion = 8;
         public static int ColKnownFunction = 9;
         public static int ColVariantType = 10;
-        public static int ColHomHet = 11;
+        public static int ColZygosity = 11;
         public static int ColCall = 15;
         public static int ColLit1 = 16;
         public static int ColLit2 = 17;
@@ -90,6 +90,7 @@ namespace GeneAnnotationApi.Data
                     if (CurrentGene == null) continue;
                     AddSymbol();
                     AddLocation();
+                    AddKnownFunction();
                 }
             }
         }
@@ -177,6 +178,7 @@ namespace GeneAnnotationApi.Data
             var geneLocation = _context
                 .GeneLocation
                 .SingleOrDefault(gl => gl.HgVersion == 19 && gl.Gene == CurrentGene);
+            if (CurrentRow[ColLocus].ToUpper() == "#N/A") CurrentRow[ColLocus] = "";
             if (geneLocation == null)
             {
                 var chromosome = _context.Chromosome.SingleOrDefault(c => c.Name == chromosomeName);
@@ -194,10 +196,19 @@ namespace GeneAnnotationApi.Data
                 {
                     Gene = CurrentGene,
                     HgVersion = 19,
-                    Chromosome = chromosome
+                    Chromosome = chromosome,
+                    Locus = CurrentRow[ColLocus]
                 };
                 _context.GeneLocation.Add(geneLocation);
                 _context.SaveChanges();
+            }
+            else
+            {
+                if (geneLocation.Locus == null)
+                {
+                    geneLocation.Locus = CurrentRow[ColLocus];
+                    _context.SaveChanges();
+                }
             }
 
             coord = new GeneCoordinate
@@ -208,6 +219,13 @@ namespace GeneAnnotationApi.Data
             };
 
             _context.GeneCoordinate.Add(coord);
+            _context.SaveChanges();
+        }
+
+        public void AddKnownFunction()
+        {
+            if (!string.IsNullOrEmpty(CurrentGene.KnownFunction)) return;
+            CurrentGene.KnownFunction = CurrentRow[ColKnownFunction];
             _context.SaveChanges();
         }
     }

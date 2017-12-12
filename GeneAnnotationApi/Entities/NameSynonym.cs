@@ -15,7 +15,8 @@ namespace GeneAnnotationApi.Entities
         [Required]
         [Column("synonum", TypeName = "varchar(250)")]
         public string Synonum { get; set; }
-        [Column("active_date", TypeName = "datetime")]
+//        [Column("active_date", TypeName = "datetime")]
+        [Column("active_date", TypeName = "timestamp")]
         public DateTime ActiveDate { get; set; }
 
         [ForeignKey("GeneId")]

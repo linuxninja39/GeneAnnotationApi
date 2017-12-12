@@ -92,7 +92,13 @@ namespace GeneAnnotationApi
             //const string connection = @"Server=10.10.88.9;Database=GeneAnnotationDB;User=sa;Password=LGEN!2015";
             // local Server=localhost;Database=master;Trusted_Connection=True;
             var connection = Environment.GetEnvironmentVariable("GA_DB_CONNECTION_STRING");
+            var dbEngine = Environment.GetEnvironmentVariable("GA_DB_ENGINE");
 
+            if (dbEngine != null && dbEngine.Equals("postgres"))
+            {
+                services.AddDbContext<GeneAnnotationDBContext>(options => options.UseNpgsql(connection));
+                return;
+            }
             services.AddDbContext<GeneAnnotationDBContext>(options => options.UseSqlServer(connection));
         }
     }

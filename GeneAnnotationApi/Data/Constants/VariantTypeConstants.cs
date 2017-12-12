@@ -47,7 +47,7 @@ namespace GeneAnnotationApi.Data.Constants
                         Name = "Partial",
                         Children = new[]
                         {
-                            new VariantType {Name = "Intragenic dkjf"},
+                            new VariantType {Name = "Intragenic"},
                             new VariantType {Name = "5'"},
                             new VariantType {Name = "3'"}
                         }

@@ -21,7 +21,8 @@ namespace GeneAnnotationApi.Entities
         public int Id { get; set; }
         [Column("app_user_id")]
         public int? AppUserId { get; set; }
-        [Column("created_at", TypeName = "datetime")]
+//        [Column("created_at", TypeName = "datetime")]
+        [Column("created_at", TypeName = "timestamp")]
         public DateTime CreatedAt { get; set; }
         [Required]
         [Column("note")]

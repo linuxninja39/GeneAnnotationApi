@@ -12,6 +12,7 @@ namespace GeneAnnotationApiTest.TestData
             new Gene { KnownFunction = "Entre Nous"},
             new Gene { KnownFunction = "Music runs in the family"},
             new Gene { KnownFunction = "Kid Gloves"},
+            new Gene {},
         };
     }
 }
