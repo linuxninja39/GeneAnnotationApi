@@ -18,6 +18,7 @@ namespace GeneAnnotationApi.Data
             _context = context;
             _currentRow = currentRow;
             CurrentVariant = new GeneVariant();
+            _context.GeneVariant.Add(CurrentVariant);
 
             SetupTypeMap();
         }
@@ -25,22 +26,20 @@ namespace GeneAnnotationApi.Data
         public void DoImport()
         {
             if (!ShouldImport()) return;
+            AddStartStop();
             AddVariantType();
         }
 
         public void AddVariantType()
         {
-            if (string.IsNullOrEmpty(_currentRow[LoadLikeData.ColVariantType]))
-                throw new InvalidOperationException("Variant type required in col " + LoadLikeData.ColVariantType);
+            ValidateData(LoadLikeData.ColVariantType, "Variant Type");
 
             CurrentVariant.VariantType = _variantTypeMap[_currentRow[LoadLikeData.ColVariantType]];
-            _context.SaveChanges();
         }
 
         public void AddZygosity()
         {
-            if (string.IsNullOrEmpty(_currentRow[LoadLikeData.ColZygosity]))
-                throw new InvalidOperationException("Zygosity type required in col " + LoadLikeData.ColZygosity);
+            ValidateData(LoadLikeData.ColZygosity, "Zygosity");
 
             var zygosityName = (_currentRow[LoadLikeData.ColZygosity].ToUpper() == "HET")
                 ? "Heterozygous"
@@ -49,7 +48,56 @@ namespace GeneAnnotationApi.Data
                 .Single(z => z.Name == zygosityName);
 
             CurrentVariant.ZygosityType = zyType;
-            _context.SaveChanges();
+        }
+
+        public void AddCall()
+        {
+            ValidateData(LoadLikeData.ColCall, "Call");
+
+            var callType = _context.CallType.SingleOrDefault(ct => ct.Name == _currentRow[LoadLikeData.ColCall]);
+            if (callType == null)
+            {
+                callType = new CallType
+                {
+                    Name = _currentRow[LoadLikeData.ColCall]
+                };
+                _context.CallType.Add(callType);
+            }
+
+            var date = DateTime.Now;
+            if (!string.IsNullOrEmpty(_currentRow[LoadLikeData.ColDateUpdated]))
+            {
+                date = DateTime.Parse(_currentRow[LoadLikeData.ColDateUpdated]);
+            }
+            
+            var callTypeGeneVariant = new CallTypeGeneVariant
+            {
+                CallType = callType,
+                GeneVariant = CurrentVariant,
+                ActiveDate = date
+            };
+
+            _context.CallTypeGeneVariant.Add(callTypeGeneVariant);
+        }
+
+        public void AddStartStop()
+        {
+
+            int start;
+            int end;
+            if (
+                !int.TryParse(_currentRow[LoadLikeData.ColStart], out start)
+                || !int.TryParse(_currentRow[LoadLikeData.ColEnd], out end)
+            ) throw new InvalidOperationException("start and end required");
+
+            CurrentVariant.Start = start;
+            CurrentVariant.End = end;
+        }
+
+        private void ValidateData(int col, string name)
+        {
+            if (string.IsNullOrEmpty(_currentRow[col]))
+                throw new InvalidOperationException(name + " type required in col " + col);
         }
 
         private bool ShouldImport()

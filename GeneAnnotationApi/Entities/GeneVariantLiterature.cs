@@ -22,7 +22,7 @@ namespace GeneAnnotationApi.Entities
         public int LiteratureId { get; set; }
         [Column("app_user_id")]
         public int AppUserId { get; set; }
-        [Column("pathogenic_support_category")]
+        [Column("pathogenic_support_category_id")]
         public int PathogenicSupportCategoryId { get; set; }
         [Column("added_at")]
         public DateTime AddedAt { get; set; }

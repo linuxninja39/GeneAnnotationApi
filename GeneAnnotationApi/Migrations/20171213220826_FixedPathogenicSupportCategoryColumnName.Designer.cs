@@ -11,9 +11,10 @@ using System;
 namespace GeneAnnotationApi.Migrations
 {
     [DbContext(typeof(GeneAnnotationDBContext))]
-    partial class GeneAnnotationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20171213220826_FixedPathogenicSupportCategoryColumnName")]
+    partial class FixedPathogenicSupportCategoryColumnName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
