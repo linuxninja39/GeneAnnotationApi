@@ -24,7 +24,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void LoadFileTest()
         {
-            var ucscLoader = new LoadUcscData(Context, "ucsc.csv.short");
+            var ucscLoader = new UcscDataLoader(Context, "ucsc.csv.short");
             var ex = Record.Exception(
                 () => { ucscLoader.LoadFile(); }
             );
@@ -35,7 +35,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void FindOrCreateNewGene()
         {
-            var ucscLoader = new LoadUcscData(Context, "ucsc.csv.short");
+            var ucscLoader = new UcscDataLoader(Context, "ucsc.csv.short");
             ucscLoader.CurrentRow = new[]
             {
                 "bla",
@@ -52,7 +52,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void FindOrCreateExistingGene()
         {
-            var ucscLoader = new LoadUcscData(Context, "ucsc.csv.short");
+            var ucscLoader = new UcscDataLoader(Context, "ucsc.csv.short");
             ucscLoader.CurrentRow = new[]
             {
                 "bla",
@@ -71,7 +71,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void AddLocation()
         {
-            var ucscLoader = new LoadUcscData(Context, "ucsc.csv.short");
+            var ucscLoader = new UcscDataLoader(Context, "ucsc.csv.short");
             const int start = 2112;
             const int end = 4224;
             ucscLoader.CurrentRow = new[]

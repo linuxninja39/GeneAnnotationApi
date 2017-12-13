@@ -20,8 +20,8 @@ namespace GeneAnnotationApiTest.Integration
         public void AddVariantTest()
         {
             var currentRow = new string[25];
-            currentRow[LoadLikeData.ColVariantType] = "1";
-            var likeVariantLoader = new LikeVariantData(Context, currentRow);
+            currentRow[LikeDataLoader.ColVariantType] = "1";
+            var likeVariantLoader = new LikeVariantLoader(Context, currentRow);
             likeVariantLoader.AddVariantType();
 
             Assert.NotNull(likeVariantLoader.CurrentVariant);
@@ -31,8 +31,8 @@ namespace GeneAnnotationApiTest.Integration
         public void AddZygosityTest()
         {
             var currentRow = new string[25];
-            currentRow[LoadLikeData.ColZygosity] = "het";
-            var likeVariantLoader = new LikeVariantData(Context, currentRow);
+            currentRow[LikeDataLoader.ColZygosity] = "het";
+            var likeVariantLoader = new LikeVariantLoader(Context, currentRow);
 
             likeVariantLoader.AddZygosity();
 
@@ -41,8 +41,8 @@ namespace GeneAnnotationApiTest.Integration
                 likeVariantLoader.CurrentVariant.ZygosityType.Name
             );
 
-            currentRow[LoadLikeData.ColZygosity] = "hom";
-            likeVariantLoader = new LikeVariantData(Context, currentRow);
+            currentRow[LikeDataLoader.ColZygosity] = "hom";
+            likeVariantLoader = new LikeVariantLoader(Context, currentRow);
 
             likeVariantLoader.AddZygosity();
 
@@ -56,9 +56,9 @@ namespace GeneAnnotationApiTest.Integration
         public void AddCallTest()
         {
             var currentRow = new string[25];
-            currentRow[LoadLikeData.ColCall] = "VOUS";
-            currentRow[LoadLikeData.ColDateUpdated] = "08/30/2017 11:38:48";
-            var likeVariantLoader = new LikeVariantData(Context, currentRow);
+            currentRow[LikeDataLoader.ColCall] = "VOUS";
+            currentRow[LikeDataLoader.ColDateUpdated] = "08/30/2017 11:38:48";
+            var likeVariantLoader = new LikeVariantLoader(Context, currentRow);
 
             likeVariantLoader.AddCall();
 
@@ -71,18 +71,18 @@ namespace GeneAnnotationApiTest.Integration
         public void AddStartStopTest()
         {
             var currentRow = new string[25];
-            currentRow[LoadLikeData.ColStart] = "10";
-            currentRow[LoadLikeData.ColEnd] = "100";
-            var likeVariantLoader = new LikeVariantData(Context, currentRow);
+            currentRow[LikeDataLoader.ColStart] = "10";
+            currentRow[LikeDataLoader.ColEnd] = "100";
+            var likeVariantLoader = new LikeVariantLoader(Context, currentRow);
 
             likeVariantLoader.AddStartStop();
 
             Assert.Equal(
-                currentRow[LoadLikeData.ColStart],
+                currentRow[LikeDataLoader.ColStart],
                 likeVariantLoader.CurrentVariant.Start.ToString()
             );
             Assert.Equal(
-                currentRow[LoadLikeData.ColEnd],
+                currentRow[LikeDataLoader.ColEnd],
                 likeVariantLoader.CurrentVariant.End.ToString()
             );
         }
@@ -91,13 +91,13 @@ namespace GeneAnnotationApiTest.Integration
         public void DoImportTest()
         {
              var currentRow = new string[25];
-            currentRow[LoadLikeData.ColVariantType] = "1";
-            currentRow[LoadLikeData.ColStart] = "10";
-            currentRow[LoadLikeData.ColEnd] = "100";
-            currentRow[LoadLikeData.ColZygosity] = "het";
-            currentRow[LoadLikeData.ColCall] = "VOUS";
-            currentRow[LoadLikeData.ColDateUpdated] = "08/30/2017 11:38:48";
-            var likeVariantLoader = new LikeVariantData(Context, currentRow);
+            currentRow[LikeDataLoader.ColVariantType] = "1";
+            currentRow[LikeDataLoader.ColStart] = "10";
+            currentRow[LikeDataLoader.ColEnd] = "100";
+            currentRow[LikeDataLoader.ColZygosity] = "het";
+            currentRow[LikeDataLoader.ColCall] = "VOUS";
+            currentRow[LikeDataLoader.ColDateUpdated] = "08/30/2017 11:38:48";
+            var likeVariantLoader = new LikeVariantLoader(Context, currentRow);
             
             var ex = Record.Exception(
                 () => { likeVariantLoader.DoImport(); }

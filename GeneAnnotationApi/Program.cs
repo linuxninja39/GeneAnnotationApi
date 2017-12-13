@@ -41,14 +41,14 @@ namespace GeneAnnotationApi
             var loadHugo = Environment.GetEnvironmentVariable("GA_DB_LOAD_HUGO");
             if (loadHugo != null)
             {
-                var hugoLoader = new LoadHugoData(context, "hugo.csv.short");
+                var hugoLoader = new HugoDataLoader(context, "hugo.csv.short");
                 hugoLoader.LoadData();
             }
             
             var loadUcsc = Environment.GetEnvironmentVariable("GA_DB_LOAD_UCSC");
             if (loadUcsc != null)
             {
-                var ucscLoader = new LoadUcscData(context,"ucsc.csv.short");
+                var ucscLoader = new UcscDataLoader(context,"ucsc.csv.short");
                 ucscLoader.LoadData();
             }
         }

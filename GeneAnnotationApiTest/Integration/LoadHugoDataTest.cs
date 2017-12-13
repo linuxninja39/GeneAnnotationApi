@@ -18,7 +18,7 @@ namespace GeneAnnotationApiTest.Integration
             StaticLoggerFactory.LoggerFactory = new LoggerFactory();
             StaticLoggerFactory.LoggerFactory.AddConsole();
             StaticLoggerFactory.LoggerFactory.AddDebug();
-            var loadHugoData = new LoadHugoData(Context, "hugo.csv.short");
+            var loadHugoData = new HugoDataLoader(Context, "hugo.csv.short");
             loadHugoData.LoadData();
 
             Assert.Equal(19, Context.Gene.Count());
@@ -38,7 +38,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void AddGeneNamesTest()
         {
-            var loadHugoData = new LoadHugoData(Context, "hugo.csv.short");
+            var loadHugoData = new HugoDataLoader(Context, "hugo.csv.short");
             Context.Gene.Add(GeneTestData.Genes[0]);
             Context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
             Context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
@@ -81,7 +81,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void AddLocationTest()
         {
-            var loadHugoData = new LoadHugoData(Context, "hugo.csv.short");
+            var loadHugoData = new HugoDataLoader(Context, "hugo.csv.short");
 
             var loci = new[]
             {
@@ -100,10 +100,10 @@ namespace GeneAnnotationApiTest.Integration
                 Context.Gene.Add(GeneTestData.Genes[j]);
                 Context.SaveChanges();
                 var gene = Context.Gene.Find(j + 1);
-                for (var i = 0; i < LoadHugoData.ColChromosome + 1; i++)
+                for (var i = 0; i < HugoDataLoader.ColChromosome + 1; i++)
                 {
                     var cellValue = "";
-                    if (i == LoadHugoData.ColChromosome)
+                    if (i == HugoDataLoader.ColChromosome)
                     {
                         cellValue = locus;
                     }
@@ -128,7 +128,7 @@ namespace GeneAnnotationApiTest.Integration
 
         private Match _parseHugoChromosome(string chromosomeCellString)
         {
-            return LoadHugoData.LocusRegex.Match(chromosomeCellString);
+            return HugoDataLoader.LocusRegex.Match(chromosomeCellString);
         }
     }
 }

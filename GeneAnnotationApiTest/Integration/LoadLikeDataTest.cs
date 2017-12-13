@@ -27,7 +27,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void LoadFileTest()
         {
-            var likeLoader = new LoadLikeData(Context, "like.csv.short");
+            var likeLoader = new LikeDataLoader(Context, "like.csv.short");
             var ex = Record.Exception(
                 () => { likeLoader.LoadFile(); }
             );
@@ -38,7 +38,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void FindOrCreateNewGene()
         {
-            var likeLoader = new LoadLikeData(Context, "like.csv.short");
+            var likeLoader = new LikeDataLoader(Context, "like.csv.short");
             likeLoader.CurrentRow = new[]
             {
                 "bla",
@@ -55,7 +55,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void FindOrCreateExistingGene()
         {
-            var likeLoader = new LoadLikeData(Context, "like.csv.short");
+            var likeLoader = new LikeDataLoader(Context, "like.csv.short");
             likeLoader.CurrentRow = new[]
             {
                 SymbolTestData.Symbols[0].Name,
@@ -74,7 +74,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void AddLocation()
         {
-            var likeLoader = new LoadLikeData(Context, "like.csv.short");
+            var likeLoader = new LikeDataLoader(Context, "like.csv.short");
             const int start = 2112;
             const int end = 4224;
             likeLoader.CurrentRow = new[]
@@ -98,7 +98,7 @@ namespace GeneAnnotationApiTest.Integration
             );
 
             Assert.Equal(
-                likeLoader.CurrentRow[LoadLikeData.ColLocus],
+                likeLoader.CurrentRow[LikeDataLoader.ColLocus],
                 likeLoader
                     .CurrentGene
                     .GeneLocations.Single(gl => gl.HgVersion == 19)
@@ -109,7 +109,7 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void AddKnownFunctionTest()
         {
-            var likeLoader = new LoadLikeData(Context, "like.csv.short");
+            var likeLoader = new LikeDataLoader(Context, "like.csv.short");
             likeLoader.CurrentRow = new[]
             {
                 "stuffz",
@@ -127,7 +127,7 @@ namespace GeneAnnotationApiTest.Integration
             likeLoader.AddKnownFunction();
 
             Assert.Equal(
-                likeLoader.CurrentRow[LoadLikeData.ColKnownFunction],
+                likeLoader.CurrentRow[LikeDataLoader.ColKnownFunction],
                 likeLoader
                     .CurrentGene
                     .KnownFunction

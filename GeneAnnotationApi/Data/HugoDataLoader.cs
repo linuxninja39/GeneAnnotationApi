@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GeneAnnotationApi.Data
 {
-    public class LoadHugoData
+    public class HugoDataLoader
     {
         private const int ColSymbol = 1;
         private const int ColName = 2;
@@ -26,13 +26,13 @@ namespace GeneAnnotationApi.Data
         private readonly GeneAnnotationDBContext _context;
         private string _fileName;
 
-        private ILogger<LoadHugoData> _logger;
+        private ILogger<HugoDataLoader> _logger;
 
-        public LoadHugoData(GeneAnnotationDBContext context, string fileName)
+        public HugoDataLoader(GeneAnnotationDBContext context, string fileName)
         {
             _context = context;
             _fileName = fileName ?? "hugo.csv";
-            _logger = StaticLoggerFactory.LoggerFactory.CreateLogger<LoadHugoData>();
+            _logger = StaticLoggerFactory.LoggerFactory.CreateLogger<HugoDataLoader>();
         }
 
         public void LoadData()
