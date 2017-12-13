@@ -37,6 +37,21 @@ namespace GeneAnnotationApi.Data
             _context.SaveChanges();
         }
 
+        public void AddZygosity()
+        {
+            if (string.IsNullOrEmpty(_currentRow[LoadLikeData.ColZygosity]))
+                throw new InvalidOperationException("Zygosity type required in col " + LoadLikeData.ColZygosity);
+
+            var zygosityName = (_currentRow[LoadLikeData.ColZygosity].ToUpper() == "HET")
+                ? "Heterozygous"
+                : "Homozygous";
+            var zyType = _context.ZygosityType
+                .Single(z => z.Name == zygosityName);
+
+            CurrentVariant.ZygosityType = zyType;
+            _context.SaveChanges();
+        }
+
         private bool ShouldImport()
         {
             if (string.IsNullOrEmpty(_currentRow[LoadLikeData.ColAnnotator])) return false;

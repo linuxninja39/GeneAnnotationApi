@@ -6,8 +6,10 @@ namespace GeneAnnotationApi.Data.Constants
     {
 
         public static readonly ZygosityType[] ZygosityTypes = {
-            new ZygosityType{Name = "Z1"},
-            new ZygosityType{Name = "Z2"}
+            new ZygosityType{Name = "Homozygous"},
+            new ZygosityType{Name = "Heterozygous"},
+            new ZygosityType{Name = "Hemizygous"},
+            new ZygosityType{Name = "Nullizygous"}
         };
     }
 }
