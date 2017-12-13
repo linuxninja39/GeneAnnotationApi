@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GeneAnnotationApi.Data;
 using GeneAnnotationApi.Data.Constants;
@@ -84,6 +85,26 @@ namespace GeneAnnotationApiTest.Integration
                 currentRow[LoadLikeData.ColEnd],
                 likeVariantLoader.CurrentVariant.End.ToString()
             );
+        }
+
+        [Fact]
+        public void DoImportTest()
+        {
+             var currentRow = new string[25];
+            currentRow[LoadLikeData.ColVariantType] = "1";
+            currentRow[LoadLikeData.ColStart] = "10";
+            currentRow[LoadLikeData.ColEnd] = "100";
+            currentRow[LoadLikeData.ColZygosity] = "het";
+            currentRow[LoadLikeData.ColCall] = "VOUS";
+            currentRow[LoadLikeData.ColDateUpdated] = "08/30/2017 11:38:48";
+            var likeVariantLoader = new LikeVariantData(Context, currentRow);
+            
+            var ex = Record.Exception(
+                () => { likeVariantLoader.DoImport(); }
+            );
+
+            Assert.Null(ex);
+           
         }
     }
 }

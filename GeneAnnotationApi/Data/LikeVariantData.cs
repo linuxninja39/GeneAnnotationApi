@@ -28,6 +28,9 @@ namespace GeneAnnotationApi.Data
             if (!ShouldImport()) return;
             AddStartStop();
             AddVariantType();
+            AddZygosity();
+            AddCall();
+            _context.SaveChanges();
         }
 
         public void AddVariantType()
