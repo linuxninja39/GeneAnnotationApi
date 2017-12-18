@@ -25,17 +25,6 @@ namespace GeneAnnotationApiTest.Integration
         }
 
         [Fact]
-        public void PopulateGeneTest()
-        {
-            var cells = new[]
-            {
-                "",
-                ""
-            };
-
-        }
-
-        [Fact]
         public void AddGeneNamesTest()
         {
             var loadHugoData = new HugoDataLoader(Context, "hugo.csv.short");

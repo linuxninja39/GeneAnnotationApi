@@ -7,7 +7,7 @@ namespace GeneAnnotationApi.Data
     {
         private GeneAnnotationDBContext _context;
         private IReadOnlyList<string> _currentRow;
-        public GeneVariant CurrentVariant { get; }
+        public GeneVariant CurrentVariant { get; private set; }
 
         public LikeVariantLiteratureDataLoader(
             GeneAnnotationDBContext context,

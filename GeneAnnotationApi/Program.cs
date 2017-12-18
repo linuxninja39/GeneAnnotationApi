@@ -51,6 +51,13 @@ namespace GeneAnnotationApi
                 var ucscLoader = new UcscDataLoader(context,"ucsc.csv.short");
                 ucscLoader.LoadData();
             }
+            
+            var loadLike = Environment.GetEnvironmentVariable("GA_DB_LOAD_LIKE");
+            if (loadLike != null)
+            {
+                var likeLoader = new LikeDataLoader(context,"like.csv.short");
+                likeLoader.LoadData();
+            }
         }
     }
 }

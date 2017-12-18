@@ -9,9 +9,9 @@ using Xunit;
 
 namespace GeneAnnotationApiTest.Integration
 {
-    public class LikeVariantDataTest : BaseDbTest
+    public class LikeVariantDataLoaderTest : BaseDbTest
     {
-        public LikeVariantDataTest()
+        public LikeVariantDataLoaderTest()
         {
             InitializeConstants.Initialize(Context);
         }
