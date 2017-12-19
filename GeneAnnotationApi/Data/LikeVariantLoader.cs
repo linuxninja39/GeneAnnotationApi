@@ -9,11 +9,11 @@ namespace GeneAnnotationApi.Data
     public class LikeVariantLoader
     {
         private readonly GeneAnnotationDBContext _context;
-        private readonly IReadOnlyList<string> _currentRow;
+        private readonly IList<string> _currentRow;
         public readonly GeneVariant CurrentVariant;
         private IDictionary<string, VariantType> _variantTypeMap;
 
-        public LikeVariantLoader(GeneAnnotationDBContext context, IReadOnlyList<string> currentRow)
+        public LikeVariantLoader(GeneAnnotationDBContext context, IList<string> currentRow)
         {
             _context = context;
             _currentRow = currentRow;

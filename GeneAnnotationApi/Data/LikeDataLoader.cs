@@ -91,6 +91,8 @@ namespace GeneAnnotationApi.Data
                     AddSymbol();
                     AddLocation();
                     AddKnownFunction();
+                    var likeVariantLoader = new LikeVariantLoader(_context, CurrentRow);
+                    likeVariantLoader.DoImport();
                 }
             }
         }
@@ -226,7 +228,6 @@ namespace GeneAnnotationApi.Data
         {
             if (!string.IsNullOrEmpty(CurrentGene.KnownFunction)) return;
             CurrentGene.KnownFunction = CurrentRow[ColKnownFunction];
-            _context.SaveChanges();
         }
     }
 }
