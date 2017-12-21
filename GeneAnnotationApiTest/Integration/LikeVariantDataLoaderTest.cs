@@ -17,14 +17,27 @@ namespace GeneAnnotationApiTest.Integration
         }
 
         [Fact]
-        public void AddVariantTest()
+        public void NewUp()
         {
-            var currentRow = new string[25];
-            currentRow[LikeDataLoader.ColVariantType] = "1";
-            var likeVariantLoader = new LikeVariantLoader(Context, currentRow);
-            likeVariantLoader.AddVariantType();
+            var currentRow = new string[26];
+            currentRow[LikeDataLoader.ColStart] = "10";
+            currentRow[LikeDataLoader.ColEnd] = "100";
+            LikeVariantLoader likeVariantLoader = null;
+            var ex = Record.Exception(
+                () => { likeVariantLoader = new LikeVariantLoader(Context, currentRow); }
+            );
+            Assert.Null(ex);
 
-            Assert.NotNull(likeVariantLoader.CurrentVariant);
+            Assert.NotNull(likeVariantLoader);
+
+            Assert.Equal(
+                currentRow[LikeDataLoader.ColStart],
+                likeVariantLoader.CurrentVariant.Start.ToString()
+            );
+            Assert.Equal(
+                currentRow[LikeDataLoader.ColEnd],
+                likeVariantLoader.CurrentVariant.End.ToString()
+            );
         }
 
         [Fact]
@@ -68,29 +81,9 @@ namespace GeneAnnotationApiTest.Integration
         }
 
         [Fact]
-        public void AddStartStopTest()
-        {
-            var currentRow = new string[25];
-            currentRow[LikeDataLoader.ColStart] = "10";
-            currentRow[LikeDataLoader.ColEnd] = "100";
-            var likeVariantLoader = new LikeVariantLoader(Context, currentRow);
-
-            likeVariantLoader.AddStartStop();
-
-            Assert.Equal(
-                currentRow[LikeDataLoader.ColStart],
-                likeVariantLoader.CurrentVariant.Start.ToString()
-            );
-            Assert.Equal(
-                currentRow[LikeDataLoader.ColEnd],
-                likeVariantLoader.CurrentVariant.End.ToString()
-            );
-        }
-
-        [Fact]
         public void DoImportTest()
         {
-             var currentRow = new string[25];
+            var currentRow = new string[25];
             currentRow[LikeDataLoader.ColVariantType] = "1";
             currentRow[LikeDataLoader.ColStart] = "10";
             currentRow[LikeDataLoader.ColEnd] = "100";
@@ -98,13 +91,12 @@ namespace GeneAnnotationApiTest.Integration
             currentRow[LikeDataLoader.ColCall] = "VOUS";
             currentRow[LikeDataLoader.ColDateUpdated] = "08/30/2017 11:38:48";
             var likeVariantLoader = new LikeVariantLoader(Context, currentRow);
-            
+
             var ex = Record.Exception(
                 () => { likeVariantLoader.DoImport(); }
             );
 
             Assert.Null(ex);
-           
         }
     }
 }

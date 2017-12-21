@@ -166,7 +166,7 @@ namespace GeneAnnotationApi.Entities
 
             modelBuilder.Entity<GeneVariant>(entity =>
             {
-                entity.HasIndex(e => new {e.Start, e.End, CodeingChange = e.CodingChange})
+                entity.HasIndex(e => new {e.Start, e.End, e.VariantTypeId, CodeingChange = e.CodingChange})
                     .HasName("uniq_start_end_codingchange")
                     .IsUnique();
             });

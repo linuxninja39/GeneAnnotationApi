@@ -21,7 +21,7 @@ namespace GeneAnnotationApi.Data
             if (!context.CallType.Any()) InitCallTypes(context);
             if (!context.OriginType.Any()) InitOriginTypes(context);
             if (!context.PathogenicSupportCategory.Any()) InitPathogenicSupportCategories(context);
-            if (!context.VariantType.Any()) InitVariantTypes(context, null);
+            if (!context.VariantType.Any()) InitVariantTypes(context);
             if (!context.ZygosityType.Any()) InitZygosityTypes(context);
         }
 
@@ -48,7 +48,7 @@ namespace GeneAnnotationApi.Data
                 );
         }
 
-        private static void InitVariantTypes(GeneAnnotationDBContext context, VariantType[] variantTypes)
+        private static void InitVariantTypes(GeneAnnotationDBContext context)
         {
             
             BasicInit(

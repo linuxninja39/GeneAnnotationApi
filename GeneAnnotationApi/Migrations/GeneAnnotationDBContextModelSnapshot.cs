@@ -551,7 +551,7 @@ namespace GeneAnnotationApi.Migrations
 
                     b.HasIndex("ZygosityTypeId");
 
-                    b.HasIndex("Start", "End", "CodingChange")
+                    b.HasIndex("Start", "End", "VariantTypeId", "CodingChange")
                         .IsUnique()
                         .HasName("uniq_start_end_codingchange")
                         .HasFilter("[coding_change] IS NOT NULL");

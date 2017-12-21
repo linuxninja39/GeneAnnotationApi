@@ -2,7 +2,7 @@
 
 namespace GeneAnnotationApi.Data.Constants
 {
-    public class ZygosityTypeConstants
+    public static class ZygosityTypeConstants
     {
 
         public static readonly ZygosityType[] ZygosityTypes = {

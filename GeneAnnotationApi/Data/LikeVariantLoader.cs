@@ -10,34 +10,52 @@ namespace GeneAnnotationApi.Data
     {
         private readonly GeneAnnotationDBContext _context;
         private readonly IList<string> _currentRow;
-        public readonly GeneVariant CurrentVariant;
+        public GeneVariant CurrentVariant;
         private IDictionary<string, VariantType> _variantTypeMap;
 
         public LikeVariantLoader(GeneAnnotationDBContext context, IList<string> currentRow)
         {
             _context = context;
             _currentRow = currentRow;
-            CurrentVariant = new GeneVariant();
-            _context.GeneVariant.Add(CurrentVariant);
 
             SetupTypeMap();
+        }
+
+        private void FindOrCreateVariant()
+        {
+            if (
+                !int.TryParse(_currentRow[LikeDataLoader.ColStart], out var start)
+                || !int.TryParse(_currentRow[LikeDataLoader.ColEnd], out var end)
+            ) throw new InvalidOperationException("start and end required");
+            if (_currentRow[LikeDataLoader.ColVariantType] == null)
+                throw new InvalidOperationException("start and end required");
+
+            CurrentVariant = _context.GeneVariant
+                .SingleOrDefault(
+                    gv => gv.Start == start
+                          && gv.End == end
+                          && gv.VariantTypeId == _variantTypeMap[_currentRow[LikeDataLoader.ColVariantType]].Id
+                );
+
+            if (CurrentVariant != null) return;
+
+            CurrentVariant = new GeneVariant
+            {
+                Start = start,
+                End = end,
+                VariantTypeId = _variantTypeMap[_currentRow[LikeDataLoader.ColVariantType]].Id
+            };
+            _context.GeneVariant.Add(CurrentVariant);
         }
 
         public void DoImport()
         {
             if (!ShouldImport()) return;
-            AddStartStop();
-            AddVariantType();
+            FindOrCreateVariant();
             AddZygosity();
+            _context.SaveChanges();
             AddCall();
             _context.SaveChanges();
-        }
-
-        public void AddVariantType()
-        {
-            ValidateData(LikeDataLoader.ColVariantType, "Variant Type");
-
-            CurrentVariant.VariantType = _variantTypeMap[_currentRow[LikeDataLoader.ColVariantType]];
         }
 
         public void AddZygosity()
@@ -50,7 +68,7 @@ namespace GeneAnnotationApi.Data
             var zyType = _context.ZygosityType
                 .Single(z => z.Name == zygosityName);
 
-            CurrentVariant.ZygosityType = zyType;
+            CurrentVariant.ZygosityTypeId = zyType.Id;
         }
 
         public void AddCall()
@@ -72,7 +90,13 @@ namespace GeneAnnotationApi.Data
             {
                 date = DateTime.Parse(_currentRow[LikeDataLoader.ColDateUpdated]);
             }
-            
+
+            if (
+                _context.CallTypeGeneVariant.Any(
+                    ctgv => ctgv.GeneVariantId == CurrentVariant.Id && ctgv.CallTypeId == callType.Id
+                )
+            ) return;
+
             var callTypeGeneVariant = new CallTypeGeneVariant
             {
                 CallType = callType,
@@ -83,20 +107,6 @@ namespace GeneAnnotationApi.Data
             _context.CallTypeGeneVariant.Add(callTypeGeneVariant);
         }
 
-        public void AddStartStop()
-        {
-
-            int start;
-            int end;
-            if (
-                !int.TryParse(_currentRow[LikeDataLoader.ColStart], out start)
-                || !int.TryParse(_currentRow[LikeDataLoader.ColEnd], out end)
-            ) throw new InvalidOperationException("start and end required");
-
-            CurrentVariant.Start = start;
-            CurrentVariant.End = end;
-        }
-
         private void ValidateData(int col, string name)
         {
             if (string.IsNullOrEmpty(_currentRow[col]))
@@ -105,7 +115,8 @@ namespace GeneAnnotationApi.Data
 
         private bool ShouldImport()
         {
-            if (string.IsNullOrEmpty(_currentRow[LikeDataLoader.ColAnnotator])) return false;
+            if (string.IsNullOrEmpty(_currentRow[LikeDataLoader.ColStart])) return false;
+            if (string.IsNullOrEmpty(_currentRow[LikeDataLoader.ColEnd])) return false;
             if (string.IsNullOrEmpty(_currentRow[LikeDataLoader.ColVariantType])) return false;
             if (string.IsNullOrEmpty(_currentRow[LikeDataLoader.ColZygosity])) return false;
             if (string.IsNullOrEmpty(_currentRow[LikeDataLoader.ColCall])) return false;
