@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,9 +20,11 @@ namespace GeneAnnotationApi.Controllers
         private readonly IMapper _mapper;
         private readonly IGeneRepository _geneRepository;
 
-        private static readonly string _qStart = "start";
-        private static readonly string _qEnd = "end";
-        private static readonly string _qGlobalFilter = "globalFilter";
+        private const string QStart = "start";
+        private const string QEnd = "end";
+        private const string QGlobalFilter = "globalFilter";
+        private const string QPageStart = "pageStart";
+        private const string QPageCount = "pageCount";
 
         public GenesController(GeneAnnotationDBContext context, IMapper mapper, IGeneRepository geneRepository,
             IGeneCoordinateRepository geneCoordinateRepository
@@ -32,13 +35,21 @@ namespace GeneAnnotationApi.Controllers
             _geneRepository = geneRepository;
         }
 
+        [HttpGet("count")]
+        public int GetGeneCount()
+        {
+            var geneEntities = BuildGeneSearch();
+            return geneEntities.Count();
+
+        }
+
         // GET: api/Genes
         [HttpGet]
         public IEnumerable<GeneDto> GetGenes()
         {
             var geneEntities = BuildGeneSearch();
 
-            var genes = geneEntities
+            var geneQuerable = geneEntities
                 .Include(gene => gene.Symbol)
                 .Include(gene => gene.GeneLocations)
                 .ThenInclude(geneLocation => geneLocation.Chromosome)
@@ -46,9 +57,27 @@ namespace GeneAnnotationApi.Controllers
                 .ThenInclude(geneLocation => geneLocation.GeneCoordinates)
                 .Include(gene => gene.GeneName)
                 .Include(gene => gene.Synonym)
-                .ToList();
+                .AsQueryable()
+                ;
+
+            var query = HttpContext.Request.Query;
+            if (query.ContainsKey(QPageStart) && query.ContainsKey(QPageCount))
+            {
+                try
+                {
+                    var skip = Convert.ToInt32(query[QPageStart]);
+                    var take = Convert.ToInt32(query[QPageCount]);
+                    geneQuerable = geneQuerable
+                        .Skip(skip)
+                        .Take(take);
+                }
+                catch (FormatException)
+                {
+                }
+            }
+            var genes = geneQuerable.ToList();
             if (genes.Count == 1 && genes[0] == null) genes.Clear();
-            
+
             var geneDtos = _mapper.Map<IList<GeneDto>>(genes);
 
             return geneDtos;
@@ -60,7 +89,7 @@ namespace GeneAnnotationApi.Controllers
             IQueryable<Gene> geneQuerable = _context.Gene;
             if (query.Count == 0) return geneQuerable;
             var predicate = PredicateBuilder.False<Gene>();
-            if (query.ContainsKey(_qGlobalFilter))
+            if (query.ContainsKey(QGlobalFilter))
             {
                 /*
                 predicate = predicate
@@ -71,8 +100,10 @@ namespace GeneAnnotationApi.Controllers
                 geneQuerable = (
                     from g in _context.Gene
                     join s in _context.Symbol on g.Id equals s.GeneId
+//                    join gn in _context.GeneName on g.Id equals gn.GeneId
                     where
-                        EF.Functions.Like(s.Name, "%" + query[_qGlobalFilter] + "%")
+                        EF.Functions.Like(s.Name, "%" + query[QGlobalFilter] + "%")
+//                        || EF.Functions.Like(gn.Name, "%" + query[_qGlobalFilter] + "%")
                     select g
                 );
             }
