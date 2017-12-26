@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using GeneAnnotationApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GeneAnnotationApi.Entities;
 using GeneAnnotationApi.Repositories;
+using GeneAnnotationApi.Utils;
 
 namespace GeneAnnotationApi.Controllers
 {
@@ -19,6 +18,10 @@ namespace GeneAnnotationApi.Controllers
         private readonly GeneAnnotationDBContext _context;
         private readonly IMapper _mapper;
         private readonly IGeneRepository _geneRepository;
+
+        private static readonly string _qStart = "start";
+        private static readonly string _qEnd = "end";
+        private static readonly string _qGlobalFilter = "globalFilter";
 
         public GenesController(GeneAnnotationDBContext context, IMapper mapper, IGeneRepository geneRepository,
             IGeneCoordinateRepository geneCoordinateRepository
@@ -31,31 +34,51 @@ namespace GeneAnnotationApi.Controllers
 
         // GET: api/Genes
         [HttpGet]
-        public IEnumerable<GeneDto> GetGenes([FromQuery] string start, [FromQuery] string end)
+        public IEnumerable<GeneDto> GetGenes()
         {
-            IQueryable<Gene> geneEntities;
-            if (start != null && end != null)
-            {
-                geneEntities = _geneRepository.FindByStartAndEnd(Convert.ToInt32(start), Convert.ToInt32(end));
-            }
-            else
-            {
-                geneEntities = _geneRepository.All();
-            }
+            var geneEntities = BuildGeneSearch();
 
             var genes = geneEntities
+                .Include(gene => gene.Symbol)
                 .Include(gene => gene.GeneLocations)
                 .ThenInclude(geneLocation => geneLocation.Chromosome)
                 .Include(gene => gene.GeneLocations)
                 .ThenInclude(geneLocation => geneLocation.GeneCoordinates)
-                .Include(gene => gene.Symbol)
                 .Include(gene => gene.GeneName)
                 .Include(gene => gene.Synonym)
                 .ToList();
+            if (genes.Count == 1 && genes[0] == null) genes.Clear();
             
             var geneDtos = _mapper.Map<IList<GeneDto>>(genes);
 
             return geneDtos;
+        }
+
+        private IQueryable<Gene> BuildGeneSearch()
+        {
+            var query = HttpContext.Request.Query;
+            IQueryable<Gene> geneQuerable = _context.Gene;
+            if (query.Count == 0) return geneQuerable;
+            var predicate = PredicateBuilder.False<Gene>();
+            if (query.ContainsKey(_qGlobalFilter))
+            {
+                /*
+                predicate = predicate
+                    .Or(
+                        g => g.Symbol.Contains(_context.Symbol.Single(s => s.Name == "A1BG"))
+                        );
+                        */
+                geneQuerable = (
+                    from g in _context.Gene
+                    join s in _context.Symbol on g.Id equals s.GeneId
+                    where
+                        EF.Functions.Like(s.Name, "%" + query[_qGlobalFilter] + "%")
+                    select g
+                );
+            }
+
+            //return geneQuerable.Where(predicate);
+            return geneQuerable;
         }
 
         // GET: api/Genes/5

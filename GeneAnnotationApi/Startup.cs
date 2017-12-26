@@ -28,7 +28,7 @@ namespace GeneAnnotationApi
             services.AddCors();
 
             // Add framework services.
-//            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc()
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling =
