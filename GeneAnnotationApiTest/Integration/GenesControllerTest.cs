@@ -16,12 +16,6 @@ namespace GeneAnnotationApiTest.Integration
         {
         }
 
-        public void Dispose()
-        {
-            Client.Dispose();
-            _testServer.Dispose();
-        }
-
         [Fact]
         public async Task ShouldGet200()
         {
@@ -32,10 +26,10 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public async Task ShouldGetGenes()
         {
-            _context.Gene.Add(GeneTestData.Genes[0]);
-            _context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
-            _context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
-            _context.SaveChanges();
+            Context.Gene.Add(GeneTestData.Genes[0]);
+            Context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
+            Context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
+            Context.SaveChanges();
 
             var res = await Client.GetAsync("/api/genes");
             Assert.True(res.StatusCode.Equals(HttpStatusCode.OK));
@@ -51,11 +45,11 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public async Task SearchGenes()
         {
-            _context.Gene.Add(GeneTestData.Genes[0]);
-            _context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
-            _context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
-            _context.Symbol.Add(SymbolTestData.Symbols[0]);
-            _context.SaveChanges();
+            Context.Gene.Add(GeneTestData.Genes[0]);
+            Context.GeneLocation.Add(GeneLocationTestData.GeneLocations[0]);
+            Context.GeneCoordinate.Add(GeneCoordinateTestData.GeneCoordinates[0]);
+            Context.Symbol.Add(SymbolTestData.Symbols[0]);
+            Context.SaveChanges();
 
             var res = await Client.GetAsync("/api/genes?globalFilter=" + SymbolTestData.Symbols[0].Name);
             Assert.True(res.StatusCode.Equals(HttpStatusCode.OK));

@@ -21,7 +21,7 @@ namespace GeneAnnotationApiTest.Integration
 
         public LiteratureControllerTest(): base(false)
         {
-            var context = _testServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
+            var context = TestServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
             if (context == null) return;
             context.Literature.Add(
                 new Literature {Url = "http://lit1", Title = "lit1"}
@@ -33,16 +33,10 @@ namespace GeneAnnotationApiTest.Integration
             var lits = context.Literature.ToList();
         }
         
-        public void Dispose()
-        {
-            Client.Dispose();
-            _testServer.Dispose();
-        }
-        
         [Fact]
         public async void ShouldGetLiteratures()
         {
-            var context = _testServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
+            var context = TestServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
             var lits = context.Literature.ToList();
             var res = await Client.GetAsync("/api/literatures");
             Assert.True(res.StatusCode.Equals(HttpStatusCode.OK));

@@ -8,25 +8,32 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace GeneAnnotationApiTest.Integration
 {
-    public abstract class BaseControllerTest
+    public abstract class BaseControllerTest: IDisposable
     {
-        protected readonly TestServer _testServer;
+        protected readonly TestServer TestServer;
         protected HttpClient Client { get; }
-        protected readonly GeneAnnotationDBContext _context;
+        protected readonly GeneAnnotationDBContext Context;
 
         public BaseControllerTest(bool initDb = true)
         {
             if (initDb) Environment.SetEnvironmentVariable(InitializeConstants.GA_DB_RESET_VARIABLE_NAME, "1");
             // just to make sure mapper is initialzed
-            _testServer = new TestServer(
+            TestServer = new TestServer(
                 new WebHostBuilder()
                     .UseEnvironment("Development")
                     .UseStartup<TestStartup>()
             );
-            Client = _testServer.CreateClient();
+            Client = TestServer.CreateClient();
             Client.BaseAddress = new Uri("http://localhost");
-            _context = _testServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
-            TestStartup.InitializeDatabase(_context);
+            Context = TestServer.Host.Services.GetService(typeof(GeneAnnotationDBContext)) as GeneAnnotationDBContext;
+            TestStartup.InitializeDatabase(Context);
         }
+        
+                public void Dispose()
+        {
+            Client.Dispose();
+            TestServer.Dispose();
+        }
+
     }
 }

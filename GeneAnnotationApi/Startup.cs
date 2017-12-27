@@ -46,6 +46,7 @@ namespace GeneAnnotationApi
         {
             services.AddScoped<IGeneRepository, GeneEfRepository>();
             services.AddScoped<IGeneCoordinateRepository, GeneCoordinateEfRepository>();
+            services.AddScoped<IGeneVariantRepository, GeneVariantEfRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

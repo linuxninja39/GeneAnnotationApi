@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using AutoMapper;
@@ -12,26 +13,12 @@ using GeneAnnotationApi.Dtos;
 
 namespace GeneAnnotationApiTest.Integration
 {
-    public class GeneVariantControllerTest: IDisposable
+    public class GeneVariantControllerTest: BaseControllerTest
     {
-        private readonly TestServer _testServer;
-        public HttpClient Client { get; }
 
         public GeneVariantControllerTest()
         {
-            _testServer = new TestServer(
-                new WebHostBuilder()
-                    .UseEnvironment("Development")
-                    .UseStartup<TestStartup>()
-            );
-            Client = _testServer.CreateClient();
-            Client.BaseAddress = new Uri("http://localhost");
-        }
-
-        public void Dispose()
-        {
-            Client.Dispose();
-            _testServer.Dispose();
+            if (Context.GeneVariant.Any()) return;
         }
 
         [Fact]
@@ -56,6 +43,18 @@ namespace GeneAnnotationApiTest.Integration
             Assert.IsType<ZygosityTypeDto>(geneVariant.ZygosityType);
             */
             Assert.True(true);
+        }
+
+        [Fact]
+        public void GetByRangeTest()
+        {
+            const int start = 1;
+            const int end = 100;
+            var task = Client.GetAsync(string.Format("/api/genevariants?start={0}&end={1}", start, end));
+            var res = task.Result;
+            
+            Assert.True(res.IsSuccessStatusCode);
+            
         }
     }
 }

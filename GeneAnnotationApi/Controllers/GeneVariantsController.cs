@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using GeneAnnotationApi.Dtos;
 using GeneAnnotationApi.Entities;
+using GeneAnnotationApi.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,19 +17,46 @@ namespace GeneAnnotationApi.Controllers
     {
         private readonly GeneAnnotationDBContext _context;
         private readonly IMapper _mapper;
+        private readonly IGeneVariantRepository _geneVariantRepository;
+
+        private const string QVariantStart = "start";
+        private const string QVariantEnd = "end";
 
         public GeneVariantsController(
             GeneAnnotationDBContext context,
+            IGeneVariantRepository geneVariantRepository,
             IMapper mapper
         )
         {
             _context = context;
             _mapper = mapper;
+            _geneVariantRepository = geneVariantRepository;
         }
 
-        // GET api/values/5
+        [HttpGet]
+        public IEnumerable<GeneVariantDto> GetByRange()
+        {
+            var query = HttpContext.Request.Query;
+            IQueryable<GeneVariant> geneVariantQueryable = _context.GeneVariant;
+            if (query.ContainsKey(QVariantStart) && query.ContainsKey(QVariantStart))
+            {
+                if (Int32.TryParse(query[QVariantStart], out var start) &&
+                    Int32.TryParse(query[QVariantEnd], out var end))
+                {
+                    geneVariantQueryable = _geneVariantRepository.FindByRange(start, end);
+                }
+            }
+
+            var geneVariants = geneVariantQueryable.ToList();
+            
+            var geneVariantDtos = _mapper.Map<IList<GeneVariantDto>>(geneVariants);
+
+            return geneVariantDtos;
+        }
+
+    // GET api/genevariants/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> GetVariant([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -49,7 +79,7 @@ namespace GeneAnnotationApi.Controllers
                 .Include(gv => gv.GeneVariantLiterature)
                     .ThenInclude(gvl => gvl.AnnotationGeneVariantLiterature)
                         .ThenInclude(agvl => agvl.Annotation)
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(gv => gv.Id == id);
 
             if (geneVariant == null)
             {
