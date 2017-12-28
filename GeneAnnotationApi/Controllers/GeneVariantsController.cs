@@ -21,6 +21,8 @@ namespace GeneAnnotationApi.Controllers
 
         private const string QVariantStart = "start";
         private const string QVariantEnd = "end";
+        private const string QPageStart = "pageStart";
+        private const string QPageCount = "pageCount";
 
         public GeneVariantsController(
             GeneAnnotationDBContext context,
@@ -46,17 +48,26 @@ namespace GeneAnnotationApi.Controllers
                     geneVariantQueryable = _geneVariantRepository.FindByRange(start, end);
                 }
             }
+            
+            var gvs = geneVariantQueryable.ToList();
 
-            var gvs = _context.GeneVariant.ToList();
+            if (query.ContainsKey(QPageCount) && query.ContainsKey(QPageStart))
+            {
+                if (int.TryParse(query[QPageCount], out var take) &&
+                    int.TryParse(query[QPageStart], out var skip))
+                {
+                    geneVariantQueryable = geneVariantQueryable.Skip(skip).Take(take);
+                }
+            }
 
             var geneVariants = geneVariantQueryable.ToList();
-            
+
             var geneVariantDtos = _mapper.Map<IList<GeneVariantDto>>(geneVariants);
 
             return geneVariantDtos;
         }
 
-    // GET api/genevariants/5
+        // GET api/genevariants/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVariant([FromRoute] int id)
         {
@@ -70,17 +81,17 @@ namespace GeneAnnotationApi.Controllers
                 .Include(gv => gv.ZygosityType)
                 .Include(gv => gv.VariantType)
                 .Include(gv => gv.CallTypeGeneVariants)
-                    .ThenInclude(geneVariantCallType => geneVariantCallType.CallType)
+                .ThenInclude(geneVariantCallType => geneVariantCallType.CallType)
                 .Include(gv => gv.AnnotationGeneVariant)
-                    .ThenInclude(agv => agv.Annotation)
-                        .ThenInclude(a => a.AppUser)
+                .ThenInclude(agv => agv.Annotation)
+                .ThenInclude(a => a.AppUser)
                 .Include(gv => gv.GeneVariantLiterature)
-                    .ThenInclude(gvl => gvl.Literature)
-                        .ThenInclude(l => l.AuthorLiterature)
-                            .ThenInclude(al => al.Author)
+                .ThenInclude(gvl => gvl.Literature)
+                .ThenInclude(l => l.AuthorLiterature)
+                .ThenInclude(al => al.Author)
                 .Include(gv => gv.GeneVariantLiterature)
-                    .ThenInclude(gvl => gvl.AnnotationGeneVariantLiterature)
-                        .ThenInclude(agvl => agvl.Annotation)
+                .ThenInclude(gvl => gvl.AnnotationGeneVariantLiterature)
+                .ThenInclude(agvl => agvl.Annotation)
                 .SingleOrDefaultAsync(gv => gv.Id == id);
 
             if (geneVariant == null)
@@ -111,7 +122,7 @@ namespace GeneAnnotationApi.Controllers
                 .GeneVariant
                 .Include(gv => gv.ZygosityType)
                 .Include(gv => gv.CallTypeGeneVariants)
-                    .ThenInclude(geneVariantCallType => geneVariantCallType.CallType)
+                .ThenInclude(geneVariantCallType => geneVariantCallType.CallType)
                 .Include(gv => gv.VariantType)
                 .SingleOrDefaultAsync(m => m.Id == entity.Id);
 
@@ -131,14 +142,14 @@ namespace GeneAnnotationApi.Controllers
             try
             {
                 var geneVariantLiteratures = _context.GeneVariantLiterature
-                    .Where(gvl => gvl.GeneVariantId == geneVariantId)
-                    .Include(gvl => gvl.AnnotationGeneVariantLiterature)
+                        .Where(gvl => gvl.GeneVariantId == geneVariantId)
+                        .Include(gvl => gvl.AnnotationGeneVariantLiterature)
                         .ThenInclude(gvl => gvl.Annotation)
-                            .ThenInclude(a => a.AppUser)
-                    .Include(gvl => gvl.Literature)
+                        .ThenInclude(a => a.AppUser)
+                        .Include(gvl => gvl.Literature)
                         .ThenInclude(l => l.AuthorLiterature)
-                            .ThenInclude(al => al.Author)
-                    .ToList()
+                        .ThenInclude(al => al.Author)
+                        .ToList()
                     ;
 
                 return Ok(_mapper.Map<GeneVariantLiteratureDto[]>(geneVariantLiteratures));

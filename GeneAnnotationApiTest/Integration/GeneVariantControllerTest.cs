@@ -70,5 +70,27 @@ namespace GeneAnnotationApiTest.Integration
             Assert.Equal(3, geneDtos.Count);
             
         }
+       
+                [Fact]
+        public void GetByRangeAndPagedTest()
+        {
+            const int start = 12;
+            const int end = 400;
+            const int pageStart = 1;
+            const int pageCount = 1;
+            var res = Client.GetAsync(
+                $"/api/genevariants?start={start}&end={end}&pageStart={pageStart}&pageCount={pageCount}"
+            ).Result;
+            
+            Assert.True(res.IsSuccessStatusCode);
+            
+            
+            var jsonString = res.Content.ReadAsStringAsync().Result;
+            var geneDtos = JsonConvert
+                .DeserializeObject<IList<GeneDto>>(jsonString);
+            
+            Assert.Equal(1, geneDtos.Count);
+            
+        }
     }
 }
