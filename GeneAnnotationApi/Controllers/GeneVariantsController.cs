@@ -40,12 +40,14 @@ namespace GeneAnnotationApi.Controllers
             IQueryable<GeneVariant> geneVariantQueryable = _context.GeneVariant;
             if (query.ContainsKey(QVariantStart) && query.ContainsKey(QVariantStart))
             {
-                if (Int32.TryParse(query[QVariantStart], out var start) &&
-                    Int32.TryParse(query[QVariantEnd], out var end))
+                if (int.TryParse(query[QVariantStart], out var start) &&
+                    int.TryParse(query[QVariantEnd], out var end))
                 {
                     geneVariantQueryable = _geneVariantRepository.FindByRange(start, end);
                 }
             }
+
+            var gvs = _context.GeneVariant.ToList();
 
             var geneVariants = geneVariantQueryable.ToList();
             

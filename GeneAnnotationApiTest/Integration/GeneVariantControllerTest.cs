@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
 using GeneAnnotationApi.Dtos;
+using GeneAnnotationApiTest.TestData;
 
 namespace GeneAnnotationApiTest.Integration
 {
@@ -19,6 +20,12 @@ namespace GeneAnnotationApiTest.Integration
         public GeneVariantControllerTest()
         {
             if (Context.GeneVariant.Any()) return;
+
+            Context.GeneVariant.Add(GeneVariantTestData.GeneVariants[0]);
+            Context.GeneVariant.Add(GeneVariantTestData.GeneVariants[1]);
+            Context.GeneVariant.Add(GeneVariantTestData.GeneVariants[2]);
+            Context.GeneVariant.Add(GeneVariantTestData.GeneVariants[3]);
+            Context.SaveChanges();
         }
 
         [Fact]
@@ -48,12 +55,19 @@ namespace GeneAnnotationApiTest.Integration
         [Fact]
         public void GetByRangeTest()
         {
-            const int start = 1;
-            const int end = 100;
+            const int start = 12;
+            const int end = 400;
             var task = Client.GetAsync(string.Format("/api/genevariants?start={0}&end={1}", start, end));
             var res = task.Result;
             
             Assert.True(res.IsSuccessStatusCode);
+            
+            
+            var jsonString = res.Content.ReadAsStringAsync().Result;
+            var geneDtos = JsonConvert
+                .DeserializeObject<IList<GeneDto>>(jsonString);
+            
+            Assert.Equal(3, geneDtos.Count);
             
         }
     }
