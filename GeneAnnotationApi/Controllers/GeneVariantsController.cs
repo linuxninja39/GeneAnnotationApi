@@ -49,8 +49,6 @@ namespace GeneAnnotationApi.Controllers
                 }
             }
             
-            var gvs = geneVariantQueryable.ToList();
-
             if (query.ContainsKey(QPageCount) && query.ContainsKey(QPageStart))
             {
                 if (int.TryParse(query[QPageCount], out var take) &&
@@ -59,6 +57,13 @@ namespace GeneAnnotationApi.Controllers
                     geneVariantQueryable = geneVariantQueryable.Skip(skip).Take(take);
                 }
             }
+
+            geneVariantQueryable = geneVariantQueryable
+                .Include(gv => gv.CallTypeGeneVariants)
+                .ThenInclude(ctgv => ctgv.CallType)
+                .Include(gv => gv.VariantType)
+                .Include(gv => gv.ZygosityType)
+                ;
 
             var geneVariants = geneVariantQueryable.ToList();
 
